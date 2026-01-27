@@ -61,6 +61,7 @@ jobs:
         if [ -f "public/$(date +%Y-%m-%d).html" ]; then
           git add public/*.html
           git diff --staged --quiet || git commit -m "📰 每日新闻更新 - $(date +'%Y-%m-%d')"
+          git pull origin main --no-rebase
           git push origin main
         else
           echo "警告：未生成今日HTML文件"
