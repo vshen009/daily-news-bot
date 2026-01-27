@@ -46,11 +46,10 @@ test_*.py
 run_output.log
 
 # 数据库文件（重要：不要提交数据库！）
-*.db
 *.db-shm
 *.db-wal
-news_bot/data/*.db
 news_bot/data/backup_*.db
+# 注意：news_bot/data/news.db 需要提交到仓库
 
 # 备份文件
 *_backup_*
@@ -63,3 +62,7 @@ news_bot/data/backup_*.db
 node_modules/
 npm-debug.log
 yarn-error.log
+
+# 项目文档（内部使用，不需要提交）
+Claude.md
+memory.md
