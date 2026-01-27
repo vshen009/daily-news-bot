@@ -1,0 +1,94 @@
+name: 端到端测试（手动触发）
+
+on:
+  # 仅允许手动触发
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: 设置Python环境
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: 安装依赖
+      run: |
+        cd news_bot
+        pip install -r requirements.txt
+
+    - name: 设置环境变量
+      run: |
+        cd news_bot
+        # 创建.env文件
+        cat > .env << EOF
+        ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
+        ANTHROPIC_BASE_URL=${{ secrets.ANTHROPIC_BASE_URL }}
+        CLAUDE_MODEL=claude-3-5-sonnet-20241022
+        MAX_AGE_HOURS=48
+        TOP_NEWS_PER_CATEGORY=5
+        EOF
+
+    - name: 运行端到端测试
+      run: |
+        cd news_bot
+        python test_e2e.py
+
+    - name: 配置Git用户
+      run: |
+        git config --global user.name 'GitHub Actions Bot'
+        git config --global user.email 'actions@github.com'
+
+    - name: 提交HTML文件
+      run: |
+        # 检查是否有新的HTML文件生成
+        if [ -n "$(git status --porcelain public/)" ]; then
+          git add public/*.html news_bot/data/news.db
+          git commit -m "🧪 端到端测试 - $(date +'%Y-%m-%d %H:%M')"
+        else
+          echo "没有新的HTML文件需要提交"
+          exit 0
+        fi
+
+    - name: 创建并自动合并 Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        branch: test-e2e-$(date +'%Y%m%d-%H%M%S')
+        title: "🧪 端到端测试 - $(date +'%Y-%m-%d %H:%M')"
+        body: |
+          ## 🧪 端到端测试 PR
+
+          这是一个由 GitHub Actions 自动创建的测试 PR。
+
+          ### 测试内容
+          - 测试日期：$(date +'%Y-%m-%d %H:%M:%S')
+          - 运行脚本：`test_e2e.py`
+          - 测试范围：每个新闻源抓取1条数据
+          - 完整流程：抓取 → 去重 → 翻译 → AI评论 → 评分 → 生成HTML → 更新首页
+
+          ### 更新文件
+          - 测试生成的 HTML 文件
+          - 数据库文件（如有更新）
+
+          ---
+
+          🤖 由 [GitHub Actions](https://github.com/vshen009/daily-news-bot/actions) 自动创建
+        commit-message: "🧪 端到端测试 - $(date +'%Y-%m-%d %H:%M')"
+        labels: automated, test, e2e
+        auto-merge: "merge"
+        delete-branch: true
+
+    - name: 完成提示
+      if: success()
+      run: |
+        echo "✅ 端到端测试完成"
+        echo "✅ PR 已创建并自动合并"
+        echo "✅ Vercel 将自动部署更新"
