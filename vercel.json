@@ -3,19 +3,11 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/archive/:match*",
-      "destination": "/public/:match*"
+      "destination": "/public/index.html"
     },
     {
       "source": "/:match*.html",
       "destination": "/public/:match*.html"
-    },
-    {
-      "source": "/:match*",
-      "destination": "/public/:match*"
     }
   ],
   "headers": [
