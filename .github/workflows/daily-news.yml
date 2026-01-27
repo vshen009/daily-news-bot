@@ -61,15 +61,36 @@ jobs:
         if [ -f "public/$(date +%Y-%m-%d).html" ]; then
           git add public/*.html
           git diff --staged --quiet || git commit -m "📰 每日新闻更新 - $(date +'%Y-%m-%d')"
-          git push origin main
         else
           echo "警告：未生成今日HTML文件"
           exit 1
         fi
 
-    - name: 触发Vercel部署
+    - name: 创建 Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        branch: automated-news-update-$(date +'%Y%m%d')
+        title: "📰 每日新闻更新 - $(date +'%Y-%m-%d')"
+        body: |
+          ## 📰 自动生成的新闻更新
+
+          这是一个由 GitHub Actions 自动创建的 PR，包含最新的财经新闻。
+
+          ### 更新内容
+          - 生成日期：$(date +'%Y-%m-%d')
+          - 自动抓取并翻译最新财经新闻
+          - 更新首页和日报 HTML 文件
+
+          ---
+
+          🤖 由 [Daily News Bot](https://github.com/vshen009/daily-news-bot) 自动生成
+        commit-message: "📰 每日新闻更新 - $(date +'%Y-%m-%d')"
+        labels: automated, daily-news
+        delete-branch: true
+
+    - name: 提示信息
       if: success()
       run: |
-        echo "✓ HTML文件已推送到main分支"
-        echo "✓ Vercel将自动检测并部署"
-        echo "✓ 访问你的Vercel仪表板查看部署状态"
+        echo "✓ Pull Request 已创建"
+        echo "✓ 请检查并合并 PR 以部署到 Vercel"
+        echo "✓ 合并后 Vercel 将自动部署"
