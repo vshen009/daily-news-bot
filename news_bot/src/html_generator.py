@@ -21,18 +21,12 @@ class HTMLGenerator:
         # 添加自定义过滤器
         self.env.filters['zfill'] = lambda s, width: str(s).zfill(width)
 
-    def generate(self, articles: List[NewsArticle], output_path: str = None):
+    def generate(self, articles: List[NewsArticle], output_path: str = None, template_name: str = 'daily_news_modern.html'):
         """生成HTML文件"""
 
-        # 按板块分组
-        domestic = [a for a in articles if a.category == Category.DOMESTIC]
-        asia = [a for a in articles if a.category == Category.ASIA_PACIFIC]
-        useu = [a for a in articles if a.category == Category.US_EUROPE]
-
-        # 确保每个板块至少有featured新闻
-        for section in [domestic, asia, useu]:
-            if section:
-                section[0].featured = True
+        # 为第一篇文章标记为featured
+        if articles:
+            articles[0].featured = True
 
         # 生成文件名
         date_str = datetime.now().strftime(Config.DATE_FORMAT)
@@ -41,15 +35,13 @@ class HTMLGenerator:
         if not output_path:
             output_path = Config.OUTPUT_DIR / filename
 
-        # 加载模板
-        template = self.env.get_template('daily_news.html')
+        # 加载模板（使用现代化模板）
+        template = self.env.get_template(template_name)
 
-        # 渲染
+        # 渲染 - 使用单一articles列表
         html = template.render(
             date=date_str,
-            domestic_news=domestic,
-            asia_news=asia,
-            useu_news=useu,
+            articles=articles,
             total_articles=len(articles)
         )
 
@@ -61,5 +53,6 @@ class HTMLGenerator:
             f.write(html)
 
         logger.info(f"HTML已生成: {output_path}")
+        logger.info(f"  总文章数: {len(articles)}")
 
         return output_path

@@ -3,43 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Financial Intelligence Daily - 每日全球财经新闻归档">
     <title>Financial Intelligence Daily · 每日财经新闻</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #fafafa;
+            /* Modern Fintech Color System */
+            --bg-primary: #f8fafc;
             --bg-secondary: #ffffff;
             --bg-card: #ffffff;
-            --bg-card-hover: #f8fafc;
+            --bg-card-hover: #f1f5f9;
 
-            --accent-blue: #0866ff;
+            /* Professional Blue Palette */
+            --accent-blue: #2563eb;
+            --accent-blue-light: #3b82f6;
+            --accent-blue-dark: #1d4ed8;
+
+            /* Accent Colors */
             --accent-indigo: #6366f1;
             --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
 
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-tertiary: #94a3b8;
+            /* Text Colors - High Contrast */
+            --text-primary: #0c1929;
+            --text-secondary: #334155;
+            --text-tertiary: #64748b;
 
+            /* Border & Effects */
             --border-color: #e2e8f0;
-            --border-glow: rgba(8, 102, 255, 0.2);
+            --border-glow: rgba(37, 99, 235, 0.3);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 8px 24px rgba(37, 99, 235, 0.12);
+            --shadow-glow-strong: 0 12px 40px rgba(37, 99, 235, 0.18);
 
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-            --shadow-glow: 0 10px 30px rgba(8, 102, 255, 0.15);
+            /* Typography */
+            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            /* Spacing */
+            --container-max-width: 1280px;
 
-            --transition-fast: 0.15s ease;
-            --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-medium: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --bg-card: #1e293b;
+                --bg-card-hover: #334155;
+
+                --text-primary: #f1f5f9;
+                --text-secondary: #cbd5e1;
+                --text-tertiary: #94a3b8;
+
+                --border-color: #334155;
+                --border-glow: rgba(59, 130, 246, 0.4);
+                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+            }
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -54,8 +94,14 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        a:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
         .container {
-            max-width: 1200px;
+            max-width: var(--container-max-width);
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -78,20 +124,29 @@
             display: flex;
             align-items: center;
             gap: 16px;
+            text-decoration: none;
         }
 
-        .logo-icon {
+        .logo-icon-wrapper {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-indigo) 100%);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 20px;
             box-shadow: var(--shadow-glow);
+            transition: transform var(--transition-medium);
+        }
+
+        .logo-section:hover .logo-icon-wrapper {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            color: white;
         }
 
         .logo-text {
@@ -104,26 +159,29 @@
             font-weight: 800;
             color: var(--text-primary);
             letter-spacing: -0.03em;
+            line-height: 1.2;
         }
 
         .logo-subtitle {
             font-size: 14px;
             color: var(--text-secondary);
+            font-weight: 500;
             margin-top: 2px;
         }
 
         .header-stats {
             display: flex;
-            gap: 24px;
+            gap: 16px;
         }
 
         .stat-badge {
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
-            background: rgba(8, 102, 255, 0.08);
-            border-radius: 8px;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 10px;
         }
 
         .stat-badge-icon {
@@ -142,30 +200,48 @@
         .stat-badge-text {
             font-size: 13px;
             color: var(--accent-blue);
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.02em;
         }
 
         /* Main Content */
         .main-content {
             flex: 1;
-            padding: 48px 0;
+            padding: 56px 0;
         }
 
         .page-header {
-            margin-bottom: 40px;
+            margin-bottom: 48px;
+        }
+
+        .page-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
+            color: var(--accent-blue);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
 
         .page-title {
-            font-size: 32px;
-            font-weight: 800;
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 900;
             letter-spacing: -0.03em;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            line-height: 1.2;
         }
 
         .page-subtitle {
-            font-size: 16px;
+            font-size: 17px;
             color: var(--text-secondary);
+            font-weight: 500;
         }
 
         /* News Grid */
@@ -179,11 +255,11 @@
         .news-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 16px;
+            padding: 28px;
             cursor: pointer;
             transition: all var(--transition-medium);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
             position: relative;
@@ -195,8 +271,8 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 3px;
+            right: 0;
+            height: 4px;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-indigo));
             transform: scaleX(0);
             transform-origin: left;
@@ -206,7 +282,7 @@
         .news-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-glow);
-            box-shadow: var(--shadow-card-hover);
+            box-shadow: var(--shadow-lg);
             transform: translateY(-4px);
         }
 
@@ -216,41 +292,50 @@
 
         .news-card.featured {
             border: 2px solid var(--accent-blue);
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(99, 102, 241, 0.03) 100%);
+        }
+
+        .news-card.featured::before {
+            transform: scaleX(1);
         }
 
         .card-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
             color: white;
-            padding: 4px 10px;
-            border-radius: 4px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.05em;
-            margin-bottom: 16px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
         .card-date {
-            font-size: 36px;
-            font-weight: 800;
+            font-size: 40px;
+            font-weight: 900;
             color: var(--text-primary);
             margin-bottom: 8px;
             letter-spacing: -0.03em;
+            line-height: 1;
         }
 
         .card-label {
             font-size: 14px;
             color: var(--text-secondary);
             margin-bottom: 16px;
+            font-weight: 500;
         }
 
         .card-title {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             color: var(--text-primary);
             line-height: 1.5;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -261,14 +346,24 @@
             margin-top: auto;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-size: 12px;
             color: var(--text-tertiary);
+            font-weight: 500;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
         }
 
         .card-meta-icon {
-            width: 4px;
-            height: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card-meta-icon::before {
+            content: '';
+            width: 6px;
+            height: 6px;
             background: var(--accent-blue);
             border-radius: 50%;
         }
@@ -277,17 +372,35 @@
         .footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
-            padding: 32px 0;
-            margin-top: 48px;
+            padding: 40px 0;
+            margin-top: 64px;
         }
 
         .footer-inner {
             text-align: center;
         }
 
+        .footer-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .footer-logo svg {
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+
         .footer-text {
-            font-size: 13px;
-            color: var(--text-tertiary);
+            font-size: 14px;
+            color: var(--text-secondary);
             margin-bottom: 8px;
         }
 
@@ -299,9 +412,10 @@
         }
 
         .footer-link {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--accent-blue);
             text-decoration: none;
+            font-weight: 600;
             transition: color var(--transition-fast);
         }
 
@@ -312,32 +426,37 @@
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .empty-icon {
-            width: 80px;
-            height: 80px;
+            width: 96px;
+            height: 96px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
-            border-radius: 20px;
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 28px;
+            box-shadow: var(--shadow-glow-strong);
+        }
+
+        .empty-icon svg {
+            width: 48px;
+            height: 48px;
             color: white;
-            font-size: 36px;
-            margin: 0 auto 24px;
-            box-shadow: var(--shadow-glow);
         }
 
         .empty-title {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
         }
 
         .empty-text {
-            font-size: 16px;
+            font-size: 17px;
             color: var(--text-secondary);
         }
 
@@ -349,7 +468,7 @@
 
             .header-inner {
                 flex-direction: column;
-                gap: 16px;
+                gap: 20px;
                 text-align: center;
             }
 
@@ -363,11 +482,26 @@
             }
 
             .page-title {
-                font-size: 24px;
+                font-size: 28px;
             }
 
             .news-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                padding: 40px 0;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -375,13 +509,17 @@
 <body>
     <header class="header">
         <div class="container header-inner">
-            <div class="logo-section">
-                <div class="logo-icon">FI</div>
+            <a href="/" class="logo-section">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                </div>
                 <div class="logo-text">
                     <div class="logo-title">Financial Intelligence</div>
                     <div class="logo-subtitle">每日财经新闻日报</div>
                 </div>
-            </div>
+            </a>
             <div class="header-stats">
                 <div class="stat-badge">
                     <span class="stat-badge-icon"></span>
@@ -393,8 +531,14 @@
 
     <main class="container main-content">
         <div class="page-header">
+            <div class="page-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                Archive
+            </div>
             <h1 class="page-title">历史新闻归档</h1>
-            <p class="page-subtitle">Archived Financial News · 点击卡片查看当日详情</p>
+            <p class="page-subtitle">Financial News Archive · 点击卡片查看当日详情</p>
         </div>
 
         <div class="news-grid" id="newsGrid">
@@ -402,7 +546,11 @@
         </div>
 
         <div class="empty-state" id="emptyState" style="display: none;">
-            <div class="empty-icon">FI</div>
+            <div class="empty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                </svg>
+            </div>
             <h2 class="empty-title">暂无新闻归档</h2>
             <p class="empty-text">新闻正在生成中，请稍后再来查看</p>
         </div>
@@ -410,6 +558,11 @@
 
     <footer class="footer">
         <div class="container footer-inner">
+            <div class="footer-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+            </div>
             <p class="footer-text">Financial Intelligence Daily · 由 AI 驱动的自动化新闻系统</p>
             <p class="footer-text">Powered by Claude AI · 部署于 Vercel</p>
             <div class="footer-links">
@@ -422,21 +575,13 @@
     <script>
         // News data will be populated by index_updater.py
         const newsList = [
-            {
-                date: '2026-01-27',
-                url: '2026-01-27.html',
-                title: '全球财经日报 · Financial Intelligence | 2026-01-27'
-            },
-            {
-                date: '2026-01-26',
-                url: '2026-01-26.html',
-                title: 'FINANCIAL INTELLIGENCE DAILY | 金融情报日报'
-            },
-            {
-                date: '2026-01-25',
-                url: '2026-01-25.html',
-                title: 'FINANCIAL INTELLIGENCE DAILY | 金融情报日报'
-            }
+            // Example format:
+            // {
+            //     date: '2026-01-26',
+            //     url: '2026-01-26.html',
+            //     title: '全球财经日报',
+            //     articleCount: 30
+            // }
         ];
 
         function renderNewsCards() {
@@ -453,7 +598,14 @@
                 const card = document.createElement('div');
                 card.className = 'news-card' + (index === 0 ? ' featured' : '');
 
-                const badgeHTML = index === 0 ? '<span class="card-badge">最新</span>' : '';
+                const badgeHTML = index === 0
+                    ? `<span class="card-badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        最新
+                       </span>`
+                    : '';
 
                 card.innerHTML = `
                     ${badgeHTML}
@@ -461,8 +613,7 @@
                     <div class="card-label">${news.date} · ${news.articleCount || 'N/A'} 条新闻</div>
                     <div class="card-title">${news.title}</div>
                     <div class="card-meta">
-                        <span class="card-meta-icon"></span>
-                        <span>点击查看详情</span>
+                        <span class="card-meta-icon">点击查看详情</span>
                     </div>
                 `;
 

@@ -29,6 +29,7 @@ class Config:
 
     # Claude API配置
     ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+    ANTHROPIC_BASE_URL = os.getenv("ANTHROPIC_BASE_URL", "https://api.anthropic.com")
     CLAUDE_MODEL = "claude-3-5-sonnet-20241022"  # 或 claude-3-5-haiku-20241022 (更便宜)
 
     # 翻译配置
@@ -41,7 +42,7 @@ class Config:
     MAX_RETRIES = 3               # 最大重试次数
 
     # 新闻筛选
-    TOP_NEWS_PER_CATEGORY = 5     # 每个板块筛选TOP数量
+    TOP_NEWS_COUNT = 15           # 总共筛选TOP新闻数量
     MAX_AGE_HOURS = 48            # 新闻最大时效（小时）
 
     # 输出配置

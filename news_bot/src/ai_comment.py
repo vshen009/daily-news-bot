@@ -15,7 +15,10 @@ class AICommentGenerator:
         if not Config.ANTHROPIC_API_KEY:
             raise ValueError("未设置 ANTHROPIC_API_KEY")
 
-        self.client = anthropic.Anthropic(api_key=Config.ANTHROPIC_API_KEY)
+        self.client = anthropic.Anthropic(
+            api_key=Config.ANTHROPIC_API_KEY,
+            base_url=Config.ANTHROPIC_BASE_URL
+        )
 
     def generate_comment(self, article: NewsArticle) -> str:
         """为新闻生成AI评论"""
@@ -46,12 +49,6 @@ class AICommentGenerator:
     def _build_prompt(self, article: NewsArticle) -> str:
         """构建Prompt"""
 
-        category_map = {
-            "domestic": "国内金融",
-            "asia_pacific": "亚太日本宏观",
-            "us_europe": "美国欧洲"
-        }
-
         prompt = f"""你是一位资深金融分析师，请为以下新闻撰写一句专业评论（30-50字）。
 
 ## 新闻标题：
@@ -59,9 +56,6 @@ class AICommentGenerator:
 
 ## 新闻摘要：
 {article.content}
-
-## 所属板块：
-{category_map.get(article.category, article.category)}
 
 ## 评论要求：
 1. 使用金融专业术语（如：存量博弈、货币政策、风险溢价、carry trade等）

@@ -555,7 +555,7 @@
             {% for article in articles %}
             <article class="news-card {% if loop.first %}featured{% endif %}">
                 <div class="card-header">
-                    <span class="card-id">NEWS-{{ loop.index|zfill(3) }}</span>
+                    <span class="card-id">NEWS-{{ loop.index|string.zfill(3) }}</span>
                     <span class="card-time">{{ article.publish_time.strftime('%Y.%m.%d') }}</span>
                 </div>
 

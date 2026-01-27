@@ -15,7 +15,10 @@ class Translator:
         if not Config.ANTHROPIC_API_KEY:
             raise ValueError("未设置 ANTHROPIC_API_KEY")
 
-        self.client = anthropic.Anthropic(api_key=Config.ANTHROPIC_API_KEY)
+        self.client = anthropic.Anthropic(
+            api_key=Config.ANTHROPIC_API_KEY,
+            base_url=Config.ANTHROPIC_BASE_URL
+        )
 
     def translate_article(self, article: NewsArticle) -> NewsArticle:
         """翻译文章"""
