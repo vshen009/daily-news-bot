@@ -1,0 +1,169 @@
+# 新闻源配置文件
+# 优化版 - 国内主流媒体 + 国际顶级财经媒体
+
+sources:
+  # ========== 国内媒体 - 用于"国内金融"板块 ==========
+  - name: "新华社"
+    english_name: "Xinhua"
+    url: "http://www.xinhuanet.com/fortune/"
+    rss: "http://www.xinhuanet.com/fortune/news_fortune.xml"
+    language: "zh"
+    category: "domestic"
+    priority: 1
+    enabled: true
+
+  - name: "财新网"
+    english_name: "Caixin"
+    url: "https://finance.caixin.com/"
+    rss: "https://finance.caixin.com/rss/home.js"
+    language: "zh"
+    category: "domestic"
+    priority: 2
+    enabled: true
+
+  - name: "21世纪经济报道"
+    english_name: "21st Century Business Herald"
+    url: "https://www.21jingji.com/"
+    rss: "https://www.21jingji.com/rss.xml"
+    language: "zh"
+    category: "domestic"
+    priority: 3
+    enabled: true
+
+  - name: "证券时报"
+    english_name: "Securities Times"
+    url: "https://www.stcn.com/"
+    rss: "https://www.stcn.com/rss.xml"
+    language: "zh"
+    category: "domestic"
+    priority: 4
+    enabled: true
+
+  - name: "第一财经"
+    english_name: "Yicai"
+    url: "https://www.yicai.com/"
+    rss: "https://www.yicai.com/rss.xml"
+    language: "zh"
+    category: "domestic"
+    priority: 5
+    enabled: true
+
+  # ========== 国际媒体 - 用于"亚太日本"和"美欧动态"板块 ==========
+  # 5个国际顶级财经媒体源,同时覆盖亚太和美欧新闻
+
+  - name: "华尔街日报"
+    english_name: "Wall Street Journal"
+    url: "https://www.wsj.com"
+    rss: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
+    language: "en"
+    category: "asia_pacific"  # 亚太日本板块
+    priority: 1
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "彭博社"
+    english_name: "Bloomberg"
+    url: "https://www.bloomberg.com"
+    rss: "https://feeds.bloomberg.com/markets/news.rss"
+    language: "en"
+    category: "asia_pacific"  # 亚太日本板块
+    priority: 2
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "CNBC"
+    english_name: "CNBC"
+    url: "https://www.cnbc.com"
+    rss: "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+    language: "en"
+    category: "asia_pacific"  # 亚太日本板块
+    priority: 3
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "MarketWatch"
+    english_name: "MarketWatch"
+    url: "https://www.marketwatch.com"
+    rss: "https://www.marketwatch.com/rss/topstories"
+    language: "en"
+    category: "asia_pacific"  # 亚太日本板块
+    priority: 4
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "Yahoo财经"
+    english_name: "Yahoo Finance"
+    url: "https://finance.yahoo.com"
+    rss: "https://finance.yahoo.com/news/rssindex"
+    language: "en"
+    category: "asia_pacific"  # 亚太日本板块
+    priority: 5
+    enabled: true
+    translate: true  # 需要翻译
+
+  # ========== 国际媒体 - 美欧动态板块 ==========
+  # 使用相同的5个国际源,但分配到us_europe分类
+
+  - name: "华尔街日报"
+    english_name: "Wall Street Journal"
+    url: "https://www.wsj.com"
+    rss: "https://feeds.a.dj.com/rss/RSSMarketsMain.xml"
+    language: "en"
+    category: "us_europe"  # 美欧动态板块
+    priority: 1
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "彭博社"
+    english_name: "Bloomberg"
+    url: "https://www.bloomberg.com"
+    rss: "https://feeds.bloomberg.com/markets/news.rss"
+    language: "en"
+    category: "us_europe"  # 美欧动态板块
+    priority: 2
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "CNBC"
+    english_name: "CNBC"
+    url: "https://www.cnbc.com"
+    rss: "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+    language: "en"
+    category: "us_europe"  # 美欧动态板块
+    priority: 3
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "MarketWatch"
+    english_name: "MarketWatch"
+    url: "https://www.marketwatch.com"
+    rss: "https://www.marketwatch.com/rss/topstories"
+    language: "en"
+    category: "us_europe"  # 美欧动态板块
+    priority: 4
+    enabled: true
+    translate: true  # 需要翻译
+
+  - name: "Yahoo财经"
+    english_name: "Yahoo Finance"
+    url: "https://finance.yahoo.com"
+    rss: "https://finance.yahoo.com/news/rssindex"
+    language: "en"
+    category: "us_europe"  # 美欧动态板块
+    priority: 5
+    enabled: true
+    translate: true  # 需要翻译
+
+# 配置说明：
+# - name: 中文名称
+# - english_name: 英文名称（保留原文用）
+# - url: 网站主页
+# - rss: RSS订阅地址（优先使用RSS）
+# - language: 'zh'中文 / 'en'英文
+# - category: 板块分类
+#   * domestic: 国内金融
+#   * asia_pacific: 亚太日本
+#   * us_europe: 美国欧洲
+# - priority: 优先级（数字越小越高）
+# - enabled: true启用 / false禁用
+# - translate: 是否需要翻译（仅英文源需要）

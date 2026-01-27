@@ -1,0 +1,18 @@
+# Python依赖库
+# 核心依赖
+requests>=2.31.0           # HTTP请求
+beautifulsoup4>=4.12.0     # HTML解析
+feedparser>=6.0.10        # RSS解析
+python-dateutil>=2.8.2    # 日期处理
+pydantic>=2.0.0           # 数据验证
+
+# AI和翻译
+anthropic>=0.18.0         # Claude API
+
+# 模板引擎
+jinja2>=3.1.2             # HTML模板
+
+# 工具库
+python-dotenv>=1.0.0      # 环境变量管理
+loguru>=0.7.0             # 日志管理
+pyyaml>=6.0               # YAML配置文件
