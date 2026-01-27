@@ -53,6 +53,7 @@ jobs:
         if [ -n "$(git status --porcelain public/)" ]; then
           git add public/*.html news_bot/data/news.db
           git commit -m "🧪 端到端测试 - $(date +'%Y-%m-%d %H:%M')"
+          git pull origin main --no-rebase
           git push origin main
         else
           echo "没有新的HTML文件需要提交"
