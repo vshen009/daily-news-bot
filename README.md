@@ -299,7 +299,7 @@
 
 ### 方法1：在线访问（推荐）
 
-直接访问网站：**[点击这里访问最新财经新闻](https://financial-news.vercel.app)**
+直接访问网站：**[点击这里访问最新财经新闻](https://news.ai.0814.host)**
 
 - ✅ 无需安装
 - ✅ 手机、电脑、平板均可访问
@@ -308,8 +308,8 @@
 ### 方法2：收藏历史新闻
 
 访问历史新闻：
-- `https://financial-news.vercel.app/2026-01-26.html`
-- `https://financial-news.vercel.app/2026-01-25.html`
+- `https://news.ai.0814.host/2026-01-26.html`
+- `https://news.ai.0814.host/2026-01-25.html`
 - 只需修改日期即可
 
 ---
@@ -332,7 +332,7 @@
 
 **每天10分钟，获取比过去3小时更有价值的财经信息**
 
-👉 **[点击这里访问今天的财经新闻](https://financial-news.vercel.app)**
+👉 **[点击这里访问今天的财经新闻](https://news.ai.0814.host)**
 
 ---
 

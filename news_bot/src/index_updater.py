@@ -60,11 +60,15 @@ class IndexUpdater:
                     # 读取标题
                     title = self._extract_title(file_path)
 
+                    # 提取新闻数量
+                    article_count = self._extract_article_count(file_path)
+
                     news_files.append({
                         'date': date_str,
                         'file_date': file_date,
                         'url': file_path.name,  # 相对于public/index.html的路径
-                        'title': title
+                        'title': title,
+                        'article_count': article_count
                     })
 
             except ValueError as e:
@@ -103,6 +107,24 @@ class IndexUpdater:
 
         # 默认标题
         return f"财经日报 - {file_path.stem}"
+
+    def _extract_article_count(self, file_path: Path) -> int:
+        """从HTML文件中提取新闻数量"""
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+
+                # 统计 <article class="news-card ..."> 的数量
+                article_count = len(re.findall(r'<article[^>]*class="[^"]*news-card', content))
+
+                if article_count > 0:
+                    return article_count
+
+        except Exception as e:
+            logger.warning(f"读取新闻数量失败: {file_path.name}, {e}")
+
+        # 如果无法提取，返回0
+        return 0
 
     def update_index(self, days: int = 30) -> bool:
         """
@@ -162,11 +184,13 @@ class IndexUpdater:
             date = news['date']
             url = news['url']
             title = news['title'].replace("'", "\\'").replace('"', '\\"')
+            article_count = news.get('article_count', 0)
 
             lines.append(f"            {{")
             lines.append(f"                date: '{date}',")
             lines.append(f"                url: '{url}',")
-            lines.append(f"                title: '{title}'")
+            lines.append(f"                title: '{title}',")
+            lines.append(f"                articleCount: {article_count}")
             lines.append(f"            }},")
 
         # 移除最后一个逗号
