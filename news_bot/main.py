@@ -82,29 +82,8 @@ def select_top_news(articles: list, top_n: int = 15) -> list:
     # 按得分倒序排序
     scored_articles.sort(key=lambda x: x[0], reverse=True)
 
-    # 取前N条
+    # 取前N条（不再需要板块平衡逻辑）
     top_articles = [article for score, article in scored_articles[:top_n]]
-
-    # 确保板块平衡（如果可能）
-    # 统计各板块数量
-    from collections import Counter
-    category_count = Counter(a.category for a in top_articles)
-
-    # 如果某个板块没有新闻，尝试替换低分新闻
-    for category in [Category.DOMESTIC, Category.ASIA_PACIFIC, Category.US_EUROPE]:
-        if category_count.get(category, 0) == 0:
-            # 从剩余新闻中查找该板块的新闻
-            for score, article in scored_articles[top_n:]:
-                if article.category == category:
-                    # 找到最低分且不是该板块的新闻进行替换
-                    for i, existing in enumerate(top_articles):
-                        if existing.category != category:
-                            # 替换
-                            top_articles[i] = article
-                            category_count[existing.category] -= 1
-                            category_count[category] = category_count.get(category, 0) + 1
-                            break
-                    break
 
     return top_articles
 
@@ -198,14 +177,6 @@ def main():
         all_articles = translated_new + cached_articles
         top_15_news = select_top_news(all_articles, top_n=15)
         logger.info(f"✓ 从 {len(all_articles)} 条新闻中筛选出 TOP {len(top_15_news)} 条")
-
-        # 统计板块分布
-        from src.models import Category
-        category_dist = {}
-        for article in top_15_news:
-            cat = article.category.value
-            category_dist[cat] = category_dist.get(cat, 0) + 1
-        logger.info(f"  板块分布: {category_dist}")
 
         # 8. 生成HTML（只显示TOP 15）
         logger.info("\n步骤8: 生成HTML（TOP 15）")

@@ -8,9 +8,7 @@ from enum import Enum
 
 class Category(str, Enum):
     """新闻板块"""
-    DOMESTIC = "domestic"           # 国内金融
-    ASIA_PACIFIC = "asia_pacific"   # 亚太日本
-    US_EUROPE = "us_europe"        # 美国欧洲
+    GLOBAL = "global"               # 全球财经（统一分类）
 
 
 class Language(str, Enum):

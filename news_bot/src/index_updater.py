@@ -24,7 +24,7 @@ class IndexUpdater:
 
         self.project_root = project_root
         self.public_dir = project_root / "public"
-        self.index_file = project_root / "index.html"
+        self.index_file = project_root / "public" / "index.html"
 
     def get_news_files(self, days: int = 30) -> list:
         """
@@ -63,7 +63,7 @@ class IndexUpdater:
                     news_files.append({
                         'date': date_str,
                         'file_date': file_date,
-                        'url': f'public/{file_path.name}',
+                        'url': file_path.name,  # 相对于public/index.html的路径
                         'title': title
                     })
 
