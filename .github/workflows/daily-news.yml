@@ -1,9 +1,9 @@
 name: 每日财经新闻生成
 
 on:
-  # 每天北京时间上午9点（UTC 1点）运行
+  # 每6小时运行一次（UTC 0点、6点、12点、18点）
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 */6 * * *'
 
   # 允许手动触发
   workflow_dispatch:
