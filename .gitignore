@@ -66,3 +66,6 @@ yarn-error.log
 # 项目文档（内部使用，不需要提交）
 /memory.md
 # Claude.md已被删除，CLAUDE.md用于Claude Code指导（需要提交）
+
+# Git工作流辅助脚本（本地使用，不提交）
+git-workflow-helpers.sh
