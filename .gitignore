@@ -64,5 +64,6 @@ npm-debug.log
 yarn-error.log
 
 # 项目文档（内部使用，不需要提交）
-Claude.md
-memory.md
+/Claude.md
+/memory.md
+# 注意：CLAUDE.md（全大写）需要提交到仓库，用于Claude Code指导
