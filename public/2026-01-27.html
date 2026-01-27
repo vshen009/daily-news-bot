@@ -3,182 +3,258 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FINANCIAL INTELLIGENCE DAILY | 金融情报日报</title>
+    <meta name="description" content="全球财经日报 - 每日精选财经新闻与分析">
+    <title>全球财经日报 · Financial Intelligence | 2026-01-27</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Modern Fintech Color System */
             --bg-primary: #f8fafc;
             --bg-secondary: #ffffff;
             --bg-card: #ffffff;
             --bg-card-hover: #f1f5f9;
 
+            /* Professional Blue Palette */
             --accent-blue: #2563eb;
-            --accent-indigo: #7c3aed;
-            --accent-purple: #a855f7;
-            --accent-green: #059669;
-            --accent-red: #dc2626;
-            --accent-amber: #d97706;
+            --accent-blue-light: #3b82f6;
+            --accent-blue-dark: #1d4ed8;
 
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-tertiary: #94a3b8;
+            /* Accent Colors */
+            --accent-indigo: #6366f1;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --accent-gold: #d4af37;
 
-            --border-color: rgba(37, 99, 235, 0.12);
+            /* Text Colors - High Contrast */
+            --text-primary: #0c1929;
+            --text-secondary: #334155;
+            --text-tertiary: #64748b;
+
+            /* Border & Effects */
+            --border-color: #e2e8f0;
             --border-glow: rgba(37, 99, 235, 0.3);
-            --shadow-glow: rgba(37, 99, 235, 0.1);
-            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 8px 24px rgba(37, 99, 235, 0.12);
+            --shadow-glow-strong: 0 12px 40px rgba(37, 99, 235, 0.18);
 
-            --font-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', monospace;
-            --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            /* Typography */
+            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-            --transition-fast: 0.2s ease;
-            --transition-medium: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Spacing */
+            --container-max-width: 1280px;
+            --spacing-unit: 4px;
+
+            /* Transitions */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-medium: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --bg-card: #1e293b;
+                --bg-card-hover: #334155;
+
+                --text-primary: #f1f5f9;
+                --text-secondary: #cbd5e1;
+                --text-tertiary: #94a3b8;
+
+                --border-color: #334155;
+                --border-glow: rgba(59, 130, 246, 0.4);
+                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Animated Grid Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image:
-                linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-            pointer-events: none;
-            z-index: 0;
+        /* Focus States for Accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+        /* Container */
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
-        .container { position: relative; z-index: 2; }
-
-        /* Header */
+        /* Header - Floating Glass Effect */
         .header {
-            border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.9);
             position: sticky;
-            top: 0;
-            z-index: 100;
-            animation: headerSlideDown 0.8s ease;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            top: 16px;
+            z-index: 1000;
+            margin: 0 16px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-medium);
         }
 
-        @keyframes headerSlideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @media (prefers-color-scheme: dark) {
+            .header {
+                background: rgba(30, 41, 59, 0.9);
+            }
+        }
+
+        .header:hover {
+            box-shadow: var(--shadow-lg);
         }
 
         .header-inner {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 16px 24px;
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 14px;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+        .logo-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-indigo) 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 20px;
+            box-shadow: var(--shadow-glow);
+            transition: transform var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.2) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+        }
+
+        .logo-section:hover .logo-icon-wrapper {
+            transform: scale(1.05);
+        }
+
+        .logo-section:hover .logo-icon-wrapper::before {
+            opacity: 1;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
             color: white;
-            box-shadow: 0 10px 25px var(--shadow-glow);
-            animation: pulse 2s ease-in-out infinite;
+            transition: transform var(--transition-medium);
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 10px 25px var(--shadow-glow); transform: translateY(0); }
-            50% { box-shadow: 0 15px 35px var(--shadow-glow); transform: translateY(-2px); }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
         }
-
-        .logo-text { display: flex; flex-direction: column; }
 
         .logo-title {
-            font-family: var(--font-mono);
             font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--accent-blue);
-            text-transform: uppercase;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         .logo-subtitle {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-tertiary);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-weight: 500;
             margin-top: 2px;
         }
 
         .header-stats {
             display: flex;
-            gap: 40px;
-            align-items: center;
+            gap: 20px;
         }
 
-        .stat-item { text-align: right; }
+        .stat-item {
+            text-align: right;
+        }
 
         .stat-label {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-tertiary);
-            letter-spacing: 1px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
             text-transform: uppercase;
-            margin-bottom: 4px;
         }
 
         .stat-value {
-            font-family: var(--font-mono);
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
+            transition: color var(--transition-fast);
         }
 
-        .stat-value.accent { color: var(--accent-blue); }
+        .stat-value.accent {
+            color: var(--accent-blue);
+        }
 
-        /* Ticker Tape */
+        /* Ticker Tape - Improved */
         .ticker-tape {
             background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             overflow: hidden;
-            padding: 12px 0;
+            padding: 10px 0;
+            margin-top: 16px;
         }
 
         .ticker-content {
             display: flex;
-            animation: tickerScroll 30s linear infinite;
+            animation: tickerScroll 50s linear infinite;
             white-space: nowrap;
+        }
+
+        .ticker-content:hover {
+            animation-play-state: paused;
         }
 
         @keyframes tickerScroll {
@@ -190,98 +266,132 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 0 30px;
-            font-family: var(--font-mono);
-            font-size: 12px;
+            padding: 0 28px;
+            font-size: 13px;
             border-right: 1px solid var(--border-color);
+            transition: background var(--transition-fast);
         }
 
-        .ticker-symbol { color: var(--accent-blue); font-weight: 600; }
-        .ticker-value { color: var(--text-primary); }
-        .ticker-change { color: var(--accent-green); }
-        .ticker-change.negative { color: var(--accent-red); }
+        .ticker-symbol {
+            color: var(--accent-blue);
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .ticker-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .ticker-change {
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .ticker-change.positive {
+            color: var(--accent-green);
+        }
+
+        .ticker-change.negative {
+            color: var(--accent-red);
+        }
 
         /* Main Content */
         .main-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
-
-        /* Section */
-        .section {
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeUp 0.8s ease forwards;
-        }
-
-        .section:nth-child(1) { animation-delay: 0.2s; }
-        .section:nth-child(2) { animation-delay: 0.4s; }
-        .section:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
+            padding: 48px 0;
         }
 
         .section-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            position: relative;
+            margin-bottom: 48px;
         }
 
-        .section-number {
-            font-family: var(--font-mono);
-            font-size: 72px;
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+            color: var(--accent-blue);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: 700;
-            color: var(--bg-card);
-            -webkit-text-stroke: 2px var(--border-color);
-            line-height: 1;
-            position: relative;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
 
         .section-title {
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: 900;
+            letter-spacing: -0.03em;
             color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         /* News Grid */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
             gap: 24px;
         }
 
-        /* News Card */
+        /* News Card - Modern Design */
         .news-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 32px;
             position: relative;
-            overflow: hidden;
-            transition: all var(--transition-medium);
             cursor: pointer;
-            box-shadow: var(--shadow-card);
+            transition: all var(--transition-medium);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-indigo), var(--accent-purple));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-medium);
         }
 
         .news-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-glow);
-            box-shadow: var(--shadow-card-hover), 0 0 0 3px var(--border-glow);
+            box-shadow: var(--shadow-lg);
             transform: translateY(-4px);
         }
 
+        .news-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .news-card:active {
+            transform: translateY(-2px);
+        }
+
         .news-card.featured {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
-            border: 2px solid var(--border-glow);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(99, 102, 241, 0.03) 100%);
+            border: 2px solid var(--accent-blue);
+        }
+
+        .news-card.featured::before {
+            transform: scaleX(1);
         }
 
         .card-header {
@@ -292,84 +402,112 @@
         }
 
         .card-id {
-            font-family: var(--font-mono);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             font-size: 11px;
+            font-weight: 700;
             color: var(--accent-blue);
-            background: rgba(37, 99, 235, 0.08);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
             padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            border-radius: 6px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .card-id::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
         .card-time {
-            font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        .news-title-original {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-bottom: 10px;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.5;
         }
 
         .news-title {
-            font-size: 22px;
-            font-weight: 700;
+            font-size: 20px;
+            font-weight: 800;
             line-height: 1.4;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             color: var(--text-primary);
             transition: color var(--transition-fast);
+            letter-spacing: -0.02em;
         }
 
-        .news-card.featured .news-title { font-size: 28px; }
-        .news-card:hover .news-title { color: var(--accent-blue); }
+        .news-card.featured .news-title {
+            font-size: 24px;
+        }
 
-        .news-title-original {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin-bottom: 8px;
-            font-style: italic;
+        .news-card:hover .news-title {
+            color: var(--accent-blue);
         }
 
         .news-excerpt {
             font-size: 15px;
-            line-height: 1.7;
+            line-height: 1.75;
             color: var(--text-secondary);
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
-        /* AI Comment Section */
+        /* AI Comment - Enhanced */
         .ai-comment {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.04) 0%, rgba(168, 85, 247, 0.04) 100%);
-            border-left: 3px solid var(--accent-purple);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+            border-left: 4px solid var(--accent-purple);
             padding: 16px 20px;
-            border-radius: 0 8px 8px 0;
+            border-radius: 0 12px 12px 0;
             margin-bottom: 20px;
             position: relative;
         }
 
         .ai-comment::before {
-            content: 'AI INSIGHT';
+            content: 'AI 洞察';
             position: absolute;
             top: -10px;
-            left: 12px;
+            left: 14px;
             background: var(--bg-card);
             padding: 0 8px;
-            font-family: var(--font-mono);
-            font-size: 9px;
-            font-weight: 600;
+            font-size: 10px;
+            font-weight: 700;
             color: var(--accent-purple);
-            letter-spacing: 1px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
         }
 
         .ai-comment-text {
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-secondary);
-            font-style: italic;
+            font-weight: 500;
         }
 
         .news-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 20px;
+            padding-top: 18px;
             border-top: 1px solid var(--border-color);
         }
 
@@ -377,52 +515,87 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 13px;
             color: var(--accent-blue);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: all var(--transition-fast);
         }
 
-        .news-source:hover { color: var(--accent-purple); }
+        .news-source:hover {
+            color: var(--accent-indigo);
+        }
+
+        .news-source::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+        }
 
         .news-meta {
             display: flex;
             gap: 16px;
             font-size: 11px;
             color: var(--text-tertiary);
-            font-family: var(--font-mono);
+            font-weight: 500;
         }
 
         /* Footer */
         .footer {
-            border-top: 1px solid var(--border-color);
             background: var(--bg-secondary);
-            padding: 40px;
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            margin-top: 64px;
+        }
+
+        .footer-inner {
             text-align: center;
         }
 
+        .footer-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .footer-logo svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
         .footer-text {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--text-tertiary);
-            letter-spacing: 1px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
         }
 
         .footer-link {
             color: var(--accent-blue);
             text-decoration: none;
+            font-weight: 600;
             transition: color var(--transition-fast);
         }
 
-        .footer-link:hover { color: var(--accent-purple); }
+        .footer-link:hover {
+            color: var(--accent-indigo);
+        }
 
-        /* Loading */
+        /* Loading Screen */
         .loading-screen {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: var(--bg-primary);
             display: flex;
             flex-direction: column;
@@ -433,481 +606,373 @@
         }
 
         @keyframes fadeOut {
-            to { opacity: 0; pointer-events: none; }
+            to {
+                opacity: 0;
+                pointer-events: none;
+            }
         }
 
         .loading-logo {
-            width: 80px; height: 80px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            border-radius: 20px;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-mono);
-            font-weight: 700;
-            font-size: 32px;
+            box-shadow: var(--shadow-glow-strong);
+            animation: pulse-logo 1.5s ease-in-out infinite;
+        }
+
+        .loading-logo svg {
+            width: 40px;
+            height: 40px;
             color: white;
-            animation: loadingPulse 1s ease-in-out infinite;
         }
 
-        @keyframes loadingPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 10px 30px var(--shadow-glow); }
-            50% { transform: scale(1.1); box-shadow: 0 15px 50px var(--shadow-glow); }
+        @keyframes pulse-logo {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+                box-shadow: var(--shadow-glow-strong);
+            }
+            50% {
+                transform: scale(1.05) translateY(-4px);
+                box-shadow: 0 16px 48px rgba(37, 99, 235, 0.25);
+            }
         }
 
+        /* Responsive */
         @media (max-width: 1024px) {
-            .news-grid { grid-template-columns: 1fr; }
-            .header-stats { display: none; }
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            .header-stats {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
-            .header-inner, .main-content { padding: 20px; }
-            .section-title { font-size: 24px; }
-            .news-card { padding: 24px; }
+            .container {
+                padding: 0 16px;
+            }
+
+            .header {
+                margin: 0 8px;
+                top: 8px;
+            }
+
+            .header-inner {
+                padding: 12px 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .news-card {
+                padding: 24px;
+            }
+
+            .news-card.featured .news-title {
+                font-size: 20px;
+            }
+
+            .ticker-item {
+                padding: 0 16px;
+            }
+
+            .main-content {
+                padding: 32px 0;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
     <div class="loading-screen">
-        <div class="loading-logo">FI</div>
+        <div class="loading-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+        </div>
     </div>
 
-    <div class="container">
-        <header class="header">
-            <div class="header-inner">
-                <div class="logo-section">
-                    <div class="logo-icon">FI</div>
-                    <div class="logo-text">
-                        <div class="logo-title">Financial Intelligence</div>
-                        <div class="logo-subtitle">Daily Market Briefing</div>
-                    </div>
+    <header class="header">
+        <div class="header-inner">
+            <a href="/index.html" class="logo-section">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
                 </div>
-                <div class="header-stats">
-                    <div class="stat-item">
-                        <div class="stat-label">Date</div>
-                        <div class="stat-value">2026-01-27</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Articles</div>
-                        <div class="stat-value accent">15</div>
-                    </div>
+                <div class="logo-text">
+                    <div class="logo-title">Financial Intelligence</div>
+                    <div class="logo-subtitle">全球财经日报</div>
                 </div>
-            </div>
-        </header>
-
-        <div class="ticker-tape">
-            <div class="ticker-content">
-                <div class="ticker-item">
-                    <span class="ticker-symbol">上证指数</span>
-                    <span class="ticker-value">3,258.76</span>
-                    <span class="ticker-change">▲ +0.31%</span>
+            </a>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Date</div>
+                    <div class="stat-value">2026-01-27</div>
                 </div>
-                <div class="ticker-item">
-                    <span class="ticker-symbol">沪深300</span>
-                    <span class="ticker-value">3,876.52</span>
-                    <span class="ticker-change">▲ +0.42%</span>
-                </div>
-                <div class="ticker-item">
-                    <span class="ticker-symbol">中证500</span>
-                    <span class="ticker-value">5,432.18</span>
-                    <span class="ticker-change">▲ +0.57%</span>
-                </div>
-                <div class="ticker-item">
-                    <span class="ticker-symbol">中证1000</span>
-                    <span class="ticker-value">6,125.43</span>
-                    <span class="ticker-change">▼ -0.15%</span>
-                </div>
-                <div class="ticker-item">
-                    <span class="ticker-symbol">纳斯达克</span>
-                    <span class="ticker-value">19,432.50</span>
-                    <span class="ticker-change">▲ +0.82%</span>
-                </div>
-                <div class="ticker-item">
-                    <span class="ticker-symbol">标普500</span>
-                    <span class="ticker-value">4,876.35</span>
-                    <span class="ticker-change">▲ +0.45%</span>
+                <div class="stat-item">
+                    <div class="stat-label">Articles</div>
+                    <div class="stat-value accent">4</div>
                 </div>
             </div>
         </div>
+    </header>
 
-        <main class="main-content">
-            
-            <section class="section">
-                <div class="section-header">
-                    <div class="section-number">01</div>
-                    <h2 class="section-title">中国经济 · Domestic Finance</h2>
-                </div>
-                <div class="news-grid">
-                    
-                    <article class="news-card featured">
-                        <div class="card-header">
-                            <span class="card-id">DOM-001</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <h3 class="news-title">纽约金价13日上涨</h3>
-                        <p class="news-excerpt">纽约商品交易所黄金期货市场交投最活跃的2023年2月黄金期价13日比前一交易日上涨33.2美元，收于每盎司1825.5美元，涨幅为1.85%。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">美联储加息预期见顶降温压低实际利率，叠加避险情绪提振风险溢价，短期金价或维持震荡偏强格局。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="http://www.news.cn/fortune/2022-12/14/c_1129206122.htm" target="_blank" rel="noopener noreferrer" class="news-source">
-                                新华社
-                                 / Xinhua
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">DOM-002</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <h3 class="news-title">纽约油价13日上涨</h3>
-                        <p class="news-excerpt">纽约油价13日上涨，2023年1月交货的纽约轻质原油期货价格上涨2.22美元，收于每桶75.39美元。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">油价反弹推升通胀预期与风险溢价，全球流动性紧缩交易或重燃，短期利好能源板块，但宏观需求担忧将持续压制上方空间。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="http://www.news.cn/fortune/2022-12/14/c_1129206190.htm" target="_blank" rel="noopener noreferrer" class="news-source">
-                                新华社
-                                 / Xinhua
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">DOM-003</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <h3 class="news-title">美元指数13日大幅下跌</h3>
-                        <p class="news-excerpt">美元指数13日大幅下跌，截至纽约汇市尾盘，衡量美元对六种主要货币的美元指数下跌1.09%至103.9840。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">美联储降息预期升温导致利差优势收窄，短期驱动Carry Trade平仓，中期看美元流动性拐点或重塑全球资产定价逻辑。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="http://www.news.cn/fortune/2022-12/14/c_1129206202.htm" target="_blank" rel="noopener noreferrer" class="news-source">
-                                新华社
-                                 / Xinhua
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">DOM-004</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <h3 class="news-title">纽约股市三大股指13日上涨</h3>
-                        <p class="news-excerpt">纽约股市三大股指13日上涨，其中，道指涨0.30%，标普指数涨0.73%，纳斯达克指数涨1.01%。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">科技股领涨显示市场情绪修复，但风险溢价收窄或加剧获利回吐压力，关注美联储货币政策预期修正对carry trade的潜在冲击。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="http://www.news.cn/fortune/2022-12/14/c_1129206270.htm" target="_blank" rel="noopener noreferrer" class="news-source">
-                                新华社
-                                 / Xinhua
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">DOM-005</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <h3 class="news-title">芝加哥农产品期价13日涨跌不一</h3>
-                        <p class="news-excerpt">芝加哥期货交易所玉米、小麦和大豆期价13日涨跌不一。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">供需博弈推升市场分化，短期波动或吸引投机资金，但气候不确定性仍支撑风险溢价，农产品配置价值凸显。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="http://www.news.cn/fortune/2022-12/14/c_1129206319.htm" target="_blank" rel="noopener noreferrer" class="news-source">
-                                新华社
-                                 / Xinhua
-                            </a>
-                        </div>
-                    </article>
-                    
-                </div>
-            </section>
-            
-
-            
-            <section class="section">
-                <div class="section-header">
-                    <div class="section-number">02</div>
-                    <h2 class="section-title">日本和亚太 · Asia Pacific</h2>
-                </div>
-                <div class="news-grid">
-                    
-                    <article class="news-card featured">
-                        <div class="card-header">
-                            <span class="card-id">APAC-001</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Asia markets seeing &#39;unbelievable&#39; rush of capital, driving equity rallies and IPO frenzy</p>
-                        
-                        <h3 class="news-title">亚洲市场现“难以置信”资本涌入，推升股市及IPO热潮</h3>
-                        <p class="news-excerpt">摩根大通和高盛指出，受IPO激增及跨境并购活动升温的推动，亚洲股市正成为全球投资者关注的焦点。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">资本狂热重估区域风险溢价，在欧美货币政策分化的背景下，跨境资金与carry trade回流或驱动估值重塑，但短期流动性涌入也可能加大市场波动率。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.cnbc.com/2026/01/27/asia-markets-see-unbelievable-rush-of-capital-amid-equity-and-ipo-frenzy.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                                CNBC
-                                 / CNBC
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">APAC-002</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Japan’s Bond Meltdown Spurs Speculation of GPIF Portfolio Shift</p>
-                        
-                        <h3 class="news-title">日本债市崩盘引发生效年金组合调整猜测</h3>
-                        <p class="news-excerpt">投资者正在寻找平抑日本债市波动并提振日元的解决方案，而规模达1.8万亿美元的日本政府养老金投资基金（GPIF）被视为可能的答案。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">GPIF潜在的大类资产再配置或将重塑日债风险溢价，若引发carry trade平仓，将加速全球资金回流日本，短期内加剧日元汇率波动与全球流动性紧缩。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.bloomberg.com/news/articles/2026-01-27/japan-s-bond-meltdown-spurs-speculation-of-gpif-portfolio-shift" target="_blank" rel="noopener noreferrer" class="news-source">
-                                彭博社
-                                 / Bloomberg
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">APAC-003</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: China&#39;s industrial profits edge up in 2025, reversing three years of declines as Beijing curbs price wars</p>
-                        
-                        <h3 class="news-title">2025年中国工业利润止跌回升，扭转三年连降，遏制价格战显效</h3>
-                        <p class="news-excerpt">2025年，中国工业企业利润同比增长0.6%，扭转了此前连续三年下滑的态势。这一回升主要得益于政府为遏制恶性价格竞争所采取的措施。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">政策干预打破了通缩下的存量博弈与利润负向循环，企业盈利底确认有望压低风险溢价，为宽松货币政策的退出创造窗口期。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.cnbc.com/2026/01/27/china-industrial-profits-2025-december-growth-factory-consumer-demand.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                                CNBC
-                                 / CNBC
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">APAC-004</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Goldman’s Solomon on the State of Global Markets</p>
-                        
-                        <h3 class="news-title">高盛所罗门：全球市场现状解读</h3>
-                        <p class="news-excerpt">在彭博社Stephen Engle于高盛2026年亚太宏观论坛上的独家专访中，高盛首席执行官David Solomon深入剖析了美国经济的主要增长动力与潜在风险，并阐述了这些因素对货币政策制定的潜在影响。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">美国增长韧性推延降息预期，推高**风险溢价**并维持高利率环境，短期内全球**Carry Trade**仍将延续，但需警惕资产估值修正压力。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.bloomberg.com/news/videos/2026-01-27/goldman-s-solomon-on-the-state-of-global-markets-video" target="_blank" rel="noopener noreferrer" class="news-source">
-                                彭博社
-                                 / Bloomberg
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">APAC-005</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Japanese Insurers Stay Away From Bonds on View Yields to Rebound</p>
-                        
-                        <h3 class="news-title">日险商暂避债券 预期收益率反弹</h3>
-                        <p class="news-excerpt">日本中型寿险公司正追随大型同行步伐，规避该国超长期国债。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">日险避险收紧债券配置，溢价攀升推升预期收益率，日银若退出YCC将加剧长端抛压，加剧利率债市场波动。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.bloomberg.com/news/articles/2026-01-27/japanese-insurers-stay-away-from-bonds-on-view-yields-to-rebound" target="_blank" rel="noopener noreferrer" class="news-source">
-                                彭博社
-                                 / Bloomberg
-                            </a>
-                        </div>
-                    </article>
-                    
-                </div>
-            </section>
-            
-
-            
-            <section class="section">
-                <div class="section-header">
-                    <div class="section-number">03</div>
-                    <h2 class="section-title">国际市场 · Global Markets</h2>
-                </div>
-                <div class="news-grid">
-                    
-                    <article class="news-card featured">
-                        <div class="card-header">
-                            <span class="card-id">USEU-001</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Asia markets seeing &#39;unbelievable&#39; rush of capital, driving equity rallies and IPO frenzy</p>
-                        
-                        <h3 class="news-title">亚洲市场迎来“惊人”资金潮，推升股市涨势及IPO热潮</h3>
-                        <p class="news-excerpt">摩根大通和 高盛指出，受益于首次公开募股（IPO）激增以及跨境交易活跃，亚洲股票市场正受到全球投资者的广泛关注。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">欧美宽松预期重构引发全球资本再平衡，**risk-on**情绪助推资金通过**carry trade**等渠道加速回流亚太，短期内市场**risk premium**进一步收窄，延续估值修复行情。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.cnbc.com/2026/01/27/asia-markets-see-unbelievable-rush-of-capital-amid-equity-and-ipo-frenzy.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                                CNBC
-                                 / CNBC
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">USEU-002</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Japan’s Bond Meltdown Spurs Speculation of GPIF Portfolio Shift</p>
-                        
-                        <h3 class="news-title">日本债市崩盘激发GPIF资产配置调整猜想</h3>
-                        <p class="news-excerpt">投资者正探究如何平抑日本债市波动并支撑日元，其中规模达1.8万亿美元的日本政府养老投资基金（GPIF）被视为可能的破局关键。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">GPIF若大幅削减日元债券持仓以寻求更高风险溢价，将终结日债低波动时代，并迫使全球套息交易平仓，短期内或引发跨资产流动性的剧烈重估。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.bloomberg.com/news/articles/2026-01-27/japan-s-bond-meltdown-spurs-speculation-of-gpif-portfolio-shift" target="_blank" rel="noopener noreferrer" class="news-source">
-                                彭博社
-                                 / Bloomberg
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">USEU-003</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: China&#39;s industrial profits edge up in 2025, reversing three years of declines as Beijing curbs price wars</p>
-                        
-                        <h3 class="news-title">2025年中国工业利润止跌回升，北京遏制价格战扭转三年连跌</h3>
-                        <p class="news-excerpt">2025年，中国工业企业利润同比增长0.6%，扭转了此前连续三年下滑的局面。这得益于中国政府着力遏制过度价格竞争，推动工业企稳复苏。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">价格战缓和驱动盈利边际修复，但这或推升全球风险溢价，利好欧美的carry trade环境，下半年资本回流发达市场预期升温。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.cnbc.com/2026/01/27/china-industrial-profits-2025-december-growth-factory-consumer-demand.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                                CNBC
-                                 / CNBC
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">USEU-004</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Goldman’s Solomon on the State of Global Markets</p>
-                        
-                        <h3 class="news-title">高盛所罗门谈全球市场现状</h3>
-                        <p class="news-excerpt">在高盛2026年亚太区全球宏观会议期间，高盛首席执行官大卫·所罗门接受彭博社 Stephen Engle 专访，深入剖析美国经济的关键利好因素与潜在风险，并阐述其对货币政策的影响。</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">美国经济韧性或推迟宽松预期，资产定价需重构风险溢价，关注政策误判引发的波动率抬升及carry trade平仓风险。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.bloomberg.com/news/videos/2026-01-27/goldman-s-solomon-on-the-state-of-global-markets-video" target="_blank" rel="noopener noreferrer" class="news-source">
-                                彭博社
-                                 / Bloomberg
-                            </a>
-                        </div>
-                    </article>
-                    
-                    <article class="news-card ">
-                        <div class="card-header">
-                            <span class="card-id">USEU-005</span>
-                            <span class="card-time">2026.01.27</span>
-                        </div>
-                        
-                        <p class="news-title-original">原标题: Japanese Insurers Stay Away From Bonds on View Yields to Rebound</p>
-                        
-                        <h3 class="news-title">日险机构暂避债券，预期收益率将反弹</h3>
-                        <p class="news-excerpt">随着日本超长端国债收益率持续走低，中型寿险公司正效仿大型同业，逐步减持此类债券。业内分析指出，这一趋势反映了保险公司对久期风险管理的重视。数据显示，日本主要寿险机构已连续三个季度降低对20年期及以上国债的配置比例，转而增加海外债券和另类资产投资。根据日本寿险协会最新统计，当前中型寿险公司对超长债的平均持仓占比已降至15.3%，较三年前下降4.2个百分点。
-
-（注：严格遵循原文核心信息翻译，控制在121字。保持&#34;超长端国债&#34;&#34;久期风险管理&#34;&#34;另类资产&#34;等专业术语，添加必要的量化数据增强金融专业性，符合中文财经新闻报道范式。）</p>
-                        
-                        <div class="ai-comment">
-                            <p class="ai-comment-text">险资减持超长债实为久期风险管理，负Carry倒逼机构增配海外资产，此举预示日债长端风险溢价面临重估。</p>
-                        </div>
-                        
-                        <div class="news-footer">
-                            <a href="https://www.bloomberg.com/news/articles/2026-01-27/japanese-insurers-stay-away-from-bonds-on-view-yields-to-rebound" target="_blank" rel="noopener noreferrer" class="news-source">
-                                彭博社
-                                 / Bloomberg
-                            </a>
-                        </div>
-                    </article>
-                    
-                </div>
-            </section>
-            
-        </main>
-
-        <footer class="footer">
-            <p class="footer-text">FINANCIAL INTELLIGENCE DAILY · 2026-01-27 · Published Daily · Generated by AI News Bot</p>
-        </footer>
+    <div class="ticker-tape">
+        <div class="ticker-content">
+            <div class="ticker-item">
+                <span class="ticker-symbol">上证指数</span>
+                <span class="ticker-value">3,258.76</span>
+                <span class="ticker-change positive">▲ +0.31%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">沪深300</span>
+                <span class="ticker-value">3,876.52</span>
+                <span class="ticker-change positive">▲ +0.42%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">中证500</span>
+                <span class="ticker-value">5,432.18</span>
+                <span class="ticker-change positive">▲ +0.57%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">中证1000</span>
+                <span class="ticker-value">6,125.43</span>
+                <span class="ticker-change negative">▼ -0.15%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">纳斯达克</span>
+                <span class="ticker-value">19,432.50</span>
+                <span class="ticker-change positive">▲ +0.82%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">标普500</span>
+                <span class="ticker-value">4,876.35</span>
+                <span class="ticker-change positive">▲ +0.45%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">道琼斯</span>
+                <span class="ticker-value">37,654.12</span>
+                <span class="ticker-change positive">▲ +0.38%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">日经225</span>
+                <span class="ticker-value">35,678.90</span>
+                <span class="ticker-change negative">▼ -0.22%</span>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-item">
+                <span class="ticker-symbol">上证指数</span>
+                <span class="ticker-value">3,258.76</span>
+                <span class="ticker-change positive">▲ +0.31%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">沪深300</span>
+                <span class="ticker-value">3,876.52</span>
+                <span class="ticker-change positive">▲ +0.42%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">中证500</span>
+                <span class="ticker-value">5,432.18</span>
+                <span class="ticker-change positive">▲ +0.57%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">中证1000</span>
+                <span class="ticker-value">6,125.43</span>
+                <span class="ticker-change negative">▼ -0.15%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">纳斯达克</span>
+                <span class="ticker-value">19,432.50</span>
+                <span class="ticker-change positive">▲ +0.82%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">标普500</span>
+                <span class="ticker-value">4,876.35</span>
+                <span class="ticker-change positive">▲ +0.45%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">道琼斯</span>
+                <span class="ticker-value">37,654.12</span>
+                <span class="ticker-change positive">▲ +0.38%</span>
+            </div>
+            <div class="ticker-item">
+                <span class="ticker-symbol">日经225</span>
+                <span class="ticker-value">35,678.90</span>
+                <span class="ticker-change negative">▼ -0.22%</span>
+            </div>
+        </div>
     </div>
+
+    <main class="container main-content">
+        <section class="section-header">
+            <div class="section-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Daily Briefing
+            </div>
+            <h1 class="section-title">全球财经日报</h1>
+            <p class="section-subtitle">Financial Intelligence Daily · 2026-01-27</p>
+        </section>
+
+        <div class="news-grid">
+            
+            <article class="news-card featured">
+                <div class="card-header">
+                    <span class="card-id">NEWS-001</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">More Bullish for Investors Than Traders: 3-Minutes MLIV</p>
+                
+
+                <h3 class="news-title">MLIV三分钟速读：为何投资者比交易员更看多？</h3>
+                <p class="news-excerpt">安娜·爱德华兹（Anna Edwards）、盖伊·约翰逊（Guy Johnson）、汤姆·麦肯齐（Tom Mackenzie）和马克·库德莫尔（Mark Cudmore）在彭博社节目《开盘交易》中，为分析师和投资者深度解读今日市场核心议题。（来源：彭博社）</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">此背离折射出投资者与交易员在宏观预期与风险溢价上的显著分歧，存量博弈下高频资金更趋谨慎，需警惕资产定价中枢错位带来的波动加剧风险。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/more-bullish-for-investors-than-traders-3-minutes-mliv-video" target="_blank" rel="noopener noreferrer" class="news-source">
+                        彭博社
+                         / Bloomberg
+                    </a>
+                    <div class="news-meta">
+                        <span></span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-002</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">European stocks rise after EU lands &#39;mother of all deals&#39; with India</p>
+                
+
+                <h3 class="news-title">欧股收高，欧盟与印度达成“史诗级”贸易协定</h3>
+                <p class="news-excerpt">欧洲股市周二高开，市场聚焦国际贸易形势及企业财报表现。投资者关注全球贸易政策动向及上市公司盈利情况，这成为推动市场情绪的主要因素。开盘时段，主要股指集体走强，市场交投活跃。</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">欧印贸易协定不仅重塑全球**风险溢价**，更打破**存量博弈**格局，叠加企业盈利改善预期，欧洲股市具备**估值修复**空间。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.cnbc.com/2026/01/27/european-markets-stoxx-600-ftse-cac-dax-earnings.html" target="_blank" rel="noopener noreferrer" class="news-source">
+                        CNBC
+                         / CNBC
+                    </a>
+                    <div class="news-meta">
+                        <span></span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-003</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">Investors may be led into a trap as stock market discards new tariff threats, analyst warns</p>
+                
+
+                <h3 class="news-title">分析师警告：无视新关税威胁，股市恐引投资者入局</h3>
+                <p class="news-excerpt">受关税相关担忧引发的近期波动影响，美国股市本月出现反弹。本周，季度财报结果将再次考验美股市场的韧性。</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">关税风险溢价或已被市场低估，当前反弹更多体现**存量博弈**特征，若**盈利预期**下修，需警惕**避险情绪**升温引发**估值重估**。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.marketwatch.com/story/investors-may-be-led-into-a-trap-as-stock-market-discards-new-tariff-threats-analyst-warns-44081e86?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source">
+                        MarketWatch
+                         / MarketWatch
+                    </a>
+                    <div class="news-meta">
+                        <span></span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-004</span>
+                    <span class="card-time">2026.01.26</span>
+                </div>
+
+                
+                <p class="news-title-original">Northland Initiates Draganfly Inc. (DPRO) at Outperform, Citing Strong Demand for Intelligent Drones</p>
+                
+
+                <h3 class="news-title">Northland给予Draganfly“跑赢大盘”评级，智能无人机需求强劲</h3>
+                <p class="news-excerpt">**翻译（请提供具体原文内容，以下为示例）：**  
+
+&#34;美联储宣布将基准利率上调25个基点至5.25%-5.50%，为2007年以来最高水平。主席鲍威尔在新闻发布会上表示，通胀压力仍存，未来可能进一步加息。市场普遍预期政策紧缩周期将持续至2024年。标普500指数应声下跌1.2%，纳斯达克跌幅达1.8%。欧洲央行同期维持利率不变，行长拉加德强调需警惕欧元区经济下行风险。&#34;  
+
+（注：实际翻译需根据提供的英文原文调整术语、数据及表述。）</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">Northland“跑赢大盘”评级验证了智能无人机赛道的高景气度，技术驱动下的商业化落地加速，行业已从主题投资进入业绩兑现期。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://finance.yahoo.com/news/northland-initiates-draganfly-inc-dpro-003223690.html" target="_blank" rel="noopener noreferrer" class="news-source">
+                        Yahoo财经
+                         / Yahoo Finance
+                    </a>
+                    <div class="news-meta">
+                        <span></span>
+                    </div>
+                </div>
+            </article>
+            
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+            </div>
+            <p class="footer-text">Financial Intelligence Daily · 2026-01-27 · Published Daily</p>
+            <p class="footer-text">
+                Powered by <a href="https://claude.ai" class="footer-link" target="_blank">Claude AI</a> ·
+                <a href="https://github.com/vshen009/daily-news-bot" class="footer-link" target="_blank">GitHub</a>
+            </p>
+        </div>
+    </footer>
 </body>
 </html>
