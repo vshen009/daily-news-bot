@@ -1,9 +1,12 @@
 # 项目记忆文档
 
 ## 项目概述
-**项目名称**: 定制每日财经新闻
+**项目名称**: Daily News Bot（每日财经新闻仪表盘）
 **所有者**: Vincent (产品经理，非程序员)
 **项目目标**: 每日自动抓取、翻译并生成财经新闻HTML报告
+
+**仓库地址**: https://github.com/vshen009/daily-news-bot
+**部署地址**: https://financial-news.vercel.app
 
 ## 技术栈
 - **语言**: Python
@@ -74,24 +77,88 @@ gh pr merge --squash --delete-branch
 
 ## 项目结构
 ```
-定制每日财经新闻/
-├── public/              # HTML输出目录（Vercel部署）
-│   └── YYYY-MM-DD.html  # 每日新闻报告
-├── news_bot/
+daily-news-bot/                    # 独立仓库根目录
+├── public/                         # 所有HTML文件（Vercel输出目录）
+│   ├── index.html                 # 首页（新闻列表）
+│   └── YYYY-MM-DD.html            # 每日新闻报告
+├── news_bot/                      # 核心代码
 │   ├── config/
-│   │   └── sources.yaml # 新闻源配置
+│   │   └── sources.yaml          # 新闻源配置
 │   ├── src/
-│   │   └── config.py    # 主配置文件
-│   ├── .env             # 环境变量（已gitignore）
-│   └── .env.example     # 环境变量模板
-├── docs/                # 文档目录
-├── index.html           # 首页
-├── vercel.json          # Vercel配置
-├── README.md            # 项目说明
-└── GIT_WORKFLOW.md      # Git工作流规范
+│   │   ├── config.py             # 主配置文件
+│   │   ├── index_updater.py      # 首页更新器
+│   │   ├── html_generator.py     # HTML生成器
+│   │   ├── database.py           # 数据库管理
+│   │   ├── scraper.py            # 新闻抓取
+│   │   ├── translator.py         # 翻译器
+│   │   ├── ai_comment.py         # AI评论生成
+│   │   └── models.py             # 数据模型
+│   ├── .env                      # 环境变量（已gitignore）
+│   └── .env.example              # 环境变量模板
+├── docs/                          # 文档目录
+│   └── vercel-migration-guide.md # Vercel迁移指南
+├── vercel.json                    # Vercel配置（已优化）
+├── README.md                      # 项目说明
+└── memory.md                      # 本文件
 ```
 
 ## 最近变更记录
+
+### 2026-01-27 - 项目分离与目录结构优化（重大里程碑）
+
+**背景**: 项目从 `claude-code-projects` 单体仓库分离为独立仓库
+
+**核心变更**:
+
+1. ✅ **项目分离**
+   - 从 `claude-code-projects/定制每日财经新闻` 分离
+   - 创建独立仓库：`vshen009/daily-news-bot`
+   - 保留完整代码库（50个文件）
+   - 公开仓库，便于独立管理和部署
+
+2. ✅ **目录结构优化**（分支：`优化发布`）
+   - `index.html` 从根目录移至 `public/index.html`
+   - 统一所有HTML文件在 `public/` 目录
+   - 更新 `index_updater.py` 输出路径
+   - 更新 URL 路径为相对路径
+
+3. ✅ **Vercel 配置优化**
+   - 更新 `vercel.json` 路由规则
+   - 修正首页路径：`/` → `/public/index.html`
+   - 简化重写规则，删除冗余配置
+   - Vercel 项目已连接到新仓库并成功部署
+
+4. ✅ **文档完善**
+   - 创建 `docs/vercel-migration-guide.md` 迁移指南
+   - 更新 `memory.md` 项目结构
+   - 更新项目名称和地址信息
+
+**技术改进**:
+- 更清晰的目录结构（所有HTML统一管理）
+- Vercel 部署路径更简洁
+- 便于后续维护和扩展
+
+**提交记录**:
+- `021408f` - ♻️ 优化输出目录结构：将index.html移至public文件夹
+- `d651422` - 📝 添加Vercel迁移指南
+
+**部署状态**:
+- ✅ Vercel 已连接到新仓库
+- ✅ 根目录配置已更新（删除"定制每日财经新闻"前缀）
+- ✅ 环境变量已配置
+- ✅ 部署成功，网站正常运行
+
+**仓库信息**:
+- GitHub: https://github.com/vshen009/daily-news-bot
+- Vercel: https://financial-news.vercel.app
+- 当前分支: `优化发布`
+
+**下一步**:
+- [ ] 推送 `优化发布` 分支到远程
+- [ ] 创建 PR 合并到 main 分支
+- [ ] 删除原仓库中的新闻项目文件夹
+
+---
 
 ### 2026-01-26 - 数据库去重优化（重大更新）
 **目标**: 减少AI API调用和token使用，实现新闻数据持久化
