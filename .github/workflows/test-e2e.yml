@@ -11,8 +11,6 @@ jobs:
     steps:
     - name: 检出代码
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
 
     - name: 设置Python环境
       uses: actions/setup-python@v5
@@ -24,6 +22,14 @@ jobs:
       run: |
         cd news_bot
         pip install -r requirements.txt
+
+    - name: 缓存数据库文件
+      uses: actions/cache@v4
+      with:
+        path: news_bot/data/news.db
+        key: news-db-${{ github.run_id }}
+        restore-keys: |
+          news-db-
 
     - name: 设置环境变量
       run: |
@@ -42,26 +48,22 @@ jobs:
         cd news_bot
         python test_e2e.py
 
-    - name: 配置Git用户
-      run: |
-        git config --global user.name 'GitHub Actions Bot'
-        git config --global user.email 'actions@github.com'
+    - name: 安装 Vercel CLI
+      run: npm install --global vercel@latest
 
-    - name: 提交并推送HTML文件
+    - name: 拉取 Vercel 现有文件
       run: |
-        # 检查是否有新的HTML文件生成
-        if [ -n "$(git status --porcelain public/)" ]; then
-          git add public/*.html news_bot/data/news.db
-          git commit -m "🧪 端到端测试 - $(date +'%Y-%m-%d %H:%M')"
-          git pull origin main --no-rebase
-          git push origin main
-        else
-          echo "没有新的HTML文件需要提交"
-        fi
+        vercel pull --yes --environment=production \
+          --token=${{ secrets.VERCEL_TOKEN }}
+
+    - name: 部署到 Vercel
+      run: |
+        vercel deploy --prod --prebuilt \
+          --token=${{ secrets.VERCEL_TOKEN }}
 
     - name: 完成提示
       if: success()
       run: |
         echo "✅ 端到端测试完成"
-        echo "✅ 文件已推送到 main 分支"
-        echo "✅ Vercel 将自动部署更新"
+        echo "✅ HTML 文件已直接部署到 Vercel"
+        echo "✅ 未提交到 GitHub 仓库"
