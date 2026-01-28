@@ -59,15 +59,12 @@ jobs:
     - name: 安装 Vercel CLI
       run: npm install --global vercel@latest
 
-    - name: 拉取 Vercel 现有文件
+    - name: 部署到 Vercel (Production)
       run: |
-        vercel pull --yes --environment=production \
-          --token=${{ secrets.VERCEL_TOKEN }}
-
-    - name: 部署到 Vercel
-      run: |
-        vercel deploy --prod --prebuilt \
-          --token=${{ secrets.VERCEL_TOKEN }}
+        cd public
+        vercel deploy --prod \
+          --token=${{ secrets.VERCEL_TOKEN }} \
+          --yes
 
     - name: 部署完成提示
       if: success()
