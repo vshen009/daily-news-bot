@@ -28,17 +28,93 @@ def setup_logging():
     )
 
 
+def filter_and_sort_articles(articles: list, hours: int = 24, enable_time_filter: bool = True) -> list:
+    """
+    筛选并排序新闻（按时间筛选 + 按源分组轮询）
+
+    新逻辑：
+    1. 筛选最近 N 小时内的新闻（不限制数量）
+    2. 按源分组轮询排列（彭博社→Yahoo→MarketWatch→...循环）
+
+    Args:
+        articles: 所有新闻列表
+        hours: 时间筛选范围（小时），默认24小时
+        enable_time_filter: 是否启用时间筛选，默认True。设为False则不筛选时间
+
+    Returns:
+        筛选并排序后的新闻列表
+    """
+    from collections import defaultdict
+    from datetime import timedelta
+
+    # ========== 第一阶段：时间筛选（可选）==========
+    if enable_time_filter:
+        now = Config.get_beijing_time()
+        time_threshold = now - timedelta(hours=hours)
+
+        # 筛选最近 N 小时内的新闻
+        filtered_articles = [
+            article for article in articles
+            if article.publish_time >= time_threshold
+        ]
+
+        if not filtered_articles:
+            logger.warning(f"  没有找到最近 {hours} 小时内的新闻！")
+            return []
+
+        logger.info(f"  时间筛选: {len(articles)} 条 → {len(filtered_articles)} 条（最近 {hours} 小时）")
+    else:
+        filtered_articles = articles
+        logger.info(f"  跳过时间筛选，使用所有 {len(articles)} 条新闻")
+
+    # ========== 第二阶段：按源分组 ==========
+    source_articles = defaultdict(list)
+    for article in filtered_articles:
+        source_articles[article.source].append(article)
+
+    # 为每个源的新闻按时间排序（最新的在前）
+    for source in source_articles:
+        source_articles[source].sort(key=lambda x: x.publish_time, reverse=True)
+
+    # ========== 第三阶段：按源轮询排序 ==========
+    # 获取所有源列表（按源名排序保证一致性）
+    sources = sorted(source_articles.keys())
+
+    # 轮询从每个源取文章
+    sorted_articles = []
+    round_num = 1
+    has_articles = True
+
+    while has_articles:
+        has_articles = False
+
+        for source in sources:
+            if len(source_articles[source]) > 0:
+                # 每轮从每个源取1条（如果还有的话）
+                article = source_articles[source].pop(0)
+                sorted_articles.append(article)
+                has_articles = True
+
+        round_num += 1
+
+        # 如果某一轮没有任何文章了，退出循环
+        if not has_articles:
+            break
+
+    logger.info(f"  源轮询排序: {len(sources)} 个源，{round_num} 轮")
+    logger.info(f"  最终结果: {len(sorted_articles)} 条新闻")
+
+    return sorted_articles
+
+
 def select_top_news(articles: list, top_n: int = 20) -> list:
     """
-    筛选新闻（按源分组轮询方案）
+    筛选新闻（按源分组轮询方案）- 保留用于重新生成历史HTML
 
-    新逻辑（方案 A）：
+    逻辑：
     1. 先从每个源取 2 条最新新闻（确保每个源都有展示）
     2. 从剩余新闻中按时间排序补充，直到凑够足够数量的候选
     3. 按源分组轮询排列（彭博社→Yahoo→MarketWatch→...循环）
-
-    旧逻辑（已屏蔽，保留代码）：
-    - 评分规则：新新闻优先、有AI评论优先、发布时间越新越好
 
     Args:
         articles: 所有新闻列表
@@ -175,8 +251,8 @@ def regenerate_html_from_db(days: int = 7):
     for date, articles in sorted(articles_by_date.items(), reverse=True):
         logger.info(f"\n处理日期: {date}")
 
-        # 筛选TOP 20新闻
-        top_news = select_top_news(articles, top_n=Config.TOP_NEWS_COUNT)
+        # 按源轮询排序所有新闻（不限制数量，不筛选时间）
+        top_news = filter_and_sort_articles(articles, enable_time_filter=False)
 
         # 生成HTML（使用指定日期）
         date_str = date.strftime(Config.DATE_FORMAT)
@@ -312,14 +388,14 @@ def main():
 
         logger.info(f"✓ 已保存 {saved_count} 条新新闻到数据库")
 
-        # 7. 筛选TOP 20新闻（用于HTML显示）
-        logger.info("\n步骤7: 筛选TOP 20新闻（用于HTML显示）")
+        # 7. 筛选并排序新闻（最近24小时，无数量限制）
+        logger.info("\n步骤7: 筛选并排序新闻（最近24小时）")
         all_articles = translated_new + cached_articles
-        top_news = select_top_news(all_articles, top_n=Config.TOP_NEWS_COUNT)
-        logger.info(f"✓ 从 {len(all_articles)} 条新闻中筛选出 TOP {len(top_news)} 条")
+        top_news = filter_and_sort_articles(all_articles, hours=24)
+        logger.info(f"✓ 从 {len(all_articles)} 条新闻中筛选出 {len(top_news)} 条")
 
-        # 8. 生成HTML（只显示TOP 20）
-        logger.info("\n步骤8: 生成HTML（TOP 20）")
+        # 8. 生成HTML
+        logger.info("\n步骤8: 生成HTML")
         generator = HTMLGenerator()
         output_path = generator.generate(top_news)
         logger.info(f"✓ HTML已生成: {output_path}")

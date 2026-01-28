@@ -7,7 +7,10 @@
 
     <!-- Favicon & Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" type="image/svg+xml" href="/apple-touch-icon.svg">
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -561,7 +564,7 @@
 
         <div class="news-grid">
             {% for article in articles %}
-            <article class="news-card {% if loop.first %}featured{% endif %}">
+            <article class="news-card">
                 <div class="card-header">
                     <span class="card-id">NEWS-{{ loop.index|zfill(3) }}</span>
                     <span class="card-time">{{ article.publish_time.strftime('%Y.%m.%d') }}</span>

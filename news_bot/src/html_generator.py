@@ -24,10 +24,6 @@ class HTMLGenerator:
     def generate(self, articles: List[NewsArticle], output_path: str = None, template_name: str = 'daily_news_modern.html'):
         """生成HTML文件"""
 
-        # 为第一篇文章标记为featured
-        if articles:
-            articles[0].featured = True
-
         # 生成文件名（使用北京时间）
         date_str = Config.get_beijing_time().strftime(Config.DATE_FORMAT)
         filename = Config.OUTPUT_FILENAME_FORMAT.format(date=date_str)
