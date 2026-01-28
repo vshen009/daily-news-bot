@@ -29,42 +29,51 @@ from src.html_generator import HTMLGenerator
 from src.index_updater import IndexUpdater
 
 
-def select_top_news(articles: list, top_n: int = 15) -> list:
-    """筛选重要新闻（完全复制main.py的逻辑）"""
-    scored_articles = []
+def select_top_news(articles: list, top_n: int = 20) -> list:
+    """
+    筛选新闻（时间混合 + 源配额方案）
+
+    新逻辑（方案 B）：
+    1. 先从每个源取 2 条最新新闻（确保每个源都有展示）
+    2. 从剩余新闻中按时间排序补充，直到凑够 20 条
+    3. 最后全部按发布时间倒序排列
+    """
+    from collections import defaultdict
+
+    # ========== 第一阶段：源配额（每个源至少 2 条）==========
+    # 按源分组
+    source_articles = defaultdict(list)
     for article in articles:
-        score = 0
+        source_articles[article.source].append(article)
 
-        # 新新闻优先（+50分）
-        if article.id is None:
-            score += 50
+    # 为每个源选择 2 条最新新闻
+    quota_articles = []
+    remaining_articles = []
 
-        # 有AI评论优先（+20分）
-        if article.ai_comment:
-            score += 20
+    for source, source_list in source_articles.items():
+        # 按发布时间倒序排序
+        source_list.sort(key=lambda x: x.publish_time, reverse=True)
 
-        # 发布时间（越新越好，最多+30分）
-        age_hours = (Config.get_beijing_time() - article.publish_time).total_seconds() / 3600
-        if age_hours < 6:
-            score += 30
-        elif age_hours < 12:
-            score += 20
-        elif age_hours < 24:
-            score += 10
-        elif age_hours < 48:
-            score += 5
+        # 取前 2 条进入配额池
+        quota_articles.extend(source_list[:2])
 
-        # 已翻译优先（+10分）
-        if article.translated:
-            score += 10
+        # 剩余的进入候选池
+        remaining_articles.extend(source_list[2:])
 
-        scored_articles.append((score, article))
+    # ========== 第二阶段：补充剩余配额 ==========
+    # 从剩余新闻中按时间排序，补充到 top_n 条
+    remaining_articles.sort(key=lambda x: x.publish_time, reverse=True)
 
-    # 按得分倒序排序
-    scored_articles.sort(key=lambda x: x[0], reverse=True)
+    # 合并配额文章和补充文章
+    combined_articles = quota_articles + remaining_articles[:top_n - len(quota_articles)]
 
-    # 取前N条
-    top_articles = [article for score, article in scored_articles[:top_n]]
+    # ========== 第三阶段：按时间倒序排列 ==========
+    # 最终全部按发布时间倒序排列（确保时间连续性）
+    combined_articles.sort(key=lambda x: x.publish_time, reverse=True)
+
+    # 只取前 top_n 条
+    top_articles = combined_articles[:top_n]
+
     return top_articles
 
 
@@ -162,8 +171,8 @@ def main():
         all_articles = translated_new + cached_articles
 
     # ==================== 步骤7：筛选TOP新闻 ====================
-    logger.info("\n【步骤7】筛选TOP 15新闻...")
-    top_news = select_top_news(all_articles, top_n=15)
+    logger.info("\n【步骤7】筛选TOP 20新闻...")
+    top_news = select_top_news(all_articles, top_n=Config.TOP_NEWS_COUNT)
     logger.info(f"  ✓ 从 {len(all_articles)} 条新闻中筛选出 TOP {len(top_news)} 条")
 
     for i, article in enumerate(top_news, 1):

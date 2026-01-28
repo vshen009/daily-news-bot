@@ -43,7 +43,7 @@ class Config:
     MAX_RETRIES = 3               # 最大重试次数
 
     # 新闻筛选
-    TOP_NEWS_COUNT = 15           # 总共筛选TOP新闻数量
+    TOP_NEWS_COUNT = 20           # 总共筛选TOP新闻数量
     MAX_AGE_HOURS = 48            # 新闻最大时效（小时）
 
     # 输出配置
