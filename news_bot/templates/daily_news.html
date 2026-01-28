@@ -299,6 +299,7 @@
             box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .news-card:hover {
@@ -306,6 +307,17 @@
             border-color: var(--border-glow);
             box-shadow: var(--shadow-lg);
             transform: translateY(-2px);
+        }
+
+        /* Expandable Content */
+        .news-expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .news-card[data-expanded="true"] .news-expandable {
+            max-height: 2000px;
         }
 
         .news-card.featured {
@@ -347,7 +359,7 @@
             font-size: 20px;
             font-weight: 700;
             line-height: 1.4;
-            margin-bottom: 12px;
+            margin-bottom: 0;
             color: var(--text-primary);
             transition: color var(--transition-fast);
             letter-spacing: -0.02em;
@@ -366,6 +378,7 @@
             line-height: 1.7;
             color: var(--text-secondary);
             margin-bottom: 16px;
+            margin-top: 16px;
             flex-grow: 1;
         }
 
@@ -627,10 +640,15 @@
 
         <div class="news-grid">
             {% for article in articles %}
-            <article class="news-card" aria-labelledby="news-title-{{ loop.index }}">
+            <article class="news-card"
+                     data-expanded="{{ 'true' if loop.index <= 3 else 'false' }}"
+                     aria-labelledby="news-title-{{ loop.index }}"
+                     aria-expanded="{{ 'true' if loop.index <= 3 else 'false' }}"
+                     role="button"
+                     tabindex="0">
                 <div class="card-header">
                     <span class="card-id">NEWS-{{ loop.index|zfill(3) }}</span>
-                    <span class="card-time">{{ article.publish_time.strftime('%Y.%m.%d') }}</span>
+                    <span class="card-time">{{ article.publish_time.strftime('%H:%M') }}</span>
                 </div>
 
                 {% if article.title_original %}
@@ -638,21 +656,24 @@
                 {% endif %}
 
                 <h3 class="news-title" id="news-title-{{ loop.index }}">{{ article.title }}</h3>
-                <p class="news-excerpt">{{ article.content }}</p>
 
-                {% if article.ai_comment %}
-                <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
-                    <p class="ai-comment-text">{{ article.ai_comment }}</p>
-                </div>
-                {% endif %}
+                <div class="news-expandable">
+                    <p class="news-excerpt">{{ article.content }}</p>
 
-                <div class="news-footer">
-                    <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="news-source">
-                        {{ article.source }}
-                        {% if article.source_original %} / {{ article.source_original }}{% endif %}
-                    </a>
-                    <div class="news-meta">
-                        <span>{{ article.source }}</span>
+                    {% if article.ai_comment %}
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">{{ article.ai_comment }}</p>
+                    </div>
+                    {% endif %}
+
+                    <div class="news-footer">
+                        <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            {{ article.source }}
+                            {% if article.source_original %} / {{ article.source_original }}{% endif %}
+                        </a>
+                        <div class="news-meta">
+                            <span>{{ article.source }}</span>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -668,5 +689,40 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        // 新闻卡片展开/收起交互
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsCards = document.querySelectorAll('.news-card');
+
+            newsCards.forEach(card => {
+                // 点击卡片切换展开/收起
+                card.addEventListener('click', function(e) {
+                    // 如果点击的是链接，不触发展开/收起
+                    if (e.target.closest('a')) {
+                        return;
+                    }
+
+                    toggleCard(this);
+                });
+
+                // 键盘支持：Enter 或 Space 键切换
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCard(this);
+                    }
+                });
+            });
+
+            function toggleCard(card) {
+                const isExpanded = card.getAttribute('data-expanded') === 'true';
+                const newState = !isExpanded;
+
+                card.setAttribute('data-expanded', newState);
+                card.setAttribute('aria-expanded', newState);
+            }
+        });
+    </script>
 </body>
 </html>
