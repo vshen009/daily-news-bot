@@ -5,9 +5,27 @@ from datetime import datetime
 from pathlib import Path
 from typing import List
 from loguru import logger
+import re
 
 from .models import NewsArticle, Category
 from .config import Config
+
+
+def simple_markdown(text):
+    """
+    简单的 Markdown 格式转换
+    支持：**粗体** 和 *斜体*
+    """
+    if not text:
+        return text
+
+    # 转换 **粗体** 为 <strong>
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+
+    # 转换 *斜体* 为 <em>
+    text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
+
+    return text
 
 
 class HTMLGenerator:
@@ -20,6 +38,7 @@ class HTMLGenerator:
         )
         # 添加自定义过滤器
         self.env.filters['zfill'] = lambda s, width: str(s).zfill(width)
+        self.env.filters['simple_markdown'] = simple_markdown
 
     def generate(self, articles: List[NewsArticle], output_path: str = None, template_name: str = 'daily_news.html'):
         """生成HTML文件"""
