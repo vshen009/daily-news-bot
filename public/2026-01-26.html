@@ -4,52 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>全球财经日报 · Global Financial Daily | 2026-01-26</title>
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" type="image/svg+xml" href="/apple-touch-icon.svg">
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Color System */
-            --bg-primary: #fafafa;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f8fafc;
+            /* Vibrant Orange-Red Gradient System */
+            --bg-primary: linear-gradient(135deg, #ffd93d 0%, #ff8e53 25%, #ff6b6b 50%, #e63946 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.7);
 
-            --accent-blue: #0866ff;
-            --accent-indigo: #6366f1;
-            --accent-purple: #8b5cf6;
+            /* Glassmorphism Card */
+            --bg-card: rgba(255, 255, 255, 0.75);
+            --bg-card-hover: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(255, 255, 255, 0.3);
+            --card-blur: blur(12px);
+
+            /* Vibrant Orange-Red Accent Colors */
+            --accent-blue: #ff6b6b;
+            --accent-blue-light: #ff8787;
+            --accent-blue-dark: #e63946;
+
+            --accent-indigo: #ff8e53;
+            --accent-purple: #fa709a;
+            --accent-pink: #ffa726;
             --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --accent-amber: #f59e0b;
+            --accent-red: #e63946;
+            --accent-amber: #ffd93d;
 
-            --text-primary: #0f172a;
+            /* Text Colors - High Contrast */
+            --text-primary: #1e293b;
             --text-secondary: #475569;
-            --text-tertiary: #94a3b8;
+            --text-tertiary: #64748b;
 
-            --border-color: #e2e8f0;
-            --border-glow: rgba(8, 102, 255, 0.2);
-
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-            --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-            --shadow-glow: 0 10px 30px rgba(8, 102, 255, 0.15);
+            /* Border & Effects */
+            --border-color: rgba(255, 255, 255, 0.3);
+            --border-glow: rgba(255, 107, 107, 0.4);
+            --shadow-sm: 0 2px 8px rgba(255, 107, 107, 0.1);
+            --shadow-md: 0 4px 16px rgba(255, 107, 107, 0.15);
+            --shadow-lg: 0 12px 32px rgba(255, 107, 107, 0.2);
+            --shadow-glow: 0 8px 24px rgba(255, 107, 107, 0.25);
+            --shadow-glow-strong: 0 12px 40px rgba(255, 107, 107, 0.3);
 
             /* Typography */
-            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
             /* Spacing */
-            --container-max-width: 1440px;
-            --spacing-unit: 8px;
+            --container-max-width: 1280px;
 
             /* Transitions */
-            --transition-fast: 0.15s ease;
-            --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-medium: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
+                --bg-secondary: rgba(15, 23, 42, 0.6);
+
+                --bg-card: rgba(30, 41, 59, 0.65);
+                --bg-card-hover: rgba(51, 65, 85, 0.75);
+                --card-border: rgba(255, 255, 255, 0.1);
+
+                --text-primary: #f1f5f9;
+                --text-secondary: #cbd5e1;
+                --text-tertiary: #94a3b8;
+
+                --border-color: rgba(255, 255, 255, 0.1);
+                --border-glow: rgba(255, 107, 107, 0.5);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+            }
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -59,6 +105,59 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Background Decorations */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 142, 83, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.12) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Ensure content is above decorations */
+        .container,
+        .header,
+        .ticker-tape,
+        .main-content,
+        .footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Focus States for Accessibility */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         /* Container */
@@ -68,21 +167,30 @@
             padding: 0 24px;
         }
 
-        /* Header */
+        /* Header - Glassmorphism Effect */
         .header {
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
             position: sticky;
-            top: 0;
+            top: 16px;
             z-index: 100;
-            box-shadow: var(--shadow-sm);
+            margin: 0 16px;
+            background: var(--bg-card);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-medium);
+        }
+
+        .header:hover {
+            box-shadow: var(--shadow-lg);
         }
 
         .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 16px 24px;
         }
 
         .logo-section {
@@ -148,10 +256,12 @@
             color: var(--accent-blue);
         }
 
-        /* Ticker Tape */
+        /* Ticker Tape - Glassmorphism */
         .ticker-tape {
             background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border-bottom: 1px solid var(--card-border);
             overflow: hidden;
             padding: 12px 0;
         }
@@ -224,31 +334,46 @@
             margin-bottom: 40px;
         }
 
-        /* News Card */
+        /* News Card - Glassmorphism */
         .news-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
             padding: 28px;
             position: relative;
             cursor: pointer;
             transition: all var(--transition-medium);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-sm);
             display: flex;
             flex-direction: column;
+            overflow: hidden;
         }
 
         .news-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-glow);
-            box-shadow: var(--shadow-card-hover);
-            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        /* Expandable Content */
+        .news-expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .news-card[data-expanded="true"] .news-expandable {
+            max-height: 2000px;
         }
 
         .news-card.featured {
             grid-column: 1 / -1;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border: 2px solid var(--accent-blue);
+            background: var(--bg-card-hover);
+            border: 2px solid var(--accent-indigo);
+            box-shadow: var(--shadow-glow);
         }
 
         .card-header {
@@ -256,6 +381,13 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-medium);
+        }
+
+        .news-card[data-expanded="true"] .card-header {
+            max-height: 50px;
         }
 
         .card-id {
@@ -278,16 +410,35 @@
             color: var(--text-tertiary);
             margin-bottom: 8px;
             font-style: italic;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card[data-expanded="false"] .news-title-original {
+            -webkit-line-clamp: 1;
         }
 
         .news-title {
             font-size: 20px;
             font-weight: 700;
             line-height: 1.4;
-            margin-bottom: 12px;
+            margin-bottom: 0;
             color: var(--text-primary);
             transition: color var(--transition-fast);
             letter-spacing: -0.02em;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card[data-expanded="false"] .news-title {
+            -webkit-line-clamp: 1;
+        }
+
+        .news-card[data-expanded="true"] .news-title {
+            -webkit-line-clamp: unset;
         }
 
         .news-card.featured .news-title {
@@ -303,15 +454,19 @@
             line-height: 1.7;
             color: var(--text-secondary);
             margin-bottom: 16px;
+            margin-top: 16px;
             flex-grow: 1;
         }
 
-        /* AI Comment */
+        /* AI Comment - Glassmorphism */
         .ai-comment {
-            background: linear-gradient(135deg, rgba(8, 102, 255, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border-left: 3px solid var(--accent-purple);
+            background: linear-gradient(135deg, rgba(255, 142, 83, 0.08) 0%, rgba(255, 107, 107, 0.08) 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 142, 83, 0.2);
+            border-left: 3px solid var(--accent-indigo);
             padding: 14px 16px;
-            border-radius: 0 8px 8px 0;
+            border-radius: 12px;
             margin-bottom: 16px;
             position: relative;
         }
@@ -365,10 +520,12 @@
             color: var(--text-tertiary);
         }
 
-        /* Footer */
+        /* Footer - Glassmorphism */
         .footer {
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border-top: 1px solid var(--card-border);
             padding: 32px 0;
             margin-top: 48px;
         }
@@ -455,6 +612,15 @@
                 padding: 0 16px;
             }
 
+            .header {
+                margin: 0 8px;
+                top: 8px;
+            }
+
+            .header-inner {
+                padding: 12px 16px;
+            }
+
             .section-title {
                 font-size: 28px;
             }
@@ -500,7 +666,7 @@
         </div>
     </header>
 
-    <div class="ticker-tape">
+    <div class="ticker-tape" role="marquee" aria-label="股市指数滚动行情">
         <div class="ticker-content">
             <div class="ticker-item">
                 <span class="ticker-symbol">上证指数</span>
@@ -553,126 +719,158 @@
 
         <div class="news-grid">
             
-            <article class="news-card featured">
+            <article class="news-card"
+                     data-expanded="true"
+                     aria-labelledby="news-title-1"
+                     aria-expanded="true"
+                     role="button"
+                     tabindex="0">
                 <div class="card-header">
                     <span class="card-id">NEWS-001</span>
-                    <span class="card-time">2026.01.26</span>
-                </div>
-
-                
-                <p class="news-title-original">Gold Extends Gains Above $5,000 as Debasement Trade Gathers Pace</p>
-                
-
-                <h3 class="news-title">金价升破5000美元，“货币贬值交易”加速</h3>
-                <p class="news-excerpt">金价延续涨势，连续第二日收于每盎司5,000美元上方。受美元走软提振，地缘政治风险加剧以及投资者撤离主权债券和货币市场的避险情绪推动，黄金延续了此前的迅猛涨势。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">金价飙升本质是货币信用对冲与避险风险溢价的共振，若主权债券抛售潮持续，黄金将加速替代法币成为核心储备资产，需警惕实际利率转负后的资产泡沫化风险。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-26/gold-extends-gains-above-5-000-as-debasement-trade-gathers-pace" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span>彭博社</span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-002</span>
-                    <span class="card-time">2026.01.26</span>
-                </div>
-
-                
-                <p class="news-title-original">Stocks Close In on New Highs as Tech Leads Charge: Markets Wrap</p>
-                
-
-                <h3 class="news-title">科技股领跑，美股逼近新高：市场收盘综述</h3>
-                <p class="news-excerpt">随着财报季步入最繁忙阶段，科技股领跑助推，全球股市正逼近历史新高。与此同时，金价走高，美元企稳。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">财报季确认盈利韧性，科技股扩张风险溢价，但随着宽松预期计价，获利了结压力或加剧市场波动，需警惕估值过高风险。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-26/asian-stocks-to-drift-higher-yen-gains-on-dollar-markets-wrap" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span>彭博社</span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-003</span>
-                    <span class="card-time">2026.01.26</span>
+                    <span class="card-time">00:32</span>
                 </div>
 
                 
                 <p class="news-title-original">Northland Initiates Draganfly Inc. (DPRO) at Outperform, Citing Strong Demand for Intelligent Drones</p>
                 
 
-                <h3 class="news-title">Northland给予Draganfly“跑赢大盘”评级，智能无人机需求强劲</h3>
-                <p class="news-excerpt">**翻译（请提供具体原文内容，以下为示例）：**  
+                <h3 class="news-title" id="news-title-1">Northland给予Draganfly“跑赢大盘”评级，智能无人机需求强劲</h3>
+
+                <div class="news-expandable">
+                    <p class="news-excerpt">**翻译（请提供具体原文内容，以下为示例）：**  
 
 &#34;美联储宣布将基准利率上调25个基点至5.25%-5.50%，为2007年以来最高水平。主席鲍威尔在新闻发布会上表示，通胀压力仍存，未来可能进一步加息。市场普遍预期政策紧缩周期将持续至2024年。标普500指数应声下跌1.2%，纳斯达克跌幅达1.8%。欧洲央行同期维持利率不变，行长拉加德强调需警惕欧元区经济下行风险。&#34;  
 
 （注：实际翻译需根据提供的英文原文调整术语、数据及表述。）</p>
 
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">Northland“跑赢大盘”评级验证了智能无人机赛道的高景气度，技术驱动下的商业化落地加速，行业已从主题投资进入业绩兑现期。</p>
-                </div>
-                
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">Northland“跑赢大盘”评级验证了智能无人机赛道的高景气度，技术驱动下的商业化落地加速，行业已从主题投资进入业绩兑现期。</p>
+                    </div>
+                    
 
-                <div class="news-footer">
-                    <a href="https://finance.yahoo.com/news/northland-initiates-draganfly-inc-dpro-003223690.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                        Yahoo财经
-                         / Yahoo Finance
-                    </a>
-                    <div class="news-meta">
-                        <span>Yahoo财经</span>
+                    <div class="news-footer">
+                        <a href="https://finance.yahoo.com/news/northland-initiates-draganfly-inc-dpro-003223690.html" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            Yahoo财经
+                             / Yahoo Finance
+                        </a>
+                        <div class="news-meta">
+                            <span>Yahoo财经</span>
+                        </div>
                     </div>
                 </div>
             </article>
             
-            <article class="news-card ">
+            <article class="news-card"
+                     data-expanded="true"
+                     aria-labelledby="news-title-2"
+                     aria-expanded="true"
+                     role="button"
+                     tabindex="0">
                 <div class="card-header">
-                    <span class="card-id">NEWS-004</span>
-                    <span class="card-time">2026.01.26</span>
+                    <span class="card-id">NEWS-002</span>
+                    <span class="card-time">23:33</span>
+                </div>
+
+                
+                <p class="news-title-original">Gold Extends Gains Above $5,000 as Debasement Trade Gathers Pace</p>
+                
+
+                <h3 class="news-title" id="news-title-2">金价升破5000美元，“货币贬值交易”加速</h3>
+
+                <div class="news-expandable">
+                    <p class="news-excerpt">金价延续涨势，连续第二日收于每盎司5,000美元上方。受美元走软提振，地缘政治风险加剧以及投资者撤离主权债券和货币市场的避险情绪推动，黄金延续了此前的迅猛涨势。</p>
+
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">金价飙升本质是货币信用对冲与避险风险溢价的共振，若主权债券抛售潮持续，黄金将加速替代法币成为核心储备资产，需警惕实际利率转负后的资产泡沫化风险。</p>
+                    </div>
+                    
+
+                    <div class="news-footer">
+                        <a href="https://www.bloomberg.com/news/articles/2026-01-26/gold-extends-gains-above-5-000-as-debasement-trade-gathers-pace" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            彭博社
+                             / Bloomberg
+                        </a>
+                        <div class="news-meta">
+                            <span>彭博社</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card"
+                     data-expanded="true"
+                     aria-labelledby="news-title-3"
+                     aria-expanded="true"
+                     role="button"
+                     tabindex="0">
+                <div class="card-header">
+                    <span class="card-id">NEWS-003</span>
+                    <span class="card-time">00:31</span>
                 </div>
 
                 
                 <p class="news-title-original">Bernstein Reiterates Hold on Cronos Group Inc. (CRON) as Cash-Rich Balance Sheet Stands Out</p>
                 
 
-                <h3 class="news-title">伯恩斯坦维持Cronos Group (CRON)持有评级，现金流充沛资产负债表引关注</h3>
-                <p class="news-excerpt">美联储主席鲍威尔表示，若美国经济持续走强，美联储可能会放缓降息步伐。他强调，政策调整将取决于通胀数据、劳动力市场表现及其他经济指标。鲍威尔指出，尽管近期通胀有所回落，但仍需更多证据确认其可持续性。美联储将保持数据依赖模式，谨慎调整货币政策以平衡经济增长与价格稳定目标。市场预计，若经济数据强劲，美联储或推迟降息至下半年。</p>
+                <h3 class="news-title" id="news-title-3">伯恩斯坦维持Cronos Group (CRON)持有评级，现金流充沛资产负债表引关注</h3>
 
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">鲍威尔放鹰抑制宽松预期，降息周期延后将提高资金成本并抑制**carry trade**，市场短期内或延续**存量博弈**，需警惕**风险溢价**重定价带来的波动。</p>
+                <div class="news-expandable">
+                    <p class="news-excerpt">美联储主席鲍威尔表示，若美国经济持续走强，美联储可能会放缓降息步伐。他强调，政策调整将取决于通胀数据、劳动力市场表现及其他经济指标。鲍威尔指出，尽管近期通胀有所回落，但仍需更多证据确认其可持续性。美联储将保持数据依赖模式，谨慎调整货币政策以平衡经济增长与价格稳定目标。市场预计，若经济数据强劲，美联储或推迟降息至下半年。</p>
+
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">鲍威尔放鹰抑制宽松预期，降息周期延后将提高资金成本并抑制**carry trade**，市场短期内或延续**存量博弈**，需警惕**风险溢价**重定价带来的波动。</p>
+                    </div>
+                    
+
+                    <div class="news-footer">
+                        <a href="https://finance.yahoo.com/news/bernstein-reiterates-hold-cronos-group-003154418.html" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            Yahoo财经
+                             / Yahoo Finance
+                        </a>
+                        <div class="news-meta">
+                            <span>Yahoo财经</span>
+                        </div>
+                    </div>
                 </div>
+            </article>
+            
+            <article class="news-card"
+                     data-expanded="false"
+                     aria-labelledby="news-title-4"
+                     aria-expanded="false"
+                     role="button"
+                     tabindex="0">
+                <div class="card-header">
+                    <span class="card-id">NEWS-004</span>
+                    <span class="card-time">22:33</span>
+                </div>
+
+                
+                <p class="news-title-original">Stocks Close In on New Highs as Tech Leads Charge: Markets Wrap</p>
                 
 
-                <div class="news-footer">
-                    <a href="https://finance.yahoo.com/news/bernstein-reiterates-hold-cronos-group-003154418.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                        Yahoo财经
-                         / Yahoo Finance
-                    </a>
-                    <div class="news-meta">
-                        <span>Yahoo财经</span>
+                <h3 class="news-title" id="news-title-4">科技股领跑，美股逼近新高：市场收盘综述</h3>
+
+                <div class="news-expandable">
+                    <p class="news-excerpt">随着财报季步入最繁忙阶段，科技股领跑助推，全球股市正逼近历史新高。与此同时，金价走高，美元企稳。</p>
+
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">财报季确认盈利韧性，科技股扩张风险溢价，但随着宽松预期计价，获利了结压力或加剧市场波动，需警惕估值过高风险。</p>
+                    </div>
+                    
+
+                    <div class="news-footer">
+                        <a href="https://www.bloomberg.com/news/articles/2026-01-26/asian-stocks-to-drift-higher-yen-gains-on-dollar-markets-wrap" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            彭博社
+                             / Bloomberg
+                        </a>
+                        <div class="news-meta">
+                            <span>彭博社</span>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -688,5 +886,40 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        // 新闻卡片展开/收起交互
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsCards = document.querySelectorAll('.news-card');
+
+            newsCards.forEach(card => {
+                // 点击卡片切换展开/收起
+                card.addEventListener('click', function(e) {
+                    // 如果点击的是链接，不触发展开/收起
+                    if (e.target.closest('a')) {
+                        return;
+                    }
+
+                    toggleCard(this);
+                });
+
+                // 键盘支持：Enter 或 Space 键切换
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCard(this);
+                    }
+                });
+            });
+
+            function toggleCard(card) {
+                const isExpanded = card.getAttribute('data-expanded') === 'true';
+                const newState = !isExpanded;
+
+                card.setAttribute('data-expanded', newState);
+                card.setAttribute('aria-expanded', newState);
+            }
+        });
+    </script>
 </body>
 </html>
