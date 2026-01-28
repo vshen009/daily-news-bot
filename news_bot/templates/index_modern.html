@@ -55,20 +55,22 @@
         /* Dark Mode */
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --bg-card: #1e293b;
-                --bg-card-hover: #334155;
+                --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
+                --bg-secondary: rgba(15, 23, 42, 0.6);
+
+                --bg-card: rgba(30, 41, 59, 0.65);
+                --bg-card-hover: rgba(51, 65, 85, 0.75);
+                --card-border: rgba(255, 255, 255, 0.1);
 
                 --text-primary: #f1f5f9;
                 --text-secondary: #cbd5e1;
                 --text-tertiary: #94a3b8;
 
-                --border-color: #334155;
-                --border-glow: rgba(59, 130, 246, 0.4);
-                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-                --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+                --border-color: rgba(255, 255, 255, 0.1);
+                --border-glow: rgba(255, 107, 107, 0.5);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
             }
         }
 
@@ -92,6 +94,49 @@
             flex-direction: column;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        /* Glassmorphism Background Decorations */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 142, 83, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.12) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Ensure content is above decorations */
+        .container,
+        .header,
+        .main-content,
+        .footer {
+            position: relative;
+            z-index: 1;
         }
 
         a:focus-visible {
@@ -106,25 +151,19 @@
             padding: 0 24px;
         }
 
-        /* Header - Floating Glass Effect */
+        /* Header - Glassmorphism */
         .header {
             position: sticky;
             top: 16px;
             z-index: 100;
             margin: 0 16px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
             box-shadow: var(--shadow-md);
             transition: all var(--transition-medium);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .header {
-                background: rgba(30, 41, 59, 0.9);
-            }
         }
 
         .header:hover {
