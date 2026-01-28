@@ -3,87 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="全球财经日报 - 每日精选财经新闻与分析">
-    <title>全球财经日报 · Financial Intelligence | 2026-01-27</title>
+    <title>全球财经日报 · Global Financial Daily | 2026-01-27</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Modern Fintech Color System */
-            --bg-primary: #f8fafc;
+            /* Color System */
+            --bg-primary: #fafafa;
             --bg-secondary: #ffffff;
             --bg-card: #ffffff;
-            --bg-card-hover: #f1f5f9;
+            --bg-card-hover: #f8fafc;
 
-            /* Professional Blue Palette */
-            --accent-blue: #2563eb;
-            --accent-blue-light: #3b82f6;
-            --accent-blue-dark: #1d4ed8;
-
-            /* Accent Colors */
+            --accent-blue: #0866ff;
             --accent-indigo: #6366f1;
             --accent-purple: #8b5cf6;
             --accent-green: #10b981;
             --accent-red: #ef4444;
             --accent-amber: #f59e0b;
-            --accent-gold: #d4af37;
 
-            /* Text Colors - High Contrast */
-            --text-primary: #0c1929;
-            --text-secondary: #334155;
-            --text-tertiary: #64748b;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-tertiary: #94a3b8;
 
-            /* Border & Effects */
             --border-color: #e2e8f0;
-            --border-glow: rgba(37, 99, 235, 0.3);
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
-            --shadow-glow: 0 8px 24px rgba(37, 99, 235, 0.12);
-            --shadow-glow-strong: 0 12px 40px rgba(37, 99, 235, 0.18);
+            --border-glow: rgba(8, 102, 255, 0.2);
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --shadow-glow: 0 10px 30px rgba(8, 102, 255, 0.15);
 
             /* Typography */
-            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
 
             /* Spacing */
-            --container-max-width: 1280px;
-            --spacing-unit: 4px;
+            --container-max-width: 1440px;
+            --spacing-unit: 8px;
 
             /* Transitions */
-            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-medium: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Dark Mode */
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --bg-card: #1e293b;
-                --bg-card-hover: #334155;
-
-                --text-primary: #f1f5f9;
-                --text-secondary: #cbd5e1;
-                --text-tertiary: #94a3b8;
-
-                --border-color: #334155;
-                --border-glow: rgba(59, 130, 246, 0.4);
-                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-                --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
-            }
+            --transition-fast: 0.15s ease;
+            --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
@@ -93,15 +59,6 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-
-        /* Focus States for Accessibility */
-        a:focus-visible,
-        button:focus-visible {
-            outline: 2px solid var(--accent-blue);
-            outline-offset: 2px;
-            border-radius: 4px;
         }
 
         /* Container */
@@ -111,81 +68,41 @@
             padding: 0 24px;
         }
 
-        /* Header - Floating Glass Effect */
+        /* Header */
         .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
-            top: 16px;
-            z-index: 1000;
-            margin: 0 16px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            transition: all var(--transition-medium);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .header {
-                background: rgba(30, 41, 59, 0.9);
-            }
-        }
-
-        .header:hover {
-            box-shadow: var(--shadow-lg);
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
         }
 
         .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 24px;
+            padding: 20px 0;
         }
 
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 14px;
-            text-decoration: none;
+            gap: 16px;
         }
 
-        .logo-icon-wrapper {
+        .logo-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-indigo) 100%);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-glow);
-            transition: transform var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-icon-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.2) 100%);
-            opacity: 0;
-            transition: opacity var(--transition-medium);
-        }
-
-        .logo-section:hover .logo-icon-wrapper {
-            transform: scale(1.05);
-        }
-
-        .logo-section:hover .logo-icon-wrapper::before {
-            opacity: 1;
-        }
-
-        .logo-icon {
-            width: 28px;
-            height: 28px;
             color: white;
-            transition: transform var(--transition-medium);
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: var(--shadow-glow);
         }
 
         .logo-text {
@@ -195,22 +112,20 @@
 
         .logo-title {
             font-size: 18px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.02em;
-            line-height: 1.2;
         }
 
         .logo-subtitle {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
         .header-stats {
             display: flex;
-            gap: 20px;
+            gap: 32px;
         }
 
         .stat-item {
@@ -218,43 +133,33 @@
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-tertiary);
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: 2px;
-            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
         .stat-value {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-primary);
-            transition: color var(--transition-fast);
         }
 
         .stat-value.accent {
             color: var(--accent-blue);
         }
 
-        /* Ticker Tape - Improved */
+        /* Ticker Tape */
         .ticker-tape {
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             overflow: hidden;
-            padding: 10px 0;
-            margin-top: 16px;
+            padding: 12px 0;
         }
 
         .ticker-content {
             display: flex;
-            animation: tickerScroll 50s linear infinite;
+            animation: tickerScroll 40s linear infinite;
             white-space: nowrap;
-        }
-
-        .ticker-content:hover {
-            animation-play-state: paused;
         }
 
         @keyframes tickerScroll {
@@ -266,30 +171,23 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 0 28px;
+            padding: 0 24px;
             font-size: 13px;
             border-right: 1px solid var(--border-color);
-            transition: background var(--transition-fast);
         }
 
         .ticker-symbol {
             color: var(--accent-blue);
-            font-weight: 700;
-            font-size: 12px;
+            font-weight: 600;
         }
 
         .ticker-value {
             color: var(--text-primary);
-            font-weight: 600;
         }
 
         .ticker-change {
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .ticker-change.positive {
             color: var(--accent-green);
+            font-weight: 500;
         }
 
         .ticker-change.negative {
@@ -302,160 +200,98 @@
         }
 
         .section-header {
-            margin-bottom: 48px;
-        }
-
-        .section-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
-            color: var(--accent-blue);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
+            margin-bottom: 40px;
         }
 
         .section-title {
-            font-size: clamp(28px, 5vw, 42px);
-            font-weight: 900;
+            font-size: 36px;
+            font-weight: 800;
             letter-spacing: -0.03em;
             color: var(--text-primary);
             margin-bottom: 12px;
-            line-height: 1.2;
         }
 
         .section-subtitle {
             font-size: 16px;
             color: var(--text-secondary);
-            font-weight: 500;
         }
 
         /* News Grid */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(680px, 1fr));
             gap: 24px;
+            margin-bottom: 40px;
         }
 
-        /* News Card - Modern Design */
+        /* News Card */
         .news-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 32px;
+            border-radius: 12px;
+            padding: 28px;
             position: relative;
             cursor: pointer;
             transition: all var(--transition-medium);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-card);
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-        }
-
-        .news-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-indigo), var(--accent-purple));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform var(--transition-medium);
         }
 
         .news-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-glow);
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-
-        .news-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .news-card:active {
+            box-shadow: var(--shadow-card-hover);
             transform: translateY(-2px);
         }
 
         .news-card.featured {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(99, 102, 241, 0.03) 100%);
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             border: 2px solid var(--accent-blue);
-        }
-
-        .news-card.featured::before {
-            transform: scaleX(1);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .card-id {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--accent-blue);
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
-            padding: 6px 12px;
-            border-radius: 6px;
+            background: rgba(8, 102, 255, 0.08);
+            padding: 4px 10px;
+            border-radius: 4px;
             letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .card-id::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
         }
 
         .card-time {
             font-size: 12px;
             color: var(--text-tertiary);
-            font-weight: 500;
         }
 
         .news-title-original {
             font-size: 13px;
             color: var(--text-tertiary);
-            margin-bottom: 10px;
-            font-weight: 500;
+            margin-bottom: 8px;
             font-style: italic;
-            line-height: 1.5;
         }
 
         .news-title {
             font-size: 20px;
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1.4;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             color: var(--text-primary);
             transition: color var(--transition-fast);
             letter-spacing: -0.02em;
         }
 
         .news-card.featured .news-title {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         .news-card:hover .news-title {
@@ -464,124 +300,91 @@
 
         .news-excerpt {
             font-size: 15px;
-            line-height: 1.75;
+            line-height: 1.7;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             flex-grow: 1;
         }
 
-        /* AI Comment - Enhanced */
+        /* AI Comment */
         .ai-comment {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
-            border-left: 4px solid var(--accent-purple);
-            padding: 16px 20px;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(8, 102, 255, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-left: 3px solid var(--accent-purple);
+            padding: 14px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
             position: relative;
         }
 
         .ai-comment::before {
-            content: 'AI 洞察';
+            content: 'AI INSIGHT';
             position: absolute;
-            top: -10px;
-            left: 14px;
+            top: -9px;
+            left: 10px;
             background: var(--bg-card);
-            padding: 0 8px;
+            padding: 0 6px;
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--accent-purple);
             letter-spacing: 0.05em;
-            text-transform: uppercase;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
         }
 
         .ai-comment-text {
             font-size: 14px;
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--text-secondary);
-            font-weight: 500;
         }
 
         .news-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 18px;
+            padding-top: 16px;
             border-top: 1px solid var(--border-color);
         }
 
         .news-source {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-size: 13px;
             color: var(--accent-blue);
             text-decoration: none;
-            font-weight: 600;
-            transition: all var(--transition-fast);
+            font-weight: 500;
+            transition: color var(--transition-fast);
         }
 
         .news-source:hover {
             color: var(--accent-indigo);
         }
 
-        .news-source::before {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-        }
-
         .news-meta {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             font-size: 11px;
             color: var(--text-tertiary);
-            font-weight: 500;
         }
 
         /* Footer */
         .footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-color);
-            padding: 40px 0;
-            margin-top: 64px;
+            padding: 32px 0;
+            margin-top: 48px;
         }
 
         .footer-inner {
             text-align: center;
         }
 
-        .footer-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .footer-logo svg {
-            width: 24px;
-            height: 24px;
-            color: white;
-        }
-
         .footer-text {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--text-tertiary);
         }
 
         .footer-link {
             color: var(--accent-blue);
             text-decoration: none;
-            font-weight: 600;
             transition: color var(--transition-fast);
         }
 
@@ -602,7 +405,7 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            animation: fadeOut 0.6s ease 0.8s forwards;
+            animation: fadeOut 0.5s ease 0.6s forwards;
         }
 
         @keyframes fadeOut {
@@ -613,31 +416,27 @@
         }
 
         .loading-logo {
-            width: 72px;
-            height: 72px;
+            width: 64px;
+            height: 64px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
-            border-radius: 18px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-glow-strong);
-            animation: pulse-logo 1.5s ease-in-out infinite;
-        }
-
-        .loading-logo svg {
-            width: 40px;
-            height: 40px;
             color: white;
+            font-weight: 700;
+            font-size: 24px;
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
-        @keyframes pulse-logo {
+        @keyframes pulse {
             0%, 100% {
-                transform: scale(1) translateY(0);
-                box-shadow: var(--shadow-glow-strong);
+                transform: scale(1);
+                box-shadow: 0 10px 30px var(--shadow-glow);
             }
             50% {
-                transform: scale(1.05) translateY(-4px);
-                box-shadow: 0 16px 48px rgba(37, 99, 235, 0.25);
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px var(--shadow-glow);
             }
         }
 
@@ -656,78 +455,46 @@
                 padding: 0 16px;
             }
 
-            .header {
-                margin: 0 8px;
-                top: 8px;
-            }
-
-            .header-inner {
-                padding: 12px 16px;
-            }
-
             .section-title {
                 font-size: 28px;
             }
 
             .news-card {
-                padding: 24px;
+                padding: 20px;
             }
 
             .news-card.featured .news-title {
-                font-size: 20px;
+                font-size: 22px;
             }
 
             .ticker-item {
                 padding: 0 16px;
-            }
-
-            .main-content {
-                padding: 32px 0;
-            }
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
     <div class="loading-screen">
-        <div class="loading-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-        </div>
+        <div class="loading-logo">FI</div>
     </div>
 
     <header class="header">
-        <div class="header-inner">
-            <a href="/index.html" class="logo-section">
-                <div class="logo-icon-wrapper">
-                    <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                </div>
+        <div class="container header-inner">
+            <div class="logo-section">
+                <div class="logo-icon">FI</div>
                 <div class="logo-text">
                     <div class="logo-title">Financial Intelligence</div>
-                    <div class="logo-subtitle">全球财经日报</div>
+                    <div class="logo-subtitle">Global Financial Daily</div>
                 </div>
-            </a>
+            </div>
             <div class="header-stats">
                 <div class="stat-item">
-                    <div class="stat-label">Date</div>
+                    <div class="stat-label">DATE</div>
                     <div class="stat-value">2026-01-27</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-label">Articles</div>
-                    <div class="stat-value accent">15</div>
+                    <div class="stat-label">ARTICLES</div>
+                    <div class="stat-value accent">20</div>
                 </div>
             </div>
         </div>
@@ -738,97 +505,50 @@
             <div class="ticker-item">
                 <span class="ticker-symbol">上证指数</span>
                 <span class="ticker-value">3,258.76</span>
-                <span class="ticker-change positive">▲ +0.31%</span>
+                <span class="ticker-change">▲ +0.31%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">沪深300</span>
                 <span class="ticker-value">3,876.52</span>
-                <span class="ticker-change positive">▲ +0.42%</span>
+                <span class="ticker-change">▲ +0.42%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">中证500</span>
                 <span class="ticker-value">5,432.18</span>
-                <span class="ticker-change positive">▲ +0.57%</span>
+                <span class="ticker-change">▲ +0.57%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">中证1000</span>
                 <span class="ticker-value">6,125.43</span>
-                <span class="ticker-change negative">▼ -0.15%</span>
+                <span class="ticker-change">▼ -0.15%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">纳斯达克</span>
                 <span class="ticker-value">19,432.50</span>
-                <span class="ticker-change positive">▲ +0.82%</span>
+                <span class="ticker-change">▲ +0.82%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">标普500</span>
                 <span class="ticker-value">4,876.35</span>
-                <span class="ticker-change positive">▲ +0.45%</span>
+                <span class="ticker-change">▲ +0.45%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">道琼斯</span>
                 <span class="ticker-value">37,654.12</span>
-                <span class="ticker-change positive">▲ +0.38%</span>
+                <span class="ticker-change">▲ +0.38%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">日经225</span>
                 <span class="ticker-value">35,678.90</span>
-                <span class="ticker-change negative">▼ -0.22%</span>
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div class="ticker-item">
-                <span class="ticker-symbol">上证指数</span>
-                <span class="ticker-value">3,258.76</span>
-                <span class="ticker-change positive">▲ +0.31%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">沪深300</span>
-                <span class="ticker-value">3,876.52</span>
-                <span class="ticker-change positive">▲ +0.42%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">中证500</span>
-                <span class="ticker-value">5,432.18</span>
-                <span class="ticker-change positive">▲ +0.57%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">中证1000</span>
-                <span class="ticker-value">6,125.43</span>
-                <span class="ticker-change negative">▼ -0.15%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">纳斯达克</span>
-                <span class="ticker-value">19,432.50</span>
-                <span class="ticker-change positive">▲ +0.82%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">标普500</span>
-                <span class="ticker-value">4,876.35</span>
-                <span class="ticker-change positive">▲ +0.45%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">道琼斯</span>
-                <span class="ticker-value">37,654.12</span>
-                <span class="ticker-change positive">▲ +0.38%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">日经225</span>
-                <span class="ticker-value">35,678.90</span>
-                <span class="ticker-change negative">▼ -0.22%</span>
+                <span class="ticker-change">▼ -0.22%</span>
             </div>
         </div>
     </div>
 
     <main class="container main-content">
         <section class="section-header">
-            <div class="section-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Daily Briefing
-            </div>
             <h1 class="section-title">全球财经日报</h1>
-            <p class="section-subtitle">Financial Intelligence Daily · 2026-01-27</p>
+            <p class="section-subtitle">Global Financial Daily · 2026-01-27</p>
         </section>
 
         <div class="news-grid">
@@ -840,25 +560,25 @@
                 </div>
 
                 
-                <p class="news-title-original">SocGen&#39;s Juckes Expects Weaker Dollar Through First Half of Year</p>
+                <p class="news-title-original">GM tops earnings expectations, announces dividend increase and stock buyback program</p>
                 
 
-                <h3 class="news-title">法兴Juckes：上半年美元料走弱</h3>
-                <p class="news-excerpt">法国兴业银行首席外汇策略师基特·朱克斯分析了美国政治施压与日本财政制约之间的博弈关系。他预测，受上述因素综合影响，今年上半年美元将呈现走弱趋势。</p>
+                <h3 class="news-title">通用汽车业绩超预期，宣布上调股息并启动回购计划</h3>
+                <p class="news-excerpt">通用汽车在2025年第四季度录得72亿美元的特殊项目支出，主要归因于其在电动汽车业务方面的战略收缩以及在中国市场的重组行动。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">法兴预判揭示了政治施压下**风险溢价**重定价逻辑，若美日货币政策背离收敛，将削弱利差优势，料引发**carry trade**平仓，加速上半年美元回调。</p>
+                    <p class="ai-comment-text">短期财务洗澡出清风险溢价，此举意在优化资本配置效率，资本结构调整有望释放股东价值，并重塑市场对其估值模型的预期。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/yen-shock-triggers-capitulation-video" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
+                    <a href="https://www.cnbc.com/2026/01/27/general-motors-gm-earnings-q4-2025.html" target="_blank" rel="noopener noreferrer" class="news-source">
+                        CNBC
+                         / CNBC
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>CNBC</span>
                     </div>
                 </div>
             </article>
@@ -870,25 +590,25 @@
                 </div>
 
                 
-                <p class="news-title-original">Trump’s Tariffs Threats Lose Their Bite</p>
+                <p class="news-title-original">Wall Street veteran who called the dot-com bust says the Magnificent Seven represent an even bigger bubble</p>
                 
 
-                <h3 class="news-title">特朗普关税威胁效力减弱</h3>
-                <p class="news-excerpt">欢迎阅读本期通讯，汇集Odd Lots栏目的每日精选内容。本期由主持人Joe Weisenthal和Tracy Alloway为您解析市场、金融及经济领域的最新动态。同时，我们也特邀专家嘉宾及信源团队提供深度见解。无论内容形式如何，我们承诺始终为您呈现最具价值的金融资讯。</p>
+                <h3 class="news-title">华尔街老将：七巨头泡沫甚于互联网泡沫</h3>
+                <p class="news-excerpt">理查德·伯恩斯坦指出，投资者正为了追逐少数科技巨头，而忽视了一大批盈利能力强劲的企业。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">关税预期计入定价边际递减，市场风险偏好逐步修复，短期避险资产溢价回落，资金或将重新布局增长敏感型资产。</p>
+                    <p class="ai-comment-text">七巨头估值溢价蕴含极端拥挤交易风险，均值回归压力下资金或将向高性价比价值板块轮动，警惕去杠杆引发的流动性冲击。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/newsletters/2026-01-27/trump-s-tariffs-threats-lose-their-bite" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
+                    <a href="https://www.marketwatch.com/story/wall-street-veteran-who-called-the-dot-com-bust-sees-a-bigger-bubble-in-magnificent-7-868dfe23?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source">
+                        MarketWatch
+                         / MarketWatch
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>MarketWatch</span>
                     </div>
                 </div>
             </article>
@@ -900,25 +620,33 @@
                 </div>
 
                 
-                <p class="news-title-original">The Talent War for Hedge Funds Is Intense, Weinstein Says</p>
+                <p class="news-title-original">Tether Launches ‘Made in America’ Stablecoin to Comply With GENIUS Act</p>
                 
 
-                <h3 class="news-title">温斯坦：对冲基金人才争夺战白热化</h3>
-                <p class="news-excerpt">对冲基金刚创十多年来最佳业绩，数十亿美元资金正回流至该行业。然而，伴随资本涌入，人才招聘却日益艰难。基金机构对资深经理的争夺趋于白热化，人才的话语权达到前所未有的高度。专注于对冲基金领域的领先猎头公司IDW集团CEO伊拉娜·温斯坦做客彭博社《Open Interest》节目，深度解析了这场正重塑行业格局的人才争夺战。</p>
+                <h3 class="news-title">Tether推出“美国制造”稳定币以符合GENIUS法案要求</h3>
+                <p class="news-excerpt">请注意，您似乎**未提供需要翻译的英文原文**。上面的“## 原文：”部分是空的。
+
+为了向您展示符合要求的翻译风格，我选取了一条**模拟的金融新闻**进行翻译：
+
+**【模拟原文】**
+The Federal Reserve paused its aggressive interest rate hiking cycle on Wednesday, holding the benchmark federal funds rate steady at 5.25%-5.50%, in line with market expectations. However, Fed Chair Jerome Powell signaled that further tightening is still on the table to combat persistent inflation, causing the S&amp;P 500 to dip 0.5% in afternoon trading.
+
+**【翻译结果】**
+美联储周三暂停激进的加息周期，将基准联邦基金利率维持在5.25%-5.50%的区间，符合市场预期。然而，美联储主席鲍威尔暗示，为应对顽固通胀，未来仍可能进一步收紧货币政策。受此鹰派信号影响，标普500指数在午后交易中下跌0.5%。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">业绩回暖引爆**alpha**稀缺性，资本涌入驱动人才**risk premium**飙升，高薪酬结构或倒逼行业**fee compression**加速，加速投研实力分化。</p>
+                    <p class="ai-comment-text">此举意在强化合规护城河并重塑风险溢价，随着稳定币监管套利空间收窄，行业合规化将加速出清劣质供给，马太效应凸显。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/hedge-funds-have-a-talent-problem-weinstein-video" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
+                    <a href="https://finance.yahoo.com/news/tether-launches-made-america-stablecoin-131805344.html" target="_blank" rel="noopener noreferrer" class="news-source">
+                        Yahoo财经
+                         / Yahoo Finance
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>Yahoo财经</span>
                     </div>
                 </div>
             </article>
@@ -930,25 +658,25 @@
                 </div>
 
                 
-                <p class="news-title-original">American Air’s Rosy Outlook Undercut by Storm Cancellations</p>
+                <p class="news-title-original">GM Profits Fueled by Full-Sized SUV, Truck Demand, CEO Barra Says</p>
                 
 
-                <h3 class="news-title">美航乐观预期受天气取消航班冲击</h3>
-                <p class="news-excerpt">美国航空集团表示，随着公司加速布局高端产品服务，其有望在迎来业绩强劲的一年，但目前首要任务是应对恶劣天气冲击。受此影响，该公司在美国主要枢纽机场被迫取消了数千架次航班。（来源：彭博）</p>
+                <h3 class="news-title">通用汽车CEO：全尺寸SUV和卡车需求驱动利润增长</h3>
+                <p class="news-excerpt">通用汽车董事长兼首席执行官玛丽·博拉探讨公司第四季度业绩表现，分析拉动盈利的核心车型，并重申对电动汽车及混合动力车型的战略承诺。此外，她还就这家汽车制造商如何应对关税冲击的管理举措发表了见解。（消息来源：彭博）</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">虽短期业绩受非对称风险扰动，但高端布局将优化客户结构并提振风险溢价，长期看基本面复苏逻辑未改。</p>
+                    <p class="ai-comment-text">高利润燃油车业务构筑的**自由现金流**，为其在**政策补贴**退坡的背景下平滑**电动化转型**的盈利阵痛提供了关键**安全垫**。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/american-air-s-outlook-undercut-by-storm-cancellations-video" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/gm-profits-fueled-by-full-sized-suv-truck-demand-ceo-video" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -960,25 +688,25 @@
                 </div>
 
                 
-                <p class="news-title-original">Transatlantic Diesel Spread Surges as Winter Storm Disrupts US</p>
+                <p class="news-title-original">Boeing&#39;s quarterly sales jump 57% as CEO says there&#39;s &#39;a lot to be optimistic about&#39;</p>
                 
 
-                <h3 class="news-title">冬季风暴扰乱美国，跨大西洋柴油价差飙升</h3>
-                <p class="news-excerpt">受冬季风暴及随后持续低温天气影响，美国燃料市场供应承压，导致该国柴油期货价格涨势领先于欧洲基准合约。市场担忧极端天气将加剧燃油短缺风险，进而推高取暖油及运输燃料的需求，短期内美柴油较欧原油的溢价有望进一步扩大。</p>
+                <h3 class="news-title">波音季度销售额飙升57%，CEO称“前景乐观”</h3>
+                <p class="news-excerpt">受增产预期推动，波音过去一年飞机交付量大幅攀升。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">极端天气通过冲击实物供给侧抬升**风险溢价**，短期内美柴油相对欧洲的**价差交易**（spread trading）或将扩大，加剧全球能源通胀博弈。</p>
+                    <p class="ai-comment-text">营收修复验证产能爬坡逻辑，乐观预期驱动**风险溢价**下行，但需警惕商业周期波动对供应链韧性的长期压制。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/transatlantic-diesel-spread-surges-as-winter-storm-disrupts-us" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
+                    <a href="https://www.cnbc.com/2026/01/27/boeing-ba-4q-2025-earnings.html" target="_blank" rel="noopener noreferrer" class="news-source">
+                        CNBC
+                         / CNBC
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>CNBC</span>
                     </div>
                 </div>
             </article>
@@ -990,25 +718,30 @@
                 </div>
 
                 
-                <p class="news-title-original">FedEx Freight Offers $3.7 Billion of Bonds Ahead of Spinoff</p>
+                <p class="news-title-original">AI advisory firm Zocks lands $45m Series B investment</p>
                 
 
-                <h3 class="news-title">联邦快递货运部门拟在分拆前发行37亿美元债券</h3>
-                <p class="news-excerpt">FedEx Freight Holding Co.正通过首次发行投资级美元债券筹资37亿美元，为其计划于6月1日从FedEx Corp.（联邦快递）分拆上市做准备。此次发债规模达37亿美元，为公司分拆奠定资金基础。</p>
+                <h3 class="news-title">AI咨询公司Zocks完成4500万美元B轮融资</h3>
+                <p class="news-excerpt">（注：您未提供英文原文，请补充具体内容以便为您翻译。）  
+
+（示例翻译结构供参考：  
+【美指走强压制黄金】受美联储加息预期升温推动，美元指数涨0.4%至102.5，国际金价承压下跌1.2%，报1850美元/盎司。美联储理事鲍曼表示通胀仍需警惕，市场对7月加息25个基点的概率升至65%。欧央行行长拉加德重申鹰派立场，欧元兑美元跌0.3%至1.08。）  
+
+（实际翻译将严格依据您提供的英文内容生成）</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">37亿美元投资级发债旨在锁定低成本资金并构建独立资产负债表，分拆后债务结构的重定价将考验市场对独立运营实体的风险溢价定价。</p>
+                    <p class="ai-comment-text">Zocks融资凸显AI对金融分析赛道的降本增效逻辑，GenAI垂直渗透加速有望重塑卖方咨询竞争格局，中长期或将倒逼传统机构重构估值模型。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/fedex-freight-offers-its-first-bonds-ahead-of-planned-spinoff" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
+                    <a href="https://finance.yahoo.com/news/ai-advisory-firm-zocks-lands-124053551.html" target="_blank" rel="noopener noreferrer" class="news-source">
+                        Yahoo财经
+                         / Yahoo Finance
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>Yahoo财经</span>
                     </div>
                 </div>
             </article>
@@ -1020,25 +753,25 @@
                 </div>
 
                 
-                <p class="news-title-original">US Natural Gas Falls After Record as Silver Rallies on China Buying, Supply Tightness</p>
+                <p class="news-title-original">Blackstone Makes Over $400 Million Gain on Marathon Sale to CVC</p>
                 
 
-                <h3 class="news-title">美天然气创纪录后回落，白银受中国买盘及供应提振反弹</h3>
-                <p class="news-excerpt">白银在实物需求激增与投机资金推动下刷新历史高位。由于市场流动性相对较低，且买家主要集中在**中国**，这波涨势获得有力支撑。**美国天然气**因交投清淡及气温预报转暖而回落。此前，极寒天气推高供暖需求并扰乱供应，致使其上周录得历史性涨幅。**彭博社**高级大宗商品策略师**迈克·麦克格隆**（Mike McGlone）将做客节目，结合**彭博情报**（Bloomberg Intelligence）数据深入探讨市场动态。</p>
+                <h3 class="news-title">黑石出售Marathon予CVC 获利超4亿美元</h3>
+                <p class="news-excerpt">CVC Capital Partners Plc以12亿美元收购信贷投资机构Marathon Asset Management，此举令Blackstone Inc.意外获益。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">白银受中国实盘驱动逼空上行，与美天然气供需博弈后的均值回归形成背离，流动性与天气计价差异暗示短期波动率将维持高位。</p>
+                    <p class="ai-comment-text">此举折射私募信贷资产在加息周期末尾的**风险溢价**重估，黑石高位套现或预示机构对另类资产**存量博弈**下的获利了结与再平衡趋势。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/us-natural-gas-falls-after-record-as-silver-rallies-video" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/blackstone-makes-over-400-million-gain-on-marathon-sale-to-cvc" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1050,25 +783,25 @@
                 </div>
 
                 
-                <p class="news-title-original">Ex-Nigerian Oil Minister Given £2 Million in Harrods Gifts, Bribery Jury Told</p>
+                <p class="news-title-original">UPS delivers on fourth-quarter numbers, and its stock rises</p>
                 
 
-                <h3 class="news-title">英陪审团：前尼日利亚石油部长收受200万英镑哈罗德贿赂</h3>
-                <p class="news-excerpt">伦敦检方在庭审首日指控，尼日利亚前石油部长迪扎尼·艾利森-马杜埃在任期间，收受贿赂及大量奢侈福利，作为交换将利润丰厚的政府合同授予相关方。</p>
+                <h3 class="news-title">UPS第四季度业绩超预期，股价上涨</h3>
+                <p class="news-excerpt">按市盈率计算，联合包裹（UPS）的估值较标普500指数折价约30%，其股息率约为6%。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">此案揭开了资源国寻租**风险溢价**的冰山一角，预示全球ESG审查趋严将推高该区域项目融资成本，跨国资金配置将更侧重合规与治理评级。</p>
+                    <p class="ai-comment-text">估值折价与高股息率提供显著安全边际，业绩超预期有望修复风险溢价，但在货币政策转向预期下，后市表现需紧盯劳动力成本及宏观经济需求韧性。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/ex-opec-president-accused-of-bribery-stands-trial-in-london" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
+                    <a href="https://www.marketwatch.com/story/ups-delivers-on-fourth-quarter-numbers-and-its-stock-rises-372479c0?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source">
+                        MarketWatch
+                         / MarketWatch
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>MarketWatch</span>
                     </div>
                 </div>
             </article>
@@ -1080,25 +813,25 @@
                 </div>
 
                 
-                <p class="news-title-original">UnitedHealth Shares Fall on Weak Revenue Outlook</p>
+                <p class="news-title-original">MUFG Weighs Insurer-Friendly SRT Tied to $2.5 Billion of Loans</p>
                 
 
-                <h3 class="news-title">联合健康业绩展望疲软，股价下挫</h3>
-                <p class="news-excerpt">联合健康预计其30多年来将首次出现营收下滑。继特朗普政府提议维持私人医保支付标准不变后，其同行股价亦纷纷下挫。彭博社的Ike Swetlitz做客《Bloomberg Open Interest》节目，探讨此举对保险公司及患者的深远影响。</p>
+                <h3 class="news-title">MUFG拟推25亿美元贷款关联SRT 意在吸引险企入场</h3>
+                <p class="news-excerpt">据知情人士透露，三菱日联金融集团正考虑发行一笔旨在吸引保险公司的重大风险转移（SRT）交易。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">营收下滑打破稳健预期，医保支付政策的不确定性推高**风险溢价**，行业面临**存量博弈**下的估值重塑与盈利能力重构。</p>
+                    <p class="ai-comment-text">此举通过SRT将**风险溢价**让渡给险资以释放**资本充足率**空间，映射金融机构在**逆周期**调节中优化资产负债表的主动尝试，预计**信用风险共担**模式将成市场新范式。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/insurers-slide-on-medicare-proposal-video" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/mufg-weighs-insurer-friendly-srt-tied-to-2-5-billion-of-loans" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1110,25 +843,25 @@
                 </div>
 
                 
-                <p class="news-title-original">Colombia Government Adds to Dollar Holdings, Pressuring the Peso</p>
+                <p class="news-title-original">More Bullish for Investors Than Traders: 3-Minutes MLIV</p>
                 
 
-                <h3 class="news-title">哥伦比亚政府增持美元资产，施压比索汇率</h3>
-                <p class="news-excerpt">自上周五以来，随着哥伦比亚比索汇率创下近五年新高，哥伦比亚财政部加大了在即期市场的美元买入力度。</p>
+                <h3 class="news-title">MLIV三分钟速读：为何投资者比交易员更看多？</h3>
+                <p class="news-excerpt">安娜·爱德华兹（Anna Edwards）、盖伊·约翰逊（Guy Johnson）、汤姆·麦肯齐（Tom Mackenzie）和马克·库德莫尔（Mark Cudmore）在彭博社节目《开盘交易》中，为分析师和投资者深度解读今日市场核心议题。（来源：彭博社）</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">哥伦比亚财政部主动干预属于逆周期调节，旨在通过打破单边升值预期管理风险溢价，短期内或将抑制套利资本流入，缓解出口承压。</p>
+                    <p class="ai-comment-text">此背离折射出投资者与交易员在宏观预期与风险溢价上的显著分歧，存量博弈下高频资金更趋谨慎，需警惕资产定价中枢错位带来的波动加剧风险。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/colombia-government-adds-to-dollar-holdings-pressuring-the-peso" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/more-bullish-for-investors-than-traders-3-minutes-mliv-video" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1140,25 +873,25 @@
                 </div>
 
                 
-                <p class="news-title-original">American Air Predicts Strong Year Amid Storms, Shutdowns</p>
+                <p class="news-title-original">ECB Study Finds ‘Pricing Cascades’ Can Cause Inflationary Wave</p>
                 
 
-                <h3 class="news-title">美航无视恶劣天气与停摆扰动，仍预测全年业绩强劲</h3>
-                <p class="news-excerpt">尽管美国航空表达了看涨预期，预测盈利强劲、营收创纪录且高端客舱升级显著，但风暴天气、运营中断及未达预期揭示了其基本面更为复杂的一面。TD Cowen航空业分析师Tom Fitzgerald近日做客“Bloomberg Open Interest”节目，就上述财报结果进行了深入探讨。（来源：Bloomberg）</p>
+                <h3 class="news-title">欧洲央行研究：“定价级联”或引发通胀浪潮</h3>
+                <p class="news-excerpt">欧洲央行的研究指出，若价格冲击波及关联紧密的企业网络，即使冲击本身相对温和，也可能引发大规模通胀。这一发现揭示了供应链网络效应在通胀传导中的关键作用，表明企业间的高度关联性可能放大局部价格波动的影响。研究强调，在评估通胀风险时，需重点关注企业网络的拓扑结构特征。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">强劲指引与运营扰动反映航空业复苏进程中的**不确定性溢价**上升，成本控制与运力修复将成为验证业绩韧性的关键变量。</p>
+                    <p class="ai-comment-text">此研究警示在当前供给侧约束下，网络拓扑效应或加剧**通胀预期**脱锚风险，迫使货币政策在**模型优化**中纳入非线性的**风险溢价**评估，打破传统的线性传导逻辑。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/american-airlines-predicts-strong-year-video" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/ecb-study-finds-pricing-cascades-can-cause-inflationary-wave" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1170,25 +903,25 @@
                 </div>
 
                 
-                <p class="news-title-original">NextEra Offers Nuclear Power Amid Red-Hot Demand From Tech Firms</p>
+                <p class="news-title-original">Adani Group, Embraer Enter a Pact to Build Aircraft in India</p>
                 
 
-                <h3 class="news-title">NextEra趁科技巨头需求火热 推出核电服务</h3>
-                <p class="news-excerpt">NextEra Energy Inc. 正在大量出售其位于威斯康星州和新罕布什尔州核电站的电力。此前，科技巨头们竞相为确保人工智能数据中心获得核能供应而加紧布局。</p>
+                <h3 class="news-title">阿达尼集团与巴西航空工业公司达成协议，在印度制造飞机</h3>
+                <p class="news-excerpt">亿万富翁高塔姆·阿达尼旗下企业集团与巴西航空工业公司宣布达成合作，将在印度建立飞机制造工厂。这标志着印度将在民用航空领域迎来首家本土制造企业，填补该国在民航制造业的空白，助力其本土化产业链发展。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">科技巨头锁定**核电容量**打破**绿色溢价**估值逻辑，**资本开支**向高确定性基荷倾斜将重塑能源**资本配置**，**分红贴现模型**中无风险利率预期有望下调。</p>
+                    <p class="ai-comment-text">此举契合印度**进口替代**战略，有望提升**本土化率**并优化**经常账户**，长期看将重塑区域航空产业链**价值分布**。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/nextera-offers-nuclear-power-amid-red-hot-demand-from-tech-firms" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/adani-group-embraer-enter-a-pact-to-build-aircraft-in-india" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1200,25 +933,25 @@
                 </div>
 
                 
-                <p class="news-title-original">Veolia Expands US Hazardous Waste Business</p>
+                <p class="news-title-original">Indian Oil to Buy More Brazil Barrels Over Next Two Years</p>
                 
 
-                <h3 class="news-title">威立雅扩大美国危废业务</h3>
-                <p class="news-excerpt">法国环境服务巨头威立雅正大举进军美国市场，同意以30亿美元收购Enviri的危险废物业务，使其在美业务版图倍增。随着清洁水、PFAS治理以及人工智能数据中心和制造业可持续解决方案的需求激增，威立雅首席执行官Estelle Brachlianoff做客彭博社“Open Interest”节目，探讨公司未来发展前景。（消息来源：彭博社）</p>
+                <h3 class="news-title">印度国家石油公司：未来两年将增购巴西原油</h3>
+                <p class="news-excerpt">印度国有炼油巨头印度石油公司一位不愿具名的高管透露，为确保供应多元化，该公司计划于今明两年采购至少2400万桶巴西原油。作为印度最大的炼油企业，印度石油正积极拓展采购渠道，以优化其原油进口结构并降低供应链风险。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">30亿美元并购不仅是规模扩张，更是**景气度博弈**下的前瞻性布局，AI驱动的危废需求提升将优化**资产回报率**，进一步打开估值上行空间。</p>
+                    <p class="ai-comment-text">此举旨在通过**进口多元化**规避**地缘政治风险溢价**，并利用**折价**资产优化**成本结构**，未来跨区套利或重塑全球原油贸易流向。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/veolia-expands-us-hazardous-waste-business-video" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/indian-oil-to-buy-more-brazil-barrels-over-next-two-years" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1230,25 +963,25 @@
                 </div>
 
                 
-                <p class="news-title-original">Medicare Rates Shock Spurs $90 Billion Rout in Insurance Stocks</p>
+                <p class="news-title-original">Germany Tests Demand for New 20-Year Bond in Sale Via Banks</p>
                 
 
-                <h3 class="news-title">医保费率震惊市场，保险股遭抛售市值蒸发900亿美元</h3>
-                <p class="news-excerpt">提供Medicare Advantage计划的健康保险股遭遇大幅抛售，导致其股票市值蒸发逾900亿美元。</p>
+                <h3 class="news-title">德国通过银行发债，测试20年期新债需求</h3>
+                <p class="news-excerpt">德国首次通过银行发行20年期国债，旨在试探投资者对该资产的兴趣。此前，类似债券在美国市场遭遇了冷热不均的市场反响。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">**医保费率下调引发估值模型重置，风险溢价飙升致存量资金大幅出逃，短期板块承压，长期看将倒逼险企优化医疗控费与精算定价能力。**</p>
+                    <p class="ai-comment-text">德国此举意在通过**流动性溢价**试探超长端配置需求，若**期限溢价**回升确立，或预示全球资产荒下长债**Carry Trade**价值重估。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/medicare-rates-shock-spurs-90-billion-rout-in-insurance-stocks" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/germany-tests-demand-for-new-20-year-bond-in-sale-via-banks" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1260,25 +993,175 @@
                 </div>
 
                 
-                <p class="news-title-original">Oil Major Eni Holds Talks With Mercuria Over Trading Partnership</p>
+                <p class="news-title-original">European stocks rise after EU lands &#39;mother of all deals&#39; with India</p>
                 
 
-                <h3 class="news-title">油气巨头埃尼与大宗商品巨头摩科瑞洽谈贸易合作</h3>
-                <p class="news-excerpt">据知情人士透露，意大利能源巨头埃尼集团正与大宗商品贸易商摩科瑞能源集团就在大宗贸易领域建立潜在合作伙伴关系展开洽谈。</p>
+                <h3 class="news-title">欧股收高，欧盟与印度达成“史诗级”贸易协定</h3>
+                <p class="news-excerpt">欧洲股市周二高开，市场聚焦国际贸易形势及企业财报表现。投资者关注全球贸易政策动向及上市公司盈利情况，这成为推动市场情绪的主要因素。开盘时段，主要股指集体走强，市场交投活跃。</p>
 
                 
                 <div class="ai-comment">
-                    <p class="ai-comment-text">此举旨在通过贸易资源**协同效应**重塑**大宗商品定价权**，对冲**地缘政治风险溢价**，预示能源巨头正加速向全产业链**风控**模式转型。</p>
+                    <p class="ai-comment-text">欧印贸易协定不仅重塑全球**风险溢价**，更打破**存量博弈**格局，叠加企业盈利改善预期，欧洲股市具备**估值修复**空间。</p>
                 </div>
                 
 
                 <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/oil-major-eni-holds-talks-with-mercuria-over-trading-partnership" target="_blank" rel="noopener noreferrer" class="news-source">
+                    <a href="https://www.cnbc.com/2026/01/27/european-markets-stoxx-600-ftse-cac-dax-earnings.html" target="_blank" rel="noopener noreferrer" class="news-source">
+                        CNBC
+                         / CNBC
+                    </a>
+                    <div class="news-meta">
+                        <span>CNBC</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-016</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">Saudi Arabia-UAE Tensions Put Middle East Businesses on Edge</p>
+                
+
+                <h3 class="news-title">沙特与阿联酋紧张局势加剧，中东企业避险情绪升温</h3>
+                <p class="news-excerpt">中东企业正日益紧张地注视着沙特阿拉伯与阿联酋之间的紧张局势。两国正崛起为区域贸易和金融中心，市场担心此时出现的摩擦可能冲击商业活动。</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">地缘政治摩擦将推升**风险溢价**，引发**资本回流**避险，**存量博弈**加剧将迫使市场重估中东资产的非系统性风险，短期区域股债或面临调整压力。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/saudi-arabia-uae-tensions-put-middle-east-businesses-on-edge" target="_blank" rel="noopener noreferrer" class="news-source">
                         彭博社
                          / Bloomberg
                     </a>
                     <div class="news-meta">
-                        <span></span>
+                        <span>彭博社</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-017</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">Horizons Middle East and Africa 1/27/2026</p>
+                
+
+                <h3 class="news-title">Horizons中东与非洲1/27/2026</h3>
+                <p class="news-excerpt">《Horizons Middle East Africa》为您聚焦全球增长最快的地区之一。从迪拜直播，带您掌握全球市场动态与深度分析，以及重磅专访，特别关注中东及非洲（MEA）资讯。无论您身处海湾地区前往办公室、在香港午间休憩，还是在伦敦或约翰内斯堡开启新的一天，都为您奉上这一财经盛宴。（来源：彭博）</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">在美元融资成本高企背景下，中东高**风险溢价**资产正吸引**Carry Trade**资金，**资产多元化**配置需求有望重塑全球**增量资金**流向。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.bloomberg.com/news/videos/2026-01-27/horizons-middle-east-and-africa-1-27-2025-video" target="_blank" rel="noopener noreferrer" class="news-source">
+                        彭博社
+                         / Bloomberg
+                    </a>
+                    <div class="news-meta">
+                        <span>彭博社</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-018</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">Luxury Investors Eye Tough Earnings Season After Stock Selloff</p>
+                
+
+                <h3 class="news-title">股市大跌后，奢侈品投资者警惕业绩考验</h3>
+                <p class="news-excerpt">从股市表现来看，投资者正为奢侈品牌公司即将到来的艰难财报季做好准备。</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">避险情绪上升推高**风险溢价**，奢侈品板块面临**流动性紧缩**与**估值消化**的双重压力，短期业绩或成为市场风格切换的关键催化剂。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/luxury-investors-eye-tough-earnings-season-after-stock-selloff" target="_blank" rel="noopener noreferrer" class="news-source">
+                        彭博社
+                         / Bloomberg
+                    </a>
+                    <div class="news-meta">
+                        <span>彭博社</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-019</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">Goldman, Morgan Stanley’s South Africa Inflation Call Undercuts Central Bank</p>
+                
+
+                <h3 class="news-title">高盛和摩根士丹利下调南非通胀预期，削弱央行立场</h3>
+                <p class="news-excerpt">高盛集团和摩根士丹利认为，南非储备银行有望下调其2026年的通胀预测。该行决策层将于本周晚些时候公布年内首次利率决议。</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">下调通胀预期预示南非央行**货币政策**转向宽松，债市做多逻辑确立，但**风险溢价**收窄或加速**carry trade**平仓，需警惕短期资金面波动。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/goldman-morgan-stanley-s-south-africa-inflation-call-undercuts-central-bank" target="_blank" rel="noopener noreferrer" class="news-source">
+                        彭博社
+                         / Bloomberg
+                    </a>
+                    <div class="news-meta">
+                        <span>彭博社</span>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card ">
+                <div class="card-header">
+                    <span class="card-id">NEWS-020</span>
+                    <span class="card-time">2026.01.27</span>
+                </div>
+
+                
+                <p class="news-title-original">Lone Pop Mart Bear Analyst Defies Rally by Cutting Price Target</p>
+                
+
+                <h3 class="news-title">泡泡玛特逆势遭唯一看空分析师下调目标价</h3>
+                <p class="news-excerpt">泡泡玛特国际集团有限公司唯一的评级为“卖出”的分析师下调了其目标价。尽管该股近期出现反弹，但鉴于市场对这家备受争议的中国玩具制造商多空分歧加剧，该分析师此举逆势而行。</p>
+
+                
+                <div class="ai-comment">
+                    <p class="ai-comment-text">分歧加剧下估值修复或已透支，看空报告折射风险溢价攀升，建议警惕情绪反转后的估值回调压力。</p>
+                </div>
+                
+
+                <div class="news-footer">
+                    <a href="https://www.bloomberg.com/news/articles/2026-01-27/lone-pop-mart-bear-analyst-defies-rally-by-cutting-price-target" target="_blank" rel="noopener noreferrer" class="news-source">
+                        彭博社
+                         / Bloomberg
+                    </a>
+                    <div class="news-meta">
+                        <span>彭博社</span>
                     </div>
                 </div>
             </article>
@@ -1288,14 +1171,8 @@
 
     <footer class="footer">
         <div class="container footer-inner">
-            <div class="footer-logo">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-            </div>
-            <p class="footer-text">Financial Intelligence Daily · 2026-01-27 · Published Daily</p>
             <p class="footer-text">
-                Powered by <a href="https://claude.ai" class="footer-link" target="_blank">Claude AI</a> ·
+                Financial Intelligence Daily · 2026-01-27 · Published Daily ·
                 <a href="https://github.com/vshen009/daily-news-bot" class="footer-link" target="_blank">GitHub</a>
             </p>
         </div>
