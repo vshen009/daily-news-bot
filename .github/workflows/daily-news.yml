@@ -8,10 +8,6 @@ on:
   # 允许手动触发
   workflow_dispatch:
 
-  # 推送到 test 分支时也运行（测试用）
-  push:
-    branches: [ test ]
-
 jobs:
   build:
     runs-on: ubuntu-latest
