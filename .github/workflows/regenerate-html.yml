@@ -64,9 +64,9 @@ jobs:
         if [ -n "$(git diff --name-only public/)" ]; then
           git add public/*.html
           git diff --staged --quiet || git commit -m "🔄 重新生成HTML - $(date +'%Y-%m-%d %H:%M:%S') (最近${{ inputs.days }}天)"
-          git pull origin main --no-rebase
-          git push origin main
-          echo "✓ HTML文件已更新并推送"
+          git pull origin ${{ github.ref_name }} --no-rebase
+          git push origin ${{ github.ref_name }}
+          echo "✓ HTML文件已更新并推送到 ${{ github.ref_name }} 分支"
         else
           echo "ℹ️ 没有HTML文件需要更新"
         fi
