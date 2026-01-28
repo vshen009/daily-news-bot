@@ -376,35 +376,6 @@
             box-shadow: var(--shadow-glow);
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height var(--transition-medium);
-        }
-
-        .news-card[data-expanded="true"] .card-header {
-            max-height: 50px;
-        }
-
-        .card-id {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--accent-blue);
-            background: rgba(8, 102, 255, 0.08);
-            padding: 4px 10px;
-            border-radius: 4px;
-            letter-spacing: 0.05em;
-        }
-
-        .card-time {
-            font-size: 12px;
-            color: var(--text-tertiary);
-        }
-
         .news-title-original {
             font-size: 13px;
             color: var(--text-tertiary);
@@ -428,17 +399,6 @@
             color: var(--text-primary);
             transition: color var(--transition-fast);
             letter-spacing: -0.02em;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .news-card[data-expanded="false"] .news-title {
-            -webkit-line-clamp: 1;
-        }
-
-        .news-card[data-expanded="true"] .news-title {
-            -webkit-line-clamp: unset;
         }
 
         .news-card.featured .news-title {
@@ -725,23 +685,18 @@
                      aria-expanded="{{ 'true' if loop.index <= 3 else 'false' }}"
                      role="button"
                      tabindex="0">
-                <div class="card-header">
-                    <span class="card-id">NEWS-{{ loop.index|zfill(3) }}</span>
-                    <span class="card-time">{{ article.publish_time.strftime('%H:%M') }}</span>
-                </div>
+                <h3 class="news-title" id="news-title-{{ loop.index }}">{{ article.title }}</h3>
 
                 {% if article.title_original %}
                 <p class="news-title-original">{{ article.title_original }}</p>
                 {% endif %}
-
-                <h3 class="news-title" id="news-title-{{ loop.index }}">{{ article.title }}</h3>
 
                 <div class="news-expandable">
                     <p class="news-excerpt">{{ article.content }}</p>
 
                     {% if article.ai_comment %}
                     <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
-                        <p class="ai-comment-text">{{ article.ai_comment }}</p>
+                        <p class="ai-comment-text">{{ article.ai_comment | simple_markdown | safe }}</p>
                     </div>
                     {% endif %}
 

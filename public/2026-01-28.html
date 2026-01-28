@@ -376,35 +376,6 @@
             box-shadow: var(--shadow-glow);
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height var(--transition-medium);
-        }
-
-        .news-card[data-expanded="true"] .card-header {
-            max-height: 50px;
-        }
-
-        .card-id {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--accent-blue);
-            background: rgba(8, 102, 255, 0.08);
-            padding: 4px 10px;
-            border-radius: 4px;
-            letter-spacing: 0.05em;
-        }
-
-        .card-time {
-            font-size: 12px;
-            color: var(--text-tertiary);
-        }
-
         .news-title-original {
             font-size: 13px;
             color: var(--text-tertiary);
@@ -428,17 +399,6 @@
             color: var(--text-primary);
             transition: color var(--transition-fast);
             letter-spacing: -0.02em;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .news-card[data-expanded="false"] .news-title {
-            -webkit-line-clamp: 1;
-        }
-
-        .news-card[data-expanded="true"] .news-title {
-            -webkit-line-clamp: unset;
         }
 
         .news-card.featured .news-title {
@@ -725,66 +685,23 @@
                      aria-expanded="true"
                      role="button"
                      tabindex="0">
-                <div class="card-header">
-                    <span class="card-id">NEWS-001</span>
-                    <span class="card-time">02:30</span>
-                </div>
+                <h3 class="news-title" id="news-title-1">AT&amp;T财报亮眼，用户增长强劲，股价飙升</h3>
 
                 
-                <p class="news-title-original">Asia markets mixed after S&amp;P 500 hits record, South Korea pushes fresh highs</p>
+                <p class="news-title-original">AT&amp;T’s earnings impress as subscriber growth booms and the stock soars</p>
                 
-
-                <h3 class="news-title" id="news-title-1">标普500创纪录新高，韩国股市刷新高点，亚洲市场涨跌互现</h3>
 
                 <div class="news-expandable">
-                    <p class="news-excerpt">受华尔街股市创新高的提振，亚太地区市场周二延续涨势，投资者重点关注即将公布的澳大利亚通胀数据。</p>
+                    <p class="news-excerpt">AT&amp;T最新季度新增28.3万光纤用户和42.1万净增后付费手机用户，体现其推进连接服务&#34;融合化&#34;战略。用户增长主要受光纤网络扩张及移动业务与固网服务深度整合驱动，符合公司打造一体化连接解决方案的发展方向。</p>
 
                     
                     <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
-                        <p class="ai-comment-text">美股新高带来的风险偏好回升提振亚太，但全球货币政策分化或加剧跨境资本流动博弈，市场反弹的持续性仍需警惕估值与基本面的偏离。</p>
+                        <p class="ai-comment-text">光纤业务的存量变现与移动端的获客共振推高了<strong>风险溢价</strong>，深度融合战略构建的<strong>护城河</strong>将有效重塑其<strong>资本成本</strong>结构，支撑估值持续修复。</p>
                     </div>
                     
 
                     <div class="news-footer">
-                        <a href="https://www.cnbc.com/2026/01/28/asia-markets-today-wednesday-hang-seng-index-nikkei-225-kospi-inflation-yen-australia-cpi.html" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
-                            CNBC
-                             / CNBC
-                        </a>
-                        <div class="news-meta">
-                            <span>CNBC</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card"
-                     data-expanded="true"
-                     aria-labelledby="news-title-2"
-                     aria-expanded="true"
-                     role="button"
-                     tabindex="0">
-                <div class="card-header">
-                    <span class="card-id">NEWS-002</span>
-                    <span class="card-time">02:20</span>
-                </div>
-
-                
-                <p class="news-title-original">Here’s how Microsoft can prove the doubters wrong this earnings season</p>
-                
-
-                <h3 class="news-title" id="news-title-2">微软财报季如何回击质疑</h3>
-
-                <div class="news-expandable">
-                    <p class="news-excerpt">提升云端算力已成为微软的当务之急。受限于图形处理器（GPU）短缺，微软目前尚无法完全满足市场对其人工智能服务的庞大需求。</p>
-
-                    
-                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
-                        <p class="ai-comment-text">GPU短缺引发的**供给侧约束**短期压制了AI的**资本开支转化率**，但随着产能瓶颈释放，高**ROE**特征未改，中长期仍具备显著的**估值溢价**空间。</p>
-                    </div>
-                    
-
-                    <div class="news-footer">
-                        <a href="https://www.marketwatch.com/story/heres-how-microsoft-can-prove-the-doubters-wrong-this-earnings-season-7e4a5a18?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                        <a href="https://www.marketwatch.com/story/at-ts-earnings-impress-as-subscriber-growth-booms-and-the-stock-soars-39285b27?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
                             MarketWatch
                              / MarketWatch
                         </a>
@@ -797,32 +714,60 @@
             
             <article class="news-card"
                      data-expanded="true"
-                     aria-labelledby="news-title-3"
+                     aria-labelledby="news-title-2"
                      aria-expanded="true"
                      role="button"
                      tabindex="0">
-                <div class="card-header">
-                    <span class="card-id">NEWS-003</span>
-                    <span class="card-time">02:15</span>
-                </div>
+                <h3 class="news-title" id="news-title-2">BNY重组高管团队，精简财富及市场部门</h3>
 
                 
-                <p class="news-title-original">Chinese Silver Fund Halts Trading as Frenzy Drives Up Premium</p>
+                <p class="news-title-original">BNY reshuffles executive team to streamline wealth and markets divisions</p>
                 
-
-                <h3 class="news-title" id="news-title-3">白银基金爆炒溢价高企，相关产品暂停交易</h3>
 
                 <div class="news-expandable">
-                    <p class="news-excerpt">周三，中国唯一的纯白银主题基金暂停交易，此前一波投资狂潮推动其溢价率显著高于其底层资产价值。</p>
+                    <p class="news-excerpt">美联储主席鲍威尔表示，美国经济依然强劲，劳动力市场稳健，通胀有所放缓但仍高于2%的目标。他强调政策决策将依赖数据，不排除在适宜时调整利率。欧洲央行行长拉加德指出，欧元区面临通胀压力，需保持谨慎。英国央行行长贝利警告称，英国经济复苏缓慢，可能需要进一步宽松政策。日本央行行长植田和男表示，将维持超宽松货币政策，直至通胀稳定达标。国际货币基金组织（IMF）下调2023年全球经济增长预期至2.9%，建议各国央行平衡通胀与增长风险。</p>
 
                     
                     <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
-                        <p class="ai-comment-text">白银ETF高溢价是非理性投机引发的**流动性风险**警示，后续**均值回归**将抹平**安全边际**，盲目追涨面临显著的**价格回调**风险。</p>
+                        <p class="ai-comment-text">BNY重组顺应降本增效趋势，旨在通过优化费率结构和提升投研能力，在财富管理的存量博弈中构筑护城河，以对冲全球流动性收紧下的风险溢价压力。</p>
                     </div>
                     
 
                     <div class="news-footer">
-                        <a href="https://www.bloomberg.com/news/articles/2026-01-28/chinese-silver-fund-halts-trading-as-frenzy-drives-up-premium" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                        <a href="https://finance.yahoo.com/news/bny-reshuffles-executive-team-streamline-114748723.html" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            Yahoo财经
+                             / Yahoo Finance
+                        </a>
+                        <div class="news-meta">
+                            <span>Yahoo财经</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="news-card"
+                     data-expanded="true"
+                     aria-labelledby="news-title-3"
+                     aria-expanded="true"
+                     role="button"
+                     tabindex="0">
+                <h3 class="news-title" id="news-title-3">肯尼亚铁路贷款置换助推中国人民币国际化战略</h3>
+
+                
+                <p class="news-title-original">Kenya Railway Loans Swap Fuels China’s Plan to Globalize Yuan</p>
+                
+
+                <div class="news-expandable">
+                    <p class="news-excerpt">据肯尼亚一位高级政府官员透露，在将三笔美元贷款转换为人民币后，肯尼亚已积累充足的人民币资金，用于偿付以人民币计价的债务。</p>
+
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">此举有效降低汇兑风险溢价，通过货币互换深化离岸市场循环，标志着人民币国际化从贸易结算向资本计价的高级形态演进。</p>
+                    </div>
+                    
+
+                    <div class="news-footer">
+                        <a href="https://www.bloomberg.com/news/articles/2026-01-28/kenya-railway-loans-swap-fuels-china-s-plan-to-globalize-yuan" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
                             彭博社
                              / Bloomberg
                         </a>
