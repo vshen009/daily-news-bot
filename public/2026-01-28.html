@@ -3,52 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="全球财经日报 - 每日精选财经新闻与分析">
-    <title>全球财经日报 · Financial Intelligence | 2026-01-28</title>
+    <title>全球财经日报 · Global Financial Daily | 2026-01-28</title>
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" type="image/svg+xml" href="/apple-touch-icon.svg">
+    <meta name="msapplication-TileImage" content="/apple-touch-icon.svg">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Modern Fintech Color System */
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f1f5f9;
+            /* Vibrant Orange-Red Gradient System */
+            --bg-primary: linear-gradient(135deg, #ffd93d 0%, #ff8e53 25%, #ff6b6b 50%, #e63946 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.7);
 
-            /* Professional Blue Palette */
-            --accent-blue: #2563eb;
-            --accent-blue-light: #3b82f6;
-            --accent-blue-dark: #1d4ed8;
+            /* Glassmorphism Card */
+            --bg-card: rgba(255, 255, 255, 0.75);
+            --bg-card-hover: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(255, 255, 255, 0.3);
+            --card-blur: blur(12px);
 
-            /* Accent Colors */
-            --accent-indigo: #6366f1;
-            --accent-purple: #8b5cf6;
+            /* Vibrant Orange-Red Accent Colors */
+            --accent-blue: #ff6b6b;
+            --accent-blue-light: #ff8787;
+            --accent-blue-dark: #e63946;
+
+            --accent-indigo: #ff8e53;
+            --accent-purple: #fa709a;
+            --accent-pink: #ffa726;
             --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --accent-amber: #f59e0b;
-            --accent-gold: #d4af37;
+            --accent-red: #e63946;
+            --accent-amber: #ffd93d;
 
             /* Text Colors - High Contrast */
-            --text-primary: #0c1929;
-            --text-secondary: #334155;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
             --text-tertiary: #64748b;
 
             /* Border & Effects */
-            --border-color: #e2e8f0;
-            --border-glow: rgba(37, 99, 235, 0.3);
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
-            --shadow-glow: 0 8px 24px rgba(37, 99, 235, 0.12);
-            --shadow-glow-strong: 0 12px 40px rgba(37, 99, 235, 0.18);
+            --border-color: rgba(255, 255, 255, 0.3);
+            --border-glow: rgba(255, 107, 107, 0.4);
+            --shadow-sm: 0 2px 8px rgba(255, 107, 107, 0.1);
+            --shadow-md: 0 4px 16px rgba(255, 107, 107, 0.15);
+            --shadow-lg: 0 12px 32px rgba(255, 107, 107, 0.2);
+            --shadow-glow: 0 8px 24px rgba(255, 107, 107, 0.25);
+            --shadow-glow-strong: 0 12px 40px rgba(255, 107, 107, 0.3);
 
             /* Typography */
             --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
             /* Spacing */
             --container-max-width: 1280px;
-            --spacing-unit: 4px;
 
             /* Transitions */
             --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -59,20 +69,22 @@
         /* Dark Mode */
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-primary: #0f172a;
-                --bg-secondary: #1e293b;
-                --bg-card: #1e293b;
-                --bg-card-hover: #334155;
+                --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
+                --bg-secondary: rgba(15, 23, 42, 0.6);
+
+                --bg-card: rgba(30, 41, 59, 0.65);
+                --bg-card-hover: rgba(51, 65, 85, 0.75);
+                --card-border: rgba(255, 255, 255, 0.1);
 
                 --text-primary: #f1f5f9;
                 --text-secondary: #cbd5e1;
                 --text-tertiary: #94a3b8;
 
-                --border-color: #334155;
-                --border-glow: rgba(59, 130, 246, 0.4);
-                --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-                --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+                --border-color: rgba(255, 255, 255, 0.1);
+                --border-glow: rgba(255, 107, 107, 0.5);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
             }
         }
 
@@ -93,7 +105,51 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Background Decorations */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 142, 83, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.12) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Ensure content is above decorations */
+        .container,
+        .header,
+        .ticker-tape,
+        .main-content,
+        .footer {
+            position: relative;
+            z-index: 1;
         }
 
         /* Focus States for Accessibility */
@@ -111,25 +167,19 @@
             padding: 0 24px;
         }
 
-        /* Header - Floating Glass Effect */
+        /* Header - Glassmorphism Effect */
         .header {
             position: sticky;
             top: 16px;
-            z-index: 1000;
+            z-index: 100;
             margin: 0 16px;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
             box-shadow: var(--shadow-md);
             transition: all var(--transition-medium);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .header {
-                background: rgba(30, 41, 59, 0.9);
-            }
         }
 
         .header:hover {
@@ -146,46 +196,21 @@
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 14px;
-            text-decoration: none;
+            gap: 16px;
         }
 
-        .logo-icon-wrapper {
+        .logo-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-indigo) 100%);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-glow);
-            transition: transform var(--transition-medium);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-icon-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.2) 100%);
-            opacity: 0;
-            transition: opacity var(--transition-medium);
-        }
-
-        .logo-section:hover .logo-icon-wrapper {
-            transform: scale(1.05);
-        }
-
-        .logo-section:hover .logo-icon-wrapper::before {
-            opacity: 1;
-        }
-
-        .logo-icon {
-            width: 28px;
-            height: 28px;
             color: white;
-            transition: transform var(--transition-medium);
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: var(--shadow-glow);
         }
 
         .logo-text {
@@ -195,22 +220,20 @@
 
         .logo-title {
             font-size: 18px;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.02em;
-            line-height: 1.2;
         }
 
         .logo-subtitle {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-secondary);
             margin-top: 2px;
         }
 
         .header-stats {
             display: flex;
-            gap: 20px;
+            gap: 32px;
         }
 
         .stat-item {
@@ -218,43 +241,35 @@
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-tertiary);
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            margin-bottom: 2px;
-            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
         .stat-value {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-primary);
-            transition: color var(--transition-fast);
         }
 
         .stat-value.accent {
             color: var(--accent-blue);
         }
 
-        /* Ticker Tape - Improved */
+        /* Ticker Tape - Glassmorphism */
         .ticker-tape {
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border-bottom: 1px solid var(--card-border);
             overflow: hidden;
-            padding: 10px 0;
-            margin-top: 16px;
+            padding: 12px 0;
         }
 
         .ticker-content {
             display: flex;
-            animation: tickerScroll 50s linear infinite;
+            animation: tickerScroll 40s linear infinite;
             white-space: nowrap;
-        }
-
-        .ticker-content:hover {
-            animation-play-state: paused;
         }
 
         @keyframes tickerScroll {
@@ -266,30 +281,23 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 0 28px;
+            padding: 0 24px;
             font-size: 13px;
             border-right: 1px solid var(--border-color);
-            transition: background var(--transition-fast);
         }
 
         .ticker-symbol {
             color: var(--accent-blue);
-            font-weight: 700;
-            font-size: 12px;
+            font-weight: 600;
         }
 
         .ticker-value {
             color: var(--text-primary);
-            font-weight: 600;
         }
 
         .ticker-change {
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .ticker-change.positive {
             color: var(--accent-green);
+            font-weight: 500;
         }
 
         .ticker-change.negative {
@@ -302,52 +310,38 @@
         }
 
         .section-header {
-            margin-bottom: 48px;
-        }
-
-        .section-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
-            color: var(--accent-blue);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
+            margin-bottom: 40px;
         }
 
         .section-title {
-            font-size: clamp(28px, 5vw, 42px);
-            font-weight: 900;
+            font-size: 36px;
+            font-weight: 800;
             letter-spacing: -0.03em;
             color: var(--text-primary);
             margin-bottom: 12px;
-            line-height: 1.2;
         }
 
         .section-subtitle {
             font-size: 16px;
             color: var(--text-secondary);
-            font-weight: 500;
         }
 
         /* News Grid */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(680px, 1fr));
             gap: 24px;
+            margin-bottom: 40px;
         }
 
-        /* News Card - Modern Design */
+        /* News Card - Glassmorphism */
         .news-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border: 1px solid var(--card-border);
             border-radius: 16px;
-            padding: 32px;
+            padding: 28px;
             position: relative;
             cursor: pointer;
             transition: all var(--transition-medium);
@@ -357,105 +351,98 @@
             overflow: hidden;
         }
 
-        .news-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-indigo), var(--accent-purple));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform var(--transition-medium);
-        }
-
         .news-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-glow);
             box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.01);
         }
 
-        .news-card:hover::before {
-            transform: scaleX(1);
+        /* Expandable Content */
+        .news-expandable {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .news-card:active {
-            transform: translateY(-2px);
+        .news-card[data-expanded="true"] .news-expandable {
+            max-height: 2000px;
         }
 
         .news-card.featured {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(99, 102, 241, 0.03) 100%);
-            border: 2px solid var(--accent-blue);
-        }
-
-        .news-card.featured::before {
-            transform: scaleX(1);
+            grid-column: 1 / -1;
+            background: var(--bg-card-hover);
+            border: 2px solid var(--accent-indigo);
+            box-shadow: var(--shadow-glow);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-medium);
+        }
+
+        .news-card[data-expanded="true"] .card-header {
+            max-height: 50px;
         }
 
         .card-id {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--accent-blue);
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
-            padding: 6px 12px;
-            border-radius: 6px;
+            background: rgba(8, 102, 255, 0.08);
+            padding: 4px 10px;
+            border-radius: 4px;
             letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .card-id::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
         }
 
         .card-time {
             font-size: 12px;
             color: var(--text-tertiary);
-            font-weight: 500;
         }
 
         .news-title-original {
             font-size: 13px;
             color: var(--text-tertiary);
-            margin-bottom: 10px;
-            font-weight: 500;
+            margin-bottom: 8px;
             font-style: italic;
-            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card[data-expanded="false"] .news-title-original {
+            -webkit-line-clamp: 1;
         }
 
         .news-title {
             font-size: 20px;
-            font-weight: 800;
+            font-weight: 700;
             line-height: 1.4;
-            margin-bottom: 14px;
+            margin-bottom: 0;
             color: var(--text-primary);
             transition: color var(--transition-fast);
             letter-spacing: -0.02em;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-card[data-expanded="false"] .news-title {
+            -webkit-line-clamp: 1;
+        }
+
+        .news-card[data-expanded="true"] .news-title {
+            -webkit-line-clamp: unset;
         }
 
         .news-card.featured .news-title {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         .news-card:hover .news-title {
@@ -464,124 +451,97 @@
 
         .news-excerpt {
             font-size: 15px;
-            line-height: 1.75;
+            line-height: 1.7;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            margin-top: 16px;
             flex-grow: 1;
         }
 
-        /* AI Comment - Enhanced */
+        /* AI Comment - Glassmorphism */
         .ai-comment {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
-            border-left: 4px solid var(--accent-purple);
-            padding: 16px 20px;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(255, 142, 83, 0.08) 0%, rgba(255, 107, 107, 0.08) 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 142, 83, 0.2);
+            border-left: 3px solid var(--accent-indigo);
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
             position: relative;
         }
 
         .ai-comment::before {
-            content: 'AI 洞察';
+            content: 'AI INSIGHT';
             position: absolute;
-            top: -10px;
-            left: 14px;
+            top: -9px;
+            left: 10px;
             background: var(--bg-card);
-            padding: 0 8px;
+            padding: 0 6px;
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--accent-purple);
             letter-spacing: 0.05em;
-            text-transform: uppercase;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
         }
 
         .ai-comment-text {
             font-size: 14px;
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--text-secondary);
-            font-weight: 500;
         }
 
         .news-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 18px;
+            padding-top: 16px;
             border-top: 1px solid var(--border-color);
         }
 
         .news-source {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-size: 13px;
             color: var(--accent-blue);
             text-decoration: none;
-            font-weight: 600;
-            transition: all var(--transition-fast);
+            font-weight: 500;
+            transition: color var(--transition-fast);
         }
 
         .news-source:hover {
             color: var(--accent-indigo);
         }
 
-        .news-source::before {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-        }
-
         .news-meta {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             font-size: 11px;
             color: var(--text-tertiary);
-            font-weight: 500;
         }
 
-        /* Footer */
+        /* Footer - Glassmorphism */
         .footer {
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border-color);
-            padding: 40px 0;
-            margin-top: 64px;
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border-top: 1px solid var(--card-border);
+            padding: 32px 0;
+            margin-top: 48px;
         }
 
         .footer-inner {
             text-align: center;
         }
 
-        .footer-logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: var(--shadow-glow);
-        }
-
-        .footer-logo svg {
-            width: 24px;
-            height: 24px;
-            color: white;
-        }
-
         .footer-text {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
+            font-size: 13px;
+            color: var(--text-tertiary);
         }
 
         .footer-link {
             color: var(--accent-blue);
             text-decoration: none;
-            font-weight: 600;
             transition: color var(--transition-fast);
         }
 
@@ -602,7 +562,7 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            animation: fadeOut 0.6s ease 0.8s forwards;
+            animation: fadeOut 0.5s ease 0.6s forwards;
         }
 
         @keyframes fadeOut {
@@ -613,31 +573,27 @@
         }
 
         .loading-logo {
-            width: 72px;
-            height: 72px;
+            width: 64px;
+            height: 64px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
-            border-radius: 18px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-glow-strong);
-            animation: pulse-logo 1.5s ease-in-out infinite;
-        }
-
-        .loading-logo svg {
-            width: 40px;
-            height: 40px;
             color: white;
+            font-weight: 700;
+            font-size: 24px;
+            animation: pulse 1.5s ease-in-out infinite;
         }
 
-        @keyframes pulse-logo {
+        @keyframes pulse {
             0%, 100% {
-                transform: scale(1) translateY(0);
-                box-shadow: var(--shadow-glow-strong);
+                transform: scale(1);
+                box-shadow: 0 10px 30px var(--shadow-glow);
             }
             50% {
-                transform: scale(1.05) translateY(-4px);
-                box-shadow: 0 16px 48px rgba(37, 99, 235, 0.25);
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px var(--shadow-glow);
             }
         }
 
@@ -670,781 +626,209 @@
             }
 
             .news-card {
-                padding: 24px;
+                padding: 20px;
             }
 
             .news-card.featured .news-title {
-                font-size: 20px;
+                font-size: 22px;
             }
 
             .ticker-item {
                 padding: 0 16px;
-            }
-
-            .main-content {
-                padding: 32px 0;
-            }
-        }
-
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
     <div class="loading-screen">
-        <div class="loading-logo">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-        </div>
+        <div class="loading-logo">FI</div>
     </div>
 
     <header class="header">
-        <div class="header-inner">
-            <a href="/index.html" class="logo-section">
-                <div class="logo-icon-wrapper">
-                    <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                </div>
+        <div class="container header-inner">
+            <div class="logo-section">
+                <div class="logo-icon">FI</div>
                 <div class="logo-text">
                     <div class="logo-title">Financial Intelligence</div>
-                    <div class="logo-subtitle">全球财经日报</div>
+                    <div class="logo-subtitle">Global Financial Daily</div>
                 </div>
-            </a>
+            </div>
             <div class="header-stats">
                 <div class="stat-item">
-                    <div class="stat-label">Date</div>
+                    <div class="stat-label">DATE</div>
                     <div class="stat-value">2026-01-28</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-label">Articles</div>
-                    <div class="stat-value accent">20</div>
+                    <div class="stat-label">ARTICLES</div>
+                    <div class="stat-value accent">3</div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="ticker-tape">
+    <div class="ticker-tape" role="marquee" aria-label="股市指数滚动行情">
         <div class="ticker-content">
             <div class="ticker-item">
                 <span class="ticker-symbol">上证指数</span>
                 <span class="ticker-value">3,258.76</span>
-                <span class="ticker-change positive">▲ +0.31%</span>
+                <span class="ticker-change">▲ +0.31%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">沪深300</span>
                 <span class="ticker-value">3,876.52</span>
-                <span class="ticker-change positive">▲ +0.42%</span>
+                <span class="ticker-change">▲ +0.42%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">中证500</span>
                 <span class="ticker-value">5,432.18</span>
-                <span class="ticker-change positive">▲ +0.57%</span>
+                <span class="ticker-change">▲ +0.57%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">中证1000</span>
                 <span class="ticker-value">6,125.43</span>
-                <span class="ticker-change negative">▼ -0.15%</span>
+                <span class="ticker-change">▼ -0.15%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">纳斯达克</span>
                 <span class="ticker-value">19,432.50</span>
-                <span class="ticker-change positive">▲ +0.82%</span>
+                <span class="ticker-change">▲ +0.82%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">标普500</span>
                 <span class="ticker-value">4,876.35</span>
-                <span class="ticker-change positive">▲ +0.45%</span>
+                <span class="ticker-change">▲ +0.45%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">道琼斯</span>
                 <span class="ticker-value">37,654.12</span>
-                <span class="ticker-change positive">▲ +0.38%</span>
+                <span class="ticker-change">▲ +0.38%</span>
             </div>
             <div class="ticker-item">
                 <span class="ticker-symbol">日经225</span>
                 <span class="ticker-value">35,678.90</span>
-                <span class="ticker-change negative">▼ -0.22%</span>
-            </div>
-            <!-- Duplicate for seamless loop -->
-            <div class="ticker-item">
-                <span class="ticker-symbol">上证指数</span>
-                <span class="ticker-value">3,258.76</span>
-                <span class="ticker-change positive">▲ +0.31%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">沪深300</span>
-                <span class="ticker-value">3,876.52</span>
-                <span class="ticker-change positive">▲ +0.42%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">中证500</span>
-                <span class="ticker-value">5,432.18</span>
-                <span class="ticker-change positive">▲ +0.57%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">中证1000</span>
-                <span class="ticker-value">6,125.43</span>
-                <span class="ticker-change negative">▼ -0.15%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">纳斯达克</span>
-                <span class="ticker-value">19,432.50</span>
-                <span class="ticker-change positive">▲ +0.82%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">标普500</span>
-                <span class="ticker-value">4,876.35</span>
-                <span class="ticker-change positive">▲ +0.45%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">道琼斯</span>
-                <span class="ticker-value">37,654.12</span>
-                <span class="ticker-change positive">▲ +0.38%</span>
-            </div>
-            <div class="ticker-item">
-                <span class="ticker-symbol">日经225</span>
-                <span class="ticker-value">35,678.90</span>
-                <span class="ticker-change negative">▼ -0.22%</span>
+                <span class="ticker-change">▼ -0.22%</span>
             </div>
         </div>
     </div>
 
     <main class="container main-content">
         <section class="section-header">
-            <div class="section-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Daily Briefing
-            </div>
             <h1 class="section-title">全球财经日报</h1>
-            <p class="section-subtitle">Financial Intelligence Daily · 2026-01-28</p>
+            <p class="section-subtitle">Global Financial Daily · 2026-01-28</p>
         </section>
 
         <div class="news-grid">
             
-            <article class="news-card featured">
+            <article class="news-card"
+                     data-expanded="true"
+                     aria-labelledby="news-title-1"
+                     aria-expanded="true"
+                     role="button"
+                     tabindex="0">
                 <div class="card-header">
                     <span class="card-id">NEWS-001</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">One year after DeepSeek, Chinese AI firms from Alibaba to Moonshot race to release new models</p>
-                
-
-                <h3 class="news-title">DeepSeek问世一周年，阿里到月之暗面竞相推出大模型</h3>
-                <p class="news-excerpt">随着中国即将迎来全年最重要的春节假期，国内企业正密集发布新AI模型，力图在AI应用竞赛中抢占先机。行业竞争白热化，科技巨头与创业公司竞相推出升级版产品，聚焦于智能客服、内容生成等场景创新。据最新数据显示，春节前AI应用下载量环比增长215%，百度、阿里等头部企业加大研发投入，通过差异化技术突破争夺市场份额，加速推动AI技术商业化落地。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">春节前模型密集发布加剧**存量博弈**，头部厂商以技术迭代换取**风险溢价**，AI商业化变现进程将决定**估值分化**趋势。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.cnbc.com/2026/01/28/chinese-tech-companies-accelerate-ai-model-rollouts-us-rivals-deepseek-moonshot-kimi.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                        CNBC
-                         / CNBC
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-002</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Here’s how Microsoft can prove the doubters wrong this earnings season</p>
-                
-
-                <h3 class="news-title">微软财报季如何回击质疑</h3>
-                <p class="news-excerpt">提升云端算力已成为微软的当务之急。受限于图形处理器（GPU）短缺，微软目前尚无法完全满足市场对其人工智能服务的庞大需求。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">GPU短缺引发的**供给侧约束**短期压制了AI的**资本开支转化率**，但随着产能瓶颈释放，高**ROE**特征未改，中长期仍具备显著的**估值溢价**空间。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.marketwatch.com/story/heres-how-microsoft-can-prove-the-doubters-wrong-this-earnings-season-7e4a5a18?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source">
-                        MarketWatch
-                         / MarketWatch
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-003</span>
-                    <span class="card-time">2026.01.26</span>
-                </div>
-
-                
-                <p class="news-title-original">Is Rigetti Computing Stock Going to $0?</p>
-                
-
-                <h3 class="news-title">Rigetti Computing股价会归零吗？</h3>
-                <p class="news-excerpt">请注意，您似乎没有提供需要翻译的原文。
-
-为了向您展示符合要求的翻译风格，以下是根据**常见的美联储降息相关新闻**撰写的一个**示例**：
-
-**示例原文（假设）：**
-The Federal Reserve concluded its two-day policy meeting on Wednesday, deciding to lower the benchmark interest rate by 25 basis points to a range of 4.25%-4.50%. This marks the third consecutive cut this year. Fed Chair Jerome Powell stated in the press conference that the labor market remains resilient, but inflation is moving toward the 2% target sustainably. Market analysts expect the central bank to adopt a more cautious approach in the upcoming policy meetings.
-
-**翻译结果：**
-美联储周三结束了为期两天的政策会议，决定将基准利率下调25个基点，至4.25%-4.50%的区间。这是今年以来的连续第三次降息。美联储主席鲍威尔在随后的新闻发布会上表示，尽管劳动力市场依然保持韧性，但通胀正持续向2%的目标水平回归。市场分析人士普遍预计，在未来的政策会议中，央行将采取更为审慎的调整策略。
-
-***
-
-**请您提供具体的英文新闻摘要，我将立即为您进行专业翻译。**</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">作为高贝塔的量子计算概念股，其估值完全依赖未来预期，若商业化落地不及预期引发烧钱困境，流动性枯竭将导致股价面临巨大的归零风险。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://finance.yahoo.com/news/rigetti-computing-stock-going-0-152000846.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                        Yahoo财经
-                         / Yahoo Finance
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-004</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Why Do Japan’s Market Meltdowns Cause Global Chaos?</p>
-                
-
-                <h3 class="news-title">日本市场崩盘为何引发全球动荡？</h3>
-                <p class="news-excerpt">上周日本债市崩盘引发全球市场面临7万亿美元的风险。为何日本市场具备撼动全球的威力？路思·卡森为您解读。（来源：彭博）</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">日债崩盘逆转全球流动性预期，套息交易平仓迫使存量资金回流，短期内风险资产重定价在所难免，全球波动率中枢将显著上移。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-28/why-do-japan-s-market-meltdowns-cause-global-chaos" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-005</span>
-                    <span class="card-time">2026.01.28</span>
+                    <span class="card-time">02:30</span>
                 </div>
 
                 
                 <p class="news-title-original">Asia markets mixed after S&amp;P 500 hits record, South Korea pushes fresh highs</p>
                 
 
-                <h3 class="news-title">标普500创纪录新高，韩国股市刷新高点，亚洲市场涨跌互现</h3>
-                <p class="news-excerpt">受华尔街股市创新高的提振，亚太地区市场周二延续涨势，投资者重点关注即将公布的澳大利亚通胀数据。</p>
+                <h3 class="news-title" id="news-title-1">标普500创纪录新高，韩国股市刷新高点，亚洲市场涨跌互现</h3>
 
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">美股新高带来的风险偏好回升提振亚太，但全球货币政策分化或加剧跨境资本流动博弈，市场反弹的持续性仍需警惕估值与基本面的偏离。</p>
-                </div>
-                
+                <div class="news-expandable">
+                    <p class="news-excerpt">受华尔街股市创新高的提振，亚太地区市场周二延续涨势，投资者重点关注即将公布的澳大利亚通胀数据。</p>
 
-                <div class="news-footer">
-                    <a href="https://www.cnbc.com/2026/01/28/asia-markets-today-wednesday-hang-seng-index-nikkei-225-kospi-inflation-yen-australia-cpi.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                        CNBC
-                         / CNBC
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">美股新高带来的风险偏好回升提振亚太，但全球货币政策分化或加剧跨境资本流动博弈，市场反弹的持续性仍需警惕估值与基本面的偏离。</p>
+                    </div>
+                    
+
+                    <div class="news-footer">
+                        <a href="https://www.cnbc.com/2026/01/28/asia-markets-today-wednesday-hang-seng-index-nikkei-225-kospi-inflation-yen-australia-cpi.html" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            CNBC
+                             / CNBC
+                        </a>
+                        <div class="news-meta">
+                            <span>CNBC</span>
+                        </div>
                     </div>
                 </div>
             </article>
             
-            <article class="news-card ">
+            <article class="news-card"
+                     data-expanded="true"
+                     aria-labelledby="news-title-2"
+                     aria-expanded="true"
+                     role="button"
+                     tabindex="0">
                 <div class="card-header">
-                    <span class="card-id">NEWS-006</span>
-                    <span class="card-time">2026.01.28</span>
+                    <span class="card-id">NEWS-002</span>
+                    <span class="card-time">02:20</span>
                 </div>
 
                 
-                <p class="news-title-original">Everyone’s looking for political fireworks from Powell’s press conference. Here’s what to expect.</p>
+                <p class="news-title-original">Here’s how Microsoft can prove the doubters wrong this earnings season</p>
                 
 
-                <h3 class="news-title">美联储记者会万众瞩目：看什么、盼什么？</h3>
-                <p class="news-excerpt">在美联储周三公布利率决议并发表讲话前夕，市场专家正就美联储主席杰罗姆·鲍威尔的前景展开热议。</p>
+                <h3 class="news-title" id="news-title-2">微软财报季如何回击质疑</h3>
 
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">市场步入紧缩尾声，博弈重心从加息幅度转向降息时点，前瞻指引若偏鹰将重塑风险溢价并引发全球carry trade平仓。</p>
-                </div>
-                
+                <div class="news-expandable">
+                    <p class="news-excerpt">提升云端算力已成为微软的当务之急。受限于图形处理器（GPU）短缺，微软目前尚无法完全满足市场对其人工智能服务的庞大需求。</p>
 
-                <div class="news-footer">
-                    <a href="https://www.marketwatch.com/story/everyones-looking-for-political-fireworks-from-powells-press-conference-heres-what-to-expect-4c79bf55?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source">
-                        MarketWatch
-                         / MarketWatch
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">GPU短缺引发的**供给侧约束**短期压制了AI的**资本开支转化率**，但随着产能瓶颈释放，高**ROE**特征未改，中长期仍具备显著的**估值溢价**空间。</p>
+                    </div>
+                    
+
+                    <div class="news-footer">
+                        <a href="https://www.marketwatch.com/story/heres-how-microsoft-can-prove-the-doubters-wrong-this-earnings-season-7e4a5a18?mod=mw_rss_topstories" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            MarketWatch
+                             / MarketWatch
+                        </a>
+                        <div class="news-meta">
+                            <span>MarketWatch</span>
+                        </div>
                     </div>
                 </div>
             </article>
             
-            <article class="news-card ">
+            <article class="news-card"
+                     data-expanded="true"
+                     aria-labelledby="news-title-3"
+                     aria-expanded="true"
+                     role="button"
+                     tabindex="0">
                 <div class="card-header">
-                    <span class="card-id">NEWS-007</span>
-                    <span class="card-time">2026.01.26</span>
-                </div>
-
-                
-                <p class="news-title-original">The Magnificent 7 in 2026: What Should Investors Expect?</p>
-                
-
-                <h3 class="news-title">2026年“美股七雄”：投资者应如何展望？</h3>
-                <p class="news-excerpt">美联储主席杰罗姆·鲍威尔在杰克逊霍尔全球央行年会上表示，若经济数据符合预期，美联储可能在9月降息。他强调，劳动力市场已从疫情时期的失衡状态中降温，通胀率正向2%的目标水平持续回归。分析人士普遍认为，这是美联储释放的明确宽松信号。若降息落地，将是2020年3月以来美联储首次下调利率，全球金融市场流动性将迎来重要拐点。
-
-（注：原文未提供具体文本，此为根据标题补译的示例文本。实际翻译时需依据完整原文调整细节数据和表述。）</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">宽松预期重塑估值逻辑，流动性拐点有望修复风险溢价，业绩分化将加剧存量博弈，资金或向具备定价权的核心资产集中。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://finance.yahoo.com/news/magnificent-7-2026-investors-expect-151805984.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                        Yahoo财经
-                         / Yahoo Finance
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-008</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Investors Are Counting on India’s Budget To Deliver a Magic Bullet</p>
-                
-
-                <h3 class="news-title">投资者寄望印度预算成为破局关键</h3>
-                <p class="news-excerpt">**欧印贸易协定未能提振市场情绪**
-
-欧盟与印度近期达成的贸易协定未能有效提振市场信心。尽管协议旨在深化双边经贸合作，但投资者反应平淡，主要因协议实施周期较长且细节尚未完全明确。市场分析指出，关税削减力度低于预期，加之全球贸易环境不确定性仍存，导致短期内该协定对相关产业及资本市场的积极影响有限。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">贸易协定利好钝化反映**风险偏好**承压，市场聚焦财政扩张能否打破**存量博弈**，若预算未能超预期提振**风险溢价**，短期资金或维持**观望**态势。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/newsletters/2026-01-28/india-stock-traders-eagerly-await-budget-banks-grapple-with-high-funding-costs" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-009</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Amazon inadvertently announces cloud unit layoffs in email to employees</p>
-                
-
-                <h3 class="news-title">亚马逊云部门误发裁员邮件，意外披露裁员计划</h3>
-                <p class="news-excerpt">亚马逊误发内部邮件承认“组织变革”</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">乌龙事件虽属个案，却凸显AWS从粗放扩张向降本增效切换的决心，在存量博弈下，管理半径收缩旨在修复利润率并提升运营效率。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.cnbc.com/2026/01/27/amazon-inadvertently-sends-email-to-employees-confirming-wednesday-layoffs.html" target="_blank" rel="noopener noreferrer" class="news-source">
-                        CNBC
-                         / CNBC
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-010</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Asian Currencies Hit Four-Month High on Dollar Debasement Fears</p>
-                
-
-                <h3 class="news-title">亚洲货币触及四个月高位，市场担忧美元贬值</h3>
-                <p class="news-excerpt">受美元贬值交易加速及特朗普总统批评部分亚洲地区货币影响，亚洲新兴市场货币升至9月以来最高水平。特朗普此前曾抨击包括印度卢比和泰铢在内的亚洲货币&#34;严重低估&#34;，引发市场对该地区可能迎来更多贸易摩擦的担忧。随着美元指数持续走弱，投资者纷纷增持亚洲货币以对冲通胀风险，推动区域内货币普遍走强。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">美元走弱引发的套息交易平仓推升亚洲货币，但在贸易摩擦隐忧下，汇率溢价面临重估，多空博弈加剧或促使央行干预以维持汇率稳定。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/asian-currencies-hit-four-month-high-on-dollar-debasement-fears" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-011</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Trump’s Embrace of Weaker Dollar Fuels Bets on New Downtrend</p>
-                
-
-                <h3 class="news-title">特朗普力推弱美元，市场押注美元开启新跌势</h3>
-                <p class="news-excerpt">特朗普总统对美元抛售所展现出的温和态度，加剧了市场对美元或已开启长期贬值周期的猜测。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">弱美元政策或重估美元风险溢价，加剧去美元化预期，短期利多新兴市场套息交易，但长期将引发全球流动性版图重构。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/trump-s-embrace-of-weaker-dollar-seen-as-start-of-new-downtrend" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-012</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">China Snacks Retailer Busy Ming Jumps 88% in Hong Kong Debut</p>
-                
-
-                <h3 class="news-title">中国零食零售商Busy Ming港股首日大涨88%</h3>
-                <p class="news-excerpt">中国休闲零食零售商明鸣集团有限公司在港交所上市首日股价大涨。此前，该公司通过首次公开募股（IPO）筹集资金36.7亿港元（约合4.7亿美元）。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">首日暴涨体现情绪溢价，短期流动性支撑股价，长期仍需关注基本面兑现与估值回调风险。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/china-snacks-retailer-busy-ming-jumps-88-in-hong-kong-debut" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-013</span>
-                    <span class="card-time">2026.01.28</span>
+                    <span class="card-id">NEWS-003</span>
+                    <span class="card-time">02:15</span>
                 </div>
 
                 
                 <p class="news-title-original">Chinese Silver Fund Halts Trading as Frenzy Drives Up Premium</p>
                 
 
-                <h3 class="news-title">白银基金爆炒溢价高企，相关产品暂停交易</h3>
-                <p class="news-excerpt">周三，中国唯一的纯白银主题基金暂停交易，此前一波投资狂潮推动其溢价率显著高于其底层资产价值。</p>
+                <h3 class="news-title" id="news-title-3">白银基金爆炒溢价高企，相关产品暂停交易</h3>
 
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">白银ETF高溢价是非理性投机引发的**流动性风险**警示，后续**均值回归**将抹平**安全边际**，盲目追涨面临显著的**价格回调**风险。</p>
-                </div>
-                
+                <div class="news-expandable">
+                    <p class="news-excerpt">周三，中国唯一的纯白银主题基金暂停交易，此前一波投资狂潮推动其溢价率显著高于其底层资产价值。</p>
 
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/chinese-silver-fund-halts-trading-as-frenzy-drives-up-premium" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
+                    
+                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
+                        <p class="ai-comment-text">白银ETF高溢价是非理性投机引发的**流动性风险**警示，后续**均值回归**将抹平**安全边际**，盲目追涨面临显著的**价格回调**风险。</p>
                     </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-014</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
+                    
 
-                
-                <p class="news-title-original">Meiji Yasuda Ready to Buy More Japan Super-Long Bonds by March</p>
-                
-
-                <h3 class="news-title">明治生命拟增持日本超长债，期限至明年3月</h3>
-                <p class="news-excerpt">明治人寿保险公司一位高管表示，日本超长期国债具备颇具吸引力的投资机遇，该公司目前正积极寻求最佳入市时机。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">在日央行维持YCC背景下，险资增配超长债旨在锁定高票息Carry并拉久期对冲负债，此举将压超长端风险溢价，但也加剧了日债利率波动风险。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/meiji-yasuda-ready-to-buy-more-japan-super-long-bonds-by-march" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-015</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">US Natural Gas Slips, Halting Historic Rally After Cold Snap</p>
-                
-
-                <h3 class="news-title">美国天然气价格回落，寒潮后 historic 涨势暂歇</h3>
-                <p class="news-excerpt">受极寒天气提振供暖需求并切断供应引发的纪录级暴涨行情影响，周三因市场交投清淡，美国天然气价格回落。此前，美国多地遭遇严寒，取暖用气需求激增，同时天然气生产及运输设施受冻出现中断，推动期价创下历史新高。当日市场交易量维持低位，获利了结情绪导致价格自高位回调。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">极端天气驱动的供给中断推高风险溢价获利了结，随着气温回升修复基本面，预计市场将回归供需博弈，期价波动中枢将下移。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/us-natural-gas-slips-halting-historic-rally-after-cold-snap" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-016</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Fmr. European Commission President on Trade, Dollar</p>
-                
-
-                <h3 class="news-title">前欧盟委员会主席谈贸易与美元</h3>
-                <p class="news-excerpt">欧盟委员会前主席若泽·曼努埃尔·巴罗佐在香港出席高盛亚太区全球宏观经济论坛期间，接受了斯蒂芬·恩格尔的专访，双方就欧盟与印度之间的自由贸易协定交换了看法。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">全球贸易版块重构将加剧去美元化趋势，推升新兴市场资产的风险溢价，并迫使全球资本在Carry Trade中重新估值跨币种配置的宏观风险。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/videos/2026-01-28/fmr-european-commission-president-on-trade-dollar-video" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-017</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">A $1.7 Trillion Rally Pushes Korea Market Cap Above Germany’s</p>
-                
-
-                <h3 class="news-title">1.7万亿美元飙升，韩国市值超越德国</h3>
-                <p class="news-excerpt">得益于科技巨头乘着全球人工智能与机器人产业繁荣的东风，韩国股市总市值超越德国，跃居全球前列。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">得益于AI产业贝塔红利驱动，韩国市场风险溢价显著重估，未来科技股盈利弹性将巩固其全球市值排名，但需警惕宏观波动带来的估值回调风险。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/south-korea-exceeds-germany-s-market-cap-on-ai-robotics-craze" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-018</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Hong Kong Banks to See Wealth ‘Windfall’ as Fees Jump, BI Says</p>
-                
-
-                <h3 class="news-title">BI：香港银行业将迎财富“意外之财”，费用收入激增</h3>
-                <p class="news-excerpt">据彭博情报报道，受基金销售、经纪业务及银行保险业务推动，以汇丰控股和中银香港为首的香港银行业，今年财富管理费收入有望实现逾20%的增长。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">财富管理费的高增不仅支撑了**非息收入**，更是**存量博弈**下业务转型的关键，随着**风险溢价**重估，预计高净值客群的资产配置将成为港银行业绩新的**阿尔法**来源。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/hong-kong-banks-to-see-wealth-windfall-as-fees-jump-bi-says" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-019</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">India’s $360 Billion Stock Rout Raises Stakes for Modi’s Budget</p>
-                
-
-                <h3 class="news-title">印度股市蒸发3600亿美元，莫迪预算案面临压力</h3>
-                <p class="news-excerpt">印度股市正遭遇十年来最差的开年表现，这给莫迪政府带来了巨大压力，迫使其必须在即将公布的新预算中推出新的经济增长催化剂以提振市场信心。目前市场普遍期待政府出台具体措施，以扭转股市颓势并刺激经济复苏。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">全球流动性收紧引发去杠杆，叠加风险溢价重定价导致资本外流，若财政扩张不及预期，市场信心修复将面临长周期考验。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/india-s-360-billion-stock-rout-raises-stakes-for-modi-s-budget" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
-                    </div>
-                </div>
-            </article>
-            
-            <article class="news-card ">
-                <div class="card-header">
-                    <span class="card-id">NEWS-020</span>
-                    <span class="card-time">2026.01.28</span>
-                </div>
-
-                
-                <p class="news-title-original">Indonesian Stocks Plunge 7% After MSCI Warning on Investability</p>
-                
-
-                <h3 class="news-title">因MSCI警告可投资性，印尼股市暴跌7%</h3>
-                <p class="news-excerpt">受明晟公司对可投资性提出质疑并警告可能下调为前沿市场地位影响，印尼股市周二大幅下挫。明晟表示担忧印尼市场流动性不足及外资参与度下降，若相关指标未见改善，该市场面临从新兴市场指数中被剔除的风险。印尼雅加达综合指数当日收跌2.8%，创三个月来最大单日跌幅。</p>
-
-                
-                <div class="ai-comment">
-                    <p class="ai-comment-text">MSCI下调警示引致**风险溢价**重估，流动性恶化冲击**被动资金**配置，短期资金外流压力加剧，倒逼监管层加速改善市场深度以保新兴市场席位。</p>
-                </div>
-                
-
-                <div class="news-footer">
-                    <a href="https://www.bloomberg.com/news/articles/2026-01-28/msci-halts-indonesia-index-changes-flags-transparency-risks" target="_blank" rel="noopener noreferrer" class="news-source">
-                        彭博社
-                         / Bloomberg
-                    </a>
-                    <div class="news-meta">
-                        <span></span>
+                    <div class="news-footer">
+                        <a href="https://www.bloomberg.com/news/articles/2026-01-28/chinese-silver-fund-halts-trading-as-frenzy-drives-up-premium" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
+                            彭博社
+                             / Bloomberg
+                        </a>
+                        <div class="news-meta">
+                            <span>彭博社</span>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -1454,17 +838,46 @@ The Federal Reserve concluded its two-day policy meeting on Wednesday, deciding 
 
     <footer class="footer">
         <div class="container footer-inner">
-            <div class="footer-logo">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                </svg>
-            </div>
-            <p class="footer-text">Financial Intelligence Daily · 2026-01-28 · Published Daily</p>
             <p class="footer-text">
-                Powered by <a href="https://claude.ai" class="footer-link" target="_blank">Claude AI</a> ·
+                Financial Intelligence Daily · 2026-01-28 · Published Daily ·
                 <a href="https://github.com/vshen009/daily-news-bot" class="footer-link" target="_blank">GitHub</a>
             </p>
         </div>
     </footer>
+
+    <script>
+        // 新闻卡片展开/收起交互
+        document.addEventListener('DOMContentLoaded', function() {
+            const newsCards = document.querySelectorAll('.news-card');
+
+            newsCards.forEach(card => {
+                // 点击卡片切换展开/收起
+                card.addEventListener('click', function(e) {
+                    // 如果点击的是链接，不触发展开/收起
+                    if (e.target.closest('a')) {
+                        return;
+                    }
+
+                    toggleCard(this);
+                });
+
+                // 键盘支持：Enter 或 Space 键切换
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCard(this);
+                    }
+                });
+            });
+
+            function toggleCard(card) {
+                const isExpanded = card.getAttribute('data-expanded') === 'true';
+                const newState = !isExpanded;
+
+                card.setAttribute('data-expanded', newState);
+                card.setAttribute('aria-expanded', newState);
+            }
+        });
+    </script>
 </body>
 </html>
