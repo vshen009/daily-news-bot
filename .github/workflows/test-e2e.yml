@@ -56,9 +56,9 @@ jobs:
         vercel pull --yes --environment=production \
           --token=${{ secrets.VERCEL_TOKEN }}
 
-    - name: 部署到 Vercel
+    - name: 部署到 Vercel (Preview)
       run: |
-        vercel deploy --prod --prebuilt \
+        vercel deploy --prebuilt \
           --token=${{ secrets.VERCEL_TOKEN }}
 
     - name: 完成提示
