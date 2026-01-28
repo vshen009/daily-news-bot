@@ -30,12 +30,12 @@ def setup_logging():
 
 def select_top_news(articles: list, top_n: int = 20) -> list:
     """
-    筛选新闻（时间混合 + 源配额方案）
+    筛选新闻（按源分组轮询方案）
 
-    新逻辑（方案 B）：
+    新逻辑（方案 A）：
     1. 先从每个源取 2 条最新新闻（确保每个源都有展示）
-    2. 从剩余新闻中按时间排序补充，直到凑够 20 条
-    3. 最后全部按发布时间倒序排列
+    2. 从剩余新闻中按时间排序补充，直到凑够足够数量的候选
+    3. 按源分组轮询排列（彭博社→Yahoo→MarketWatch→...循环）
 
     旧逻辑（已屏蔽，保留代码）：
     - 评分规则：新新闻优先、有AI评论优先、发布时间越新越好
@@ -45,7 +45,7 @@ def select_top_news(articles: list, top_n: int = 20) -> list:
         top_n: 筛选数量，默认20条
 
     Returns:
-        筛选后的新闻列表（按发布时间倒序）
+        筛选后的新闻列表（按源分组轮询）
     """
     from collections import defaultdict
 
@@ -70,21 +70,48 @@ def select_top_news(articles: list, top_n: int = 20) -> list:
         remaining_articles.extend(source_list[2:])
 
     # ========== 第二阶段：补充剩余配额 ==========
-    # 从剩余新闻中按时间排序，补充到 top_n 条
+    # 从剩余新闻中按时间排序，补充到足够数量
     remaining_articles.sort(key=lambda x: x.publish_time, reverse=True)
 
     # 合并配额文章和补充文章
     combined_articles = quota_articles + remaining_articles[:top_n - len(quota_articles)]
 
-    # ========== 第三阶段：按时间倒序排列 ==========
-    # 最终全部按发布时间倒序排列（确保时间连续性）
-    combined_articles.sort(key=lambda x: x.publish_time, reverse=True)
+    # ========== 第三阶段：按源分组轮询排列 ==========
+    # 将文章按源重新分组（合并后）
+    source_queues = defaultdict(list)
+    for article in combined_articles:
+        source_queues[article.source].append(article)
 
-    # 只取前 top_n 条
-    top_articles = combined_articles[:top_n]
+    # 获取所有源列表（按源优先级排序，这里按源名排序保证一致性）
+    sources = sorted(source_queues.keys())
+
+    # 轮询从每个源取文章
+    top_articles = []
+    round_num = 1
+
+    while len(top_articles) < top_n:
+        round_has_articles = False
+
+        for source in sources:
+            if len(source_queues[source]) > 0:
+                # 每轮从每个源取1条（如果还有的话）
+                article = source_queues[source].pop(0)
+                top_articles.append(article)
+                round_has_articles = True
+
+                # 如果已经够了，退出
+                if len(top_articles) >= top_n:
+                    break
+
+        # 如果某一轮没有任何文章了，退出循环
+        if not round_has_articles:
+            break
+
+        round_num += 1
 
     logger.info(f"  源配额阶段: {len(quota_articles)} 条（每个源至少2条）")
     logger.info(f"  补充阶段: {len(remaining_articles[:top_n - len(quota_articles)])} 条")
+    logger.info(f"  轮询阶段: {len(sources)} 个源，{round_num} 轮")
     logger.info(f"  最终筛选: {len(top_articles)} 条")
 
     return top_articles
