@@ -1,13 +1,16 @@
 {
   "version": 2,
+  "publicDirectory": "public",
+  "buildCommand": null,
+  "outputDirectory": "public",
   "rewrites": [
     {
       "source": "/",
-      "destination": "/public/index.html"
+      "destination": "/index.html"
     },
     {
       "source": "/:match*.html",
-      "destination": "/public/:match*.html"
+      "destination": "/:match.html"
     }
   ],
   "headers": [
@@ -29,7 +32,7 @@
       ]
     },
     {
-      "source": "/public/(.*\\.html)",
+      "source": "/(.*\\.html)",
       "headers": [
         {
           "key": "Cache-Control",

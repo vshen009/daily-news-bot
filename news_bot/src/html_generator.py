@@ -21,7 +21,7 @@ class HTMLGenerator:
         # 添加自定义过滤器
         self.env.filters['zfill'] = lambda s, width: str(s).zfill(width)
 
-    def generate(self, articles: List[NewsArticle], output_path: str = None, template_name: str = 'daily_news_modern.html'):
+    def generate(self, articles: List[NewsArticle], output_path: str = None, template_name: str = 'daily_news.html'):
         """生成HTML文件"""
 
         # 生成文件名（使用北京时间）
