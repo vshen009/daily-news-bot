@@ -61,9 +61,9 @@ def select_top_news(articles: list, top_n: int = 15) -> list:
             score += 20
 
         # 发布时间（越新越好，最多+30分）
-        # 计算新闻年龄（小时）
-        from datetime import datetime, timedelta
-        age_hours = (datetime.now() - article.publish_time).total_seconds() / 3600
+        # 计算新闻年龄（小时，使用北京时间）
+        from datetime import timedelta
+        age_hours = (Config.get_beijing_time() - article.publish_time).total_seconds() / 3600
         if age_hours < 6:
             score += 30
         elif age_hours < 12:

@@ -13,6 +13,11 @@ import re
 from datetime import datetime, timedelta
 from pathlib import Path
 from loguru import logger
+import sys
+
+# 添加src目录到Python路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.config import Config
 
 
 class IndexUpdater:
@@ -54,8 +59,8 @@ class IndexUpdater:
             try:
                 file_date = datetime.strptime(date_str, "%Y-%m-%d")
 
-                # 检查是否在指定天数内
-                cutoff_date = datetime.now() - timedelta(days=days)
+                # 检查是否在指定天数内（使用北京时间）
+                cutoff_date = Config.get_beijing_time() - timedelta(days=days)
                 if file_date >= cutoff_date:
                     # 读取标题
                     title = self._extract_title(file_path)

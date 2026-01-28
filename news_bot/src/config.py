@@ -5,6 +5,7 @@ import yaml
 from pathlib import Path
 from dotenv import load_dotenv
 from typing import List
+from datetime import datetime, timedelta
 
 from .models import NewsSource
 
@@ -85,3 +86,16 @@ class Config:
 
         if errors:
             raise ValueError("配置验证失败:\n" + "\n".join(f"  - {e}" for e in errors))
+
+    @classmethod
+    def get_beijing_time(cls) -> datetime:
+        """
+        获取北京时间（UTC+8）
+
+        无论在哪个时区运行，都返回北京时间
+        北京时间 = UTC时间 + 8小时
+
+        Returns:
+            datetime: 北京时间的datetime对象
+        """
+        return datetime.utcnow() + timedelta(hours=8)

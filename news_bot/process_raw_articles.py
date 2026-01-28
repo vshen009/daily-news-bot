@@ -164,8 +164,7 @@ def process_raw_articles():
         # ========== 步骤11：生成HTML ==========
         logger.info("\n【步骤11】生成HTML...")
         # 这里应该调用html_generator
-        from datetime import datetime
-        today = datetime.now().strftime("%Y-%m-%d")
+        today = Config.get_beijing_time().strftime("%Y-%m-%d")
         output_path = project_root / "public" / f"{today}.html"
         logger.info(f"  HTML将保存到: {output_path}")
 
