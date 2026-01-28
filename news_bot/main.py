@@ -28,75 +28,188 @@ def setup_logging():
     )
 
 
-def select_top_news(articles: list, top_n: int = 15) -> list:
+def select_top_news(articles: list, top_n: int = 20) -> list:
     """
-    筛选重要新闻（跨板块总共TOP N）
+    筛选新闻（时间混合 + 源配额方案）
 
-    评分规则：
-    1. 新新闻优先（没有数据库ID）
-    2. 发布时间越新越好
-    3. 有AI评论优先
-    4. 板块平衡（尽量覆盖3个板块）
+    新逻辑（方案 B）：
+    1. 先从每个源取 2 条最新新闻（确保每个源都有展示）
+    2. 从剩余新闻中按时间排序补充，直到凑够 20 条
+    3. 最后全部按发布时间倒序排列
+
+    旧逻辑（已屏蔽，保留代码）：
+    - 评分规则：新新闻优先、有AI评论优先、发布时间越新越好
 
     Args:
         articles: 所有新闻列表
-        top_n: 筛选数量，默认15条
+        top_n: 筛选数量，默认20条
 
     Returns:
-        筛选后的新闻列表
+        筛选后的新闻列表（按发布时间倒序）
     """
-    from src.models import Category
+    from collections import defaultdict
 
-    # 为每条新闻计算得分
-    scored_articles = []
+    # ========== 第一阶段：源配额（每个源至少 2 条）==========
+    # 按源分组
+    source_articles = defaultdict(list)
     for article in articles:
-        score = 0
+        source_articles[article.source].append(article)
 
-        # 新新闻优先（+50分）
-        if article.id is None:
-            score += 50
+    # 为每个源选择 2 条最新新闻
+    quota_articles = []
+    remaining_articles = []
 
-        # 有AI评论优先（+20分）
-        if article.ai_comment:
-            score += 20
+    for source, source_list in source_articles.items():
+        # 按发布时间倒序排序
+        source_list.sort(key=lambda x: x.publish_time, reverse=True)
 
-        # 发布时间（越新越好，最多+30分）
-        # 计算新闻年龄（小时）
-        from datetime import datetime, timedelta
-        age_hours = (datetime.now() - article.publish_time).total_seconds() / 3600
-        if age_hours < 6:
-            score += 30
-        elif age_hours < 12:
-            score += 20
-        elif age_hours < 24:
-            score += 10
-        elif age_hours < 48:
-            score += 5
+        # 取前 2 条进入配额池
+        quota_articles.extend(source_list[:2])
 
-        # 已翻译优先（+10分）
-        if article.translated:
-            score += 10
+        # 剩余的进入候选池
+        remaining_articles.extend(source_list[2:])
 
-        scored_articles.append((score, article))
+    # ========== 第二阶段：补充剩余配额 ==========
+    # 从剩余新闻中按时间排序，补充到 top_n 条
+    remaining_articles.sort(key=lambda x: x.publish_time, reverse=True)
 
-    # 按得分倒序排序
-    scored_articles.sort(key=lambda x: x[0], reverse=True)
+    # 合并配额文章和补充文章
+    combined_articles = quota_articles + remaining_articles[:top_n - len(quota_articles)]
 
-    # 取前N条（不再需要板块平衡逻辑）
-    top_articles = [article for score, article in scored_articles[:top_n]]
+    # ========== 第三阶段：按时间倒序排列 ==========
+    # 最终全部按发布时间倒序排列（确保时间连续性）
+    combined_articles.sort(key=lambda x: x.publish_time, reverse=True)
+
+    # 只取前 top_n 条
+    top_articles = combined_articles[:top_n]
+
+    logger.info(f"  源配额阶段: {len(quota_articles)} 条（每个源至少2条）")
+    logger.info(f"  补充阶段: {len(remaining_articles[:top_n - len(quota_articles)])} 条")
+    logger.info(f"  最终筛选: {len(top_articles)} 条")
 
     return top_articles
+
+
+def regenerate_html_from_db(days: int = 7):
+    """
+    从数据库读取新闻并重新生成HTML
+
+    流程：
+    1. 读取最近N天的所有新闻
+    2. 按发布日期分组
+    3. 每个日期分别筛选TOP 20并生成HTML
+    4. 更新首页
+
+    Args:
+        days: 天数，默认7天
+    """
+    from collections import defaultdict
+    from datetime import timedelta
+
+    logger.info("=" * 60)
+    logger.info(f"从数据库重新生成HTML（最近{days}天）")
+    logger.info("=" * 60)
+
+    # 1. 初始化数据库
+    logger.info("\n步骤1: 初始化数据库")
+    db_manager = DatabaseManager(Config.DATABASE_PATH)
+    db_manager.init_database()
+    logger.info("✓ 数据库初始化完成")
+
+    # 2. 读取最近N天的所有新闻
+    logger.info(f"\n步骤2: 读取最近{days}天的新闻")
+    all_articles = db_manager.get_articles_by_days(days=days)
+
+    if not all_articles:
+        logger.warning(f"没有找到最近{days}天的新闻！")
+        return
+
+    logger.info(f"✓ 读取到 {len(all_articles)} 条新闻")
+
+    # 3. 按发布日期分组
+    logger.info("\n步骤3: 按发布日期分组")
+    from collections import defaultdict
+
+    articles_by_date = defaultdict(list)
+    for article in all_articles:
+        # 直接使用新闻的发布时间日期
+        publish_date = article.publish_time.date()
+        articles_by_date[publish_date].append(article)
+
+    logger.info(f"✓ 分为 {len(articles_by_date)} 天:")
+    for date, articles in sorted(articles_by_date.items()):
+        logger.info(f"  {date}: {len(articles)} 条")
+
+    # 4. 为每个日期生成HTML
+    logger.info("\n步骤4: 为每个日期生成HTML")
+    generator = HTMLGenerator()
+    generated_files = []
+
+    for date, articles in sorted(articles_by_date.items(), reverse=True):
+        logger.info(f"\n处理日期: {date}")
+
+        # 筛选TOP 20新闻
+        top_news = select_top_news(articles, top_n=Config.TOP_NEWS_COUNT)
+
+        # 生成HTML（使用指定日期）
+        date_str = date.strftime(Config.DATE_FORMAT)
+        filename = Config.OUTPUT_FILENAME_FORMAT.format(date=date_str)
+        output_path = Config.OUTPUT_DIR / filename
+
+        # 临时修改系统时间以生成指定日期的HTML
+        # 实际上我们需要修改生成逻辑，让它接受日期参数
+        template = generator.env.get_template('daily_news.html')
+        html = template.render(
+            date=date_str,
+            articles=top_news,
+            total_articles=len(top_news)
+        )
+
+        # 保存文件
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+
+        generated_files.append(output_path)
+        logger.info(f"  ✓ 生成: {output_path.name} ({len(top_news)} 条新闻)")
+
+    # 5. 更新首页
+    logger.info("\n步骤5: 更新首页")
+    from src.index_updater import IndexUpdater
+    updater = IndexUpdater(project_root=Config.BASE_DIR.parent)
+    success = updater.update_index(days=30)
+    if success:
+        logger.info("✓ 首页已更新（保留30天）")
+    else:
+        logger.warning("⚠ 首页更新失败")
+
+    # 完成
+    logger.info("\n" + "=" * 60)
+    logger.success(f"HTML重新生成完成！共生成 {len(generated_files)} 个文件")
+    logger.info("=" * 60)
+
+    for file_path in generated_files:
+        logger.info(f"  - {file_path.name}")
 
 
 def main():
     """主函数"""
     # 解析命令行参数
     parser = argparse.ArgumentParser(description='财经新闻抓取系统')
+    parser.add_argument('--html-only', action='store_true',
+                        help='只从数据库读取新闻生成HTML，跳过抓取、翻译、AI评论')
+    parser.add_argument('--days', type=int, default=7,
+                        help='读取最近N天的新闻，默认7天（仅用于--html-only）')
     args = parser.parse_args()
 
     logger.info("=" * 60)
     logger.info("新闻抓取系统启动")
     logger.info("=" * 60)
+
+    # 分支：只生成HTML模式
+    if args.html_only:
+        regenerate_html_from_db(days=args.days)
+        return
 
     try:
         # 1. 配置验证
@@ -172,16 +285,16 @@ def main():
 
         logger.info(f"✓ 已保存 {saved_count} 条新新闻到数据库")
 
-        # 7. 筛选TOP 15新闻（用于HTML显示）
-        logger.info("\n步骤7: 筛选TOP 15新闻（用于HTML显示）")
+        # 7. 筛选TOP 20新闻（用于HTML显示）
+        logger.info("\n步骤7: 筛选TOP 20新闻（用于HTML显示）")
         all_articles = translated_new + cached_articles
-        top_15_news = select_top_news(all_articles, top_n=15)
-        logger.info(f"✓ 从 {len(all_articles)} 条新闻中筛选出 TOP {len(top_15_news)} 条")
+        top_news = select_top_news(all_articles, top_n=Config.TOP_NEWS_COUNT)
+        logger.info(f"✓ 从 {len(all_articles)} 条新闻中筛选出 TOP {len(top_news)} 条")
 
-        # 8. 生成HTML（只显示TOP 15）
-        logger.info("\n步骤8: 生成HTML（TOP 15）")
+        # 8. 生成HTML（只显示TOP 20）
+        logger.info("\n步骤8: 生成HTML（TOP 20）")
         generator = HTMLGenerator()
-        output_path = generator.generate(top_15_news)
+        output_path = generator.generate(top_news)
         logger.info(f"✓ HTML已生成: {output_path}")
 
         # 9. 更新首页（自动更新index.html）

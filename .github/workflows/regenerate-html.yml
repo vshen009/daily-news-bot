@@ -1,0 +1,79 @@
+name: 重新生成HTML
+
+on:
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      days:
+        description: '读取最近N天的新闻'
+        required: false
+        default: '7'
+        type: choice
+        options:
+          - 7
+          - 14
+          - 30
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # 获取完整历史，用于推送到main分支
+
+    - name: 设置Python环境
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: 安装依赖
+      run: |
+        cd news_bot
+        pip install -r requirements.txt
+
+    - name: 设置环境变量
+      run: |
+        cd news_bot
+        # 创建.env文件
+        cat > .env << EOF
+        ANTHROPIC_API_KEY=${{ secrets.ANTHROPIC_API_KEY }}
+        ANTHROPIC_BASE_URL=${{ secrets.ANTHROPIC_BASE_URL }}
+        CLAUDE_MODEL=claude-3-5-sonnet-20241022
+        MAX_AGE_HOURS=48
+        TOP_NEWS_PER_CATEGORY=5
+        EOF
+
+    - name: 重新生成HTML
+      run: |
+        cd news_bot
+        echo "🔄 开始重新生成HTML（最近 ${{ inputs.days }} 天）"
+        python main.py --html-only --days ${{ inputs.days }}
+
+    - name: 配置Git用户
+      run: |
+        git config --global user.name 'GitHub Actions Bot'
+        git config --global user.email 'actions@github'
+
+    - name: 提交并推送HTML文件
+      run: |
+        # 检查是否有修改
+        if [ -n "$(git diff --name-only public/)" ]; then
+          git add public/*.html
+          git diff --staged --quiet || git commit -m "🔄 重新生成HTML - $(date +'%Y-%m-%d %H:%M:%S') (最近${{ inputs.days }}天)"
+          git pull origin main --no-rebase
+          git push origin main
+          echo "✓ HTML文件已更新并推送"
+        else
+          echo "ℹ️ 没有HTML文件需要更新"
+        fi
+
+    - name: 触发Vercel部署
+      if: success()
+      run: |
+        echo "✓ HTML文件已推送到main分支"
+        echo "✓ Vercel将自动检测并部署"
+        echo "✓ 访问你的Vercel仪表板查看部署状态"
