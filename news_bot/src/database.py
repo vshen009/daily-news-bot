@@ -2,11 +2,12 @@
 
 import sqlite3
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Optional, List
 from loguru import logger
 
 from .models import NewsArticle, Category, Language
+from .config import Config
 
 
 class DatabaseManager:
@@ -332,6 +333,37 @@ class DatabaseManager:
             for row in results:
                 articles.append(self._row_to_article(row))
 
+            return articles
+
+    def get_articles_by_days(self, days: int = 7) -> List[NewsArticle]:
+        """
+        获取最近N天的所有新闻文章（已翻译、有AI评论）
+
+        Args:
+            days: 天数，默认7天
+
+        Returns:
+            List[NewsArticle]: 新闻文章列表
+        """
+        with self:
+            # 计算时间范围（使用北京时间）
+            cutoff_time = Config.get_beijing_time() - timedelta(days=days)
+
+            query = """
+                SELECT * FROM news_articles
+                WHERE publish_time >= ?
+                AND translated = 1
+                AND ai_comment IS NOT NULL
+                ORDER BY publish_time DESC
+            """
+
+            results = self.cursor.execute(query, (cutoff_time,)).fetchall()
+
+            articles = []
+            for row in results:
+                articles.append(self._row_to_article(row))
+
+            logger.info(f"从数据库读取最近 {days} 天的新闻: {len(articles)} 条")
             return articles
 
     def get_stats(self) -> dict:
