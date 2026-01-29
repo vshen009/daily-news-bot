@@ -1,4 +1,4 @@
-name: Gemini AI Code Review (毒舌吐槽版)
+name: Gemini AI Code Review (毒舌版)
 
 on:
   pull_request:
@@ -43,3 +43,4 @@ jobs:
             记住，你的目标是让开发者在羞愧中进步！
           # 排除不需要 Review 的文件
           exclude: "**/*.json, **/*.md, **/*.lock, dist/**, node_modules/**"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
