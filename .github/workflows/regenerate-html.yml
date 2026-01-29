@@ -75,11 +75,11 @@ jobs:
 
         if [ "${{ github.ref }}" = "refs/heads/main" ]; then
           echo "🚀 正在部署到生产环境 (Production)..."
-          vercel deploy ./public --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+          vercel deploy ./public --prod --name daily-news-bot --token=${{ secrets.VERCEL_TOKEN }} --yes
         else
           echo "🧪 正在部署到测试预览环境 (Preview)..."
            # 不带 --prod 参数，Vercel 会生成一个临时预览链接
-          vercel deploy ./public --token=${{ secrets.VERCEL_TOKEN }} --yes
+          vercel deploy ./public --name daily-news-bot --token=${{ secrets.VERCEL_TOKEN }} --yes
         fi
 
     - name: 部署完成提示
