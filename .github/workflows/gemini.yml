@@ -12,7 +12,7 @@ jobs:
     # 只有在 PR 下面回复 /gemini-review 才会触发，避免额度乱扣
     if: |
       github.event.issue.pull_request &&
-      contains(github.event.comment.body, '/gemini-review')
+      contains(github.event.comment.body, '/gr')
     
     steps:
       - name: Checkout Repo
