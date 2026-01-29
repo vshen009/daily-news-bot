@@ -156,10 +156,11 @@ class IndexUpdater:
             # 生成JavaScript数组
             news_list_js = self._generate_news_list_js(news_files)
 
-            # 读取index.html模板
+            # 读取index.html模板，如果不存在则创建默认模板
             if not self.index_file.exists():
-                logger.error(f"index.html不存在: {self.index_file}")
-                return False
+                logger.warning(f"index.html不存在，创建默认模板: {self.index_file}")
+                self._create_default_index()
+                # 创建后继续执行，填充新闻数据
 
             with open(self.index_file, 'r', encoding='utf-8') as f:
                 content = f.read()
@@ -180,6 +181,27 @@ class IndexUpdater:
         except Exception as e:
             logger.error(f"更新首页失败: {e}")
             return False
+
+    def _create_default_index(self):
+        """从模板创建默认的 index.html"""
+        template_path = Config.TEMPLATES_DIR / "index_modern.html"
+
+        # 检查模板是否存在
+        if not template_path.exists():
+            raise FileNotFoundError(f"index.html 模板文件不存在: {template_path}")
+
+        # 读取模板
+        with open(template_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # 确保目录存在
+        self.index_file.parent.mkdir(parents=True, exist_ok=True)
+
+        # 写入到 public/index.html
+        with open(self.index_file, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+        logger.info(f"✓ 已从模板创建 index.html: {self.index_file}")
 
     def _generate_news_list_js(self, news_files: list) -> str:
         """生成JavaScript数组的字符串"""

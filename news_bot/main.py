@@ -280,9 +280,12 @@ def regenerate_html_from_db(days: int = 7):
     logger.info("\n步骤5: 更新首页")
     from src.index_updater import IndexUpdater
     updater = IndexUpdater(project_root=Config.BASE_DIR.parent)
+    index_path = Config.OUTPUT_DIR / "index.html"
     success = updater.update_index(days=30)
     if success:
         logger.info("✓ 首页已更新（保留30天）")
+        # 将 index.html 添加到生成的文件列表中
+        generated_files.append(index_path)
     else:
         logger.warning("⚠ 首页更新失败")
 

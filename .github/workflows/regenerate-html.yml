@@ -21,8 +21,6 @@ jobs:
     steps:
     - name: 检出代码
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0  # 获取完整历史，用于推送到main分支
 
     - name: 设置Python环境
       uses: actions/setup-python@v5
@@ -34,6 +32,17 @@ jobs:
       run: |
         cd news_bot
         pip install -r requirements.txt
+
+    - name: 缓存数据库文件
+      uses: actions/cache@v4
+      with:
+        path: news_bot/data/news.db
+        # key 决定了本次运行产生的缓存叫什么名字
+        key: news-db-${{ runner.os }}-${{ github.run_id }}
+        # restore-keys 决定了如果 key 没命中，去捡哪一个旧缓存来用
+        restore-keys: |
+          news-db-${{ runner.os }}-
+          news-db-
 
     - name: 设置环境变量
       run: |
@@ -55,28 +64,27 @@ jobs:
         echo "🔄 开始重新生成HTML（最近 $DAYS 天）"
         python main.py --html-only --days $DAYS
 
-    - name: 配置Git用户
-      run: |
-        git config --global user.name 'GitHub Actions Bot'
-        git config --global user.email 'actions@github'
+    - name: 安装 Vercel CLI
+      if: success()
+      run: npm install --global vercel@latest
 
-    - name: 提交并推送HTML文件
-      run: |
-        DAYS=${{ inputs.days || '7' }}
-        # 检查是否有修改
-        if [ -n "$(git diff --name-only public/)" ]; then
-          git add public/*.html
-          git diff --staged --quiet || git commit -m "🔄 重新生成HTML - $(date +'%Y-%m-%d %H:%M:%S') (最近${DAYS}天)"
-          git pull origin ${{ github.ref_name }} --no-rebase
-          git push origin ${{ github.ref_name }}
-          echo "✓ HTML文件已更新并推送到 ${{ github.ref_name }} 分支"
-        else
-          echo "ℹ️ 没有HTML文件需要更新"
-        fi
-
-    - name: 触发Vercel部署
+    - name: 部署到 Vercel
       if: success()
       run: |
-        echo "✓ HTML文件已推送到main分支"
-        echo "✓ Vercel将自动检测并部署"
-        echo "✓ 访问你的Vercel仪表板查看部署状态"
+        npm install --global vercel@latest
+
+        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "🚀 正在部署到生产环境 (Production)..."
+          vercel deploy ./public --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+        else
+          echo "🧪 正在部署到测试预览环境 (Preview)..."
+           # 不带 --prod 参数，Vercel 会生成一个临时预览链接
+          vercel deploy ./public --token=${{ secrets.VERCEL_TOKEN }} --yes
+        fi
+
+    - name: 部署完成提示
+      if: success()
+      run: |
+        echo "✅ HTML 文件已直接部署到 Vercel"
+        echo "✅ 未提交到 GitHub 仓库"
+        echo "✅ 数据库已缓存到 GitHub Actions"
