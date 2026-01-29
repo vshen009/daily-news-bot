@@ -61,6 +61,7 @@
                 --bg-card: rgba(30, 41, 59, 0.65);
                 --bg-card-hover: rgba(51, 65, 85, 0.75);
                 --card-border: rgba(255, 255, 255, 0.1);
+                --card-blur: blur(12px);
 
                 --text-primary: #f1f5f9;
                 --text-secondary: #cbd5e1;
@@ -71,6 +72,11 @@
                 --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
                 --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
                 --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+            }
+
+            /* 暗色模式下 featured 卡片保持毛玻璃效果 */
+            .news-card.featured {
+                background: rgba(30, 41, 59, 0.65);
             }
         }
 
@@ -311,7 +317,9 @@
         /* News Card */
         .news-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            backdrop-filter: var(--card-blur, blur(12px));
+            -webkit-backdrop-filter: var(--card-blur, blur(12px));
+            border: 1px solid var(--card-border, var(--border-color));
             border-radius: 16px;
             padding: 28px;
             cursor: pointer;
