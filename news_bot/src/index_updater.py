@@ -159,8 +159,8 @@ class IndexUpdater:
             # 读取index.html模板，如果不存在则创建默认模板
             if not self.index_file.exists():
                 logger.warning(f"index.html不存在，创建默认模板: {self.index_file}")
-                self._create_default_index(news_files)
-                return True
+                self._create_default_index()
+                # 创建后继续执行，填充新闻数据
 
             with open(self.index_file, 'r', encoding='utf-8') as f:
                 content = f.read()
@@ -181,6 +181,27 @@ class IndexUpdater:
         except Exception as e:
             logger.error(f"更新首页失败: {e}")
             return False
+
+    def _create_default_index(self):
+        """从模板创建默认的 index.html"""
+        template_path = Config.TEMPLATES_DIR / "index_modern.html"
+
+        # 检查模板是否存在
+        if not template_path.exists():
+            raise FileNotFoundError(f"index.html 模板文件不存在: {template_path}")
+
+        # 读取模板
+        with open(template_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # 确保目录存在
+        self.index_file.parent.mkdir(parents=True, exist_ok=True)
+
+        # 写入到 public/index.html
+        with open(self.index_file, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+        logger.info(f"✓ 已从模板创建 index.html: {self.index_file}")
 
     def _generate_news_list_js(self, news_files: list) -> str:
         """生成JavaScript数组的字符串"""
@@ -204,192 +225,6 @@ class IndexUpdater:
             lines[-1] = lines[-1].rstrip(',')
 
         return '\n'.join(lines)
-
-    def _create_default_index(self, news_files: list = None):
-        """
-        创建默认的 index.html
-
-        Args:
-            news_files: 新闻文件列表（如果为None，则创建空模板）
-        """
-        if news_files is None:
-            news_files = []
-
-        # 生成 JavaScript 数组
-        news_list_js = self._generate_news_list_js(news_files)
-
-        # 默认 index.html 模板
-        template = '''<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>财经日报 - 每日金融新闻汇总</title>
-    <meta name="description" content="每日精选财经新闻，涵盖国内、亚太、美国欧洲市场动态">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            color: #eaeaea;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px 40px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #a0a0a0;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            padding: 40px 20px;
-        }
-
-        .news-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .news-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(255, 107, 107, 0.15);
-            border-color: rgba(255, 107, 107, 0.3);
-        }
-
-        .news-date {
-            font-size: 0.9rem;
-            color: #ff6b6b;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .news-title {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #ffffff;
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        .news-meta {
-            font-size: 0.85rem;
-            color: #a0a0a0;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            color: #a0a0a0;
-        }
-
-        .empty-state h2 {
-            font-size: 1.8rem;
-            margin-bottom: 16px;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .news-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>📈 财经日报</h1>
-            <p class="subtitle">每日精选金融新闻汇总</p>
-        </header>
-
-        <main id="news-container" class="news-grid"></main>
-    </div>
-
-    <script>
-        const newsList = [
-        ];
-
-        function renderNews() {
-            const container = document.getElementById('news-container');
-
-            if (newsList.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <h2>暂无新闻</h2>
-                        <p>敬请期待...</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = newsList.map(news => `
-                <article class="news-card" onclick="window.location.href='${news.url}'">
-                    <div class="news-date">${news.date}</div>
-                    <h2 class="news-title">${news.title}</h2>
-                    <div class="news-meta">📰 ${news.articleCount} 条新闻</div>
-                </article>
-            `).join('');
-        }
-
-        // 页面加载时渲染新闻
-        document.addEventListener('DOMContentLoaded', renderNews);
-    </script>
-</body>
-</html>'''
-
-        # 替换 newsList
-        if news_files:
-            pattern = r'const newsList = \[.*?\];'
-            replacement = f'const newsList = [\n{news_list_js}\n        ];'
-            template = re.sub(pattern, replacement, template, flags=re.DOTALL)
-
-        # 确保目录存在
-        self.index_file.parent.mkdir(parents=True, exist_ok=True)
-
-        # 写入文件
-        with open(self.index_file, 'w', encoding='utf-8') as f:
-            f.write(template)
-
-        logger.info(f"✓ 已创建默认 index.html，包含 {len(news_files)} 天新闻")
 
 
 def update_index_html(days: int = 30) -> bool:
