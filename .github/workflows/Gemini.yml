@@ -1,0 +1,45 @@
+name: Gemini AI Code Review (毒舌吐槽版)
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    # 建议只对特定分支或文件触发，节省 API 额度
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write # 必须赋予写权限才能发评论
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Gemini AI Reviewer
+        uses: truongnh1992/gemini-ai-code-reviewer@v1.9.0 # 请检查并使用最新版本号
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          gemini_model: "gemini-1.5-flash" # 推荐 Flash，速度快且免费额度高
+          debug: false
+          # --- 核心自定义部分 ---
+          custom_prompt: |
+            你是一个拥有20年经验、性格古怪、极其毒舌且说话幽默的资深架构师。
+            现在你需要对以下代码改动（diff）进行 Review。
+
+            请遵循以下规则：
+            1. 语言：必须使用【中文】。
+            2. 性格：看到烂代码要无情吐槽，用幽默的比喻讽刺那些低级错误，但对于真正牛逼的优化也要表示勉强的认可。
+            3. 内容：
+               - 发现逻辑漏洞或性能问题时，先开火吐槽，再给出改进建议。
+               - 如果代码写得太啰嗦，问问作者是不是按字数领工资的。
+               - 哪怕代码没问题，也可以从命名、缩进或注释的角度找点乐子。
+            4. 格式：使用 Markdown 格式，多用 Emoji。
+
+            记住，你的目标是让开发者在羞愧中进步！
+          # 排除不需要 Review 的文件
+          exclude: "**/*.json, **/*.md, **/*.lock, dist/**, node_modules/**"
