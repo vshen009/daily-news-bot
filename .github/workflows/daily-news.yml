@@ -57,20 +57,25 @@ jobs:
         cd news_bot
         python main.py
 
-    - name: 安装 Vercel CLI
-      run: npm install --global vercel@latest
-
     - name: 部署到 Vercel
+      if: success()
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       run: |
-        npm install --global vercel@latest
-            
+        # 在 CI 中用 secrets 指定的 Org/Project 绑定，避免默认用目录名（比如 public）创建新项目
         if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "🔗 绑定到 Vercel Project (production)..."
+          vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
           echo "🚀 正在部署到生产环境 (Production)..."
-          vercel deploy ./public --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+          vercel deploy ./public --prod --name daily-news-bot --token="$VERCEL_TOKEN" --yes
         else
+          echo "🔗 绑定到 Vercel Project (preview)..."
+          vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
           echo "🧪 正在部署到测试预览环境 (Preview)..."
-           # 不带 --prod 参数，Vercel 会生成一个临时预览链接
-          vercel deploy ./public --token=${{ secrets.VERCEL_TOKEN }} --yes
+          # 不带 --prod 参数，Vercel 会生成一个临时预览链接
+          vercel deploy ./public --name daily-news-bot --token="$VERCEL_TOKEN" --yes
         fi
 
     - name: 部署完成提示
