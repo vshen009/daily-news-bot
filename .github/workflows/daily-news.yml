@@ -1,10 +1,12 @@
 name: 每日财经新闻生成
 
 on:
-  # 北京时间每天 8:00 和 12:00 运行（UTC 0:00 和 4:00）
-  schedule:
-    - cron: '0 0,4 * * *'
 
+
+  schedule:
+    - cron: '0 0 * * *'   # UTC 00:00 (北京时间 08:00)
+    - cron: '0 4 * * *'   # UTC 04:00 (北京时间 12:00)
+  
   # 允许手动触发
   workflow_dispatch:
 
