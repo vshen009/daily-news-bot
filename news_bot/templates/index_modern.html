@@ -61,6 +61,7 @@
                 --bg-card: rgba(30, 41, 59, 0.65);
                 --bg-card-hover: rgba(51, 65, 85, 0.75);
                 --card-border: rgba(255, 255, 255, 0.1);
+                --card-blur: blur(12px);
 
                 --text-primary: #f1f5f9;
                 --text-secondary: #cbd5e1;
@@ -311,7 +312,9 @@
         /* News Card */
         .news-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            backdrop-filter: var(--card-blur, blur(12px));
+            -webkit-backdrop-filter: var(--card-blur, blur(12px));
+            border: 1px solid var(--card-border, var(--border-color));
             border-radius: 16px;
             padding: 28px;
             cursor: pointer;
