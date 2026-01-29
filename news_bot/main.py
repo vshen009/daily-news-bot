@@ -391,17 +391,49 @@ def main():
 
         logger.info(f"✓ 已保存 {saved_count} 条新新闻到数据库")
 
-        # 7. 筛选并排序新闻（最近24小时，无数量限制）
-        logger.info("\n步骤7: 筛选并排序新闻（最近24小时）")
-        all_articles = translated_new + cached_articles
-        top_news = filter_and_sort_articles(all_articles, hours=24)
-        logger.info(f"✓ 从 {len(all_articles)} 条新闻中筛选出 {len(top_news)} 条")
+        # 7. 按日期分组并生成HTML
+        logger.info("\n步骤7: 按日期分组")
+        from collections import defaultdict
 
-        # 8. 生成HTML
-        logger.info("\n步骤8: 生成HTML")
+        all_articles = translated_new + cached_articles
+        articles_by_date = defaultdict(list)
+        for article in all_articles:
+            publish_date = article.publish_time.date()
+            articles_by_date[publish_date].append(article)
+
+        logger.info(f"✓ {len(all_articles)} 条新闻分为 {len(articles_by_date)} 天")
+        for date, articles in sorted(articles_by_date.items()):
+            logger.info(f"  {date}: {len(articles)} 条")
+
+        # 8. 为每个日期生成HTML
+        logger.info("\n步骤8: 为每个日期生成HTML")
         generator = HTMLGenerator()
-        output_path = generator.generate(top_news)
-        logger.info(f"✓ HTML已生成: {output_path}")
+        generated_files = []
+
+        for date, articles in sorted(articles_by_date.items(), reverse=True):
+            # 筛选并排序当天新闻（不筛选时间）
+            top_news = filter_and_sort_articles(articles, enable_time_filter=False)
+
+            # 生成HTML
+            date_str = date.strftime(Config.DATE_FORMAT)
+            filename = Config.OUTPUT_FILENAME_FORMAT.format(date=date_str)
+            output_path = Config.OUTPUT_DIR / filename
+
+            template = generator.env.get_template('daily_news.html')
+            html = template.render(
+                date=date_str,
+                articles=top_news,
+                total_articles=len(top_news)
+            )
+
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(html)
+
+            generated_files.append(output_path)
+            logger.info(f"  ✓ 生成: {output_path.name} ({len(top_news)} 条新闻)")
+
+        logger.info(f"✓ 共生成 {len(generated_files)} 个HTML文件")
 
         # 9. 更新首页（自动更新index.html）
         logger.info("\n步骤9: 更新首页")
