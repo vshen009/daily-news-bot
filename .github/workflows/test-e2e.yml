@@ -27,8 +27,11 @@ jobs:
       uses: actions/cache@v4
       with:
         path: news_bot/data/news.db
-        key: news-db-${{ github.run_id }}
+        # key 决定了本次运行产生的缓存叫什么名字
+        key: news-db-${{ runner.os }}-${{ github.run_id }}
+        # restore-keys 决定了如果 key 没命中，去捡哪一个旧缓存来用
         restore-keys: |
+          news-db-${{ runner.os }}-
           news-db-
 
     - name: 设置环境变量
@@ -51,16 +54,23 @@ jobs:
     - name: 安装 Vercel CLI
       run: npm install --global vercel@latest
 
-    - name: 部署到 Vercel (Preview)
+    - name: 部署到 Vercel
       run: |
-        cd public
-        vercel deploy \
-          --token=${{ secrets.VERCEL_TOKEN }} \
-          --yes
+        npm install --global vercel@latest
 
-    - name: 完成提示
+        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "🚀 正在部署到生产环境 (Production)..."
+          vercel deploy ./public --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+        else
+          echo "🧪 正在部署到测试预览环境 (Preview)..."
+           # 不带 --prod 参数，Vercel 会生成一个临时预览链接
+          vercel deploy ./public --token=${{ secrets.VERCEL_TOKEN }} --yes
+        fi
+
+    - name: 部署完成提示
       if: success()
       run: |
         echo "✅ 端到端测试完成"
         echo "✅ HTML 文件已直接部署到 Vercel"
         echo "✅ 未提交到 GitHub 仓库"
+        echo "✅ 数据库已缓存到 GitHub Actions"
