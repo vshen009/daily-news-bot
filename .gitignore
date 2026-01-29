@@ -57,6 +57,10 @@ news_bot/data/backup_*.db
 
 # Vercel
 .vercel/
+vercel.json
+
+# 生成的 HTML 文件（部署输出目录）
+public/
 
 # Node.js (如果未来使用)
 node_modules/
