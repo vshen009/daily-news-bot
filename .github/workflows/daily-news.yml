@@ -2,10 +2,9 @@ name: 每日财经新闻生成
 
 on:
 
-
   schedule:
-    - cron: '0 0 * * *'   # UTC 00:00 (北京时间 08:00)
-    - cron: '0 4 * * *'   # UTC 04:00 (北京时间 12:00)
+    - cron: '5 23 * * *'   # 北京时间 07:05
+    - cron: '5 4 * * *'   # 北京时间 12:05
   
   # 允许手动触发
   workflow_dispatch:
@@ -33,10 +32,13 @@ jobs:
       uses: actions/cache@v4
       with:
         path: news_bot/data/news.db
-        key: news-db-${{ github.run_id }}
+        # key 决定了本次运行产生的缓存叫什么名字
+        key: news-db-${{ runner.os }}-${{ github.run_id }}
+        # restore-keys 决定了如果 key 没命中，去捡哪一个旧缓存来用
         restore-keys: |
+          news-db-${{ runner.os }}-
           news-db-
-
+          
     - name: 设置环境变量
       run: |
         cd news_bot
@@ -57,12 +59,18 @@ jobs:
     - name: 安装 Vercel CLI
       run: npm install --global vercel@latest
 
-    - name: 部署到 Vercel (Production)
+    - name: 部署到 Vercel
       run: |
-        cd public
-        vercel deploy --prod \
-          --token=${{ secrets.VERCEL_TOKEN }} \
-          --yes
+        npm install --global vercel@latest
+            
+        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "🚀 正在部署到生产环境 (Production)..."
+          vercel deploy ./public --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+        else
+          echo "🧪 正在部署到测试预览环境 (Preview)..."
+           # 不带 --prod 参数，Vercel 会生成一个临时预览链接
+          vercel deploy ./public --token=${{ secrets.VERCEL_TOKEN }} --yes
+        fi
 
     - name: 部署完成提示
       if: success()
