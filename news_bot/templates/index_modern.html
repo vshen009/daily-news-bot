@@ -52,9 +52,9 @@
             --transition-medium: 250ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Dark Mode */
+        /* Dark Mode - System Preference Fallback */
         @media (prefers-color-scheme: dark) {
-            :root {
+            :root:not([data-theme]) {
                 --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
                 --bg-secondary: rgba(15, 23, 42, 0.6);
 
@@ -78,6 +78,31 @@
             .news-card.featured {
                 background: rgba(30, 41, 59, 0.65);
             }
+        }
+
+        /* Manual Dark Mode */
+        :root[data-theme="dark"] {
+            --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
+            --bg-secondary: rgba(15, 23, 42, 0.6);
+
+            --bg-card: rgba(30, 41, 59, 0.65);
+            --bg-card-hover: rgba(51, 65, 85, 0.75);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-blur: blur(12px);
+
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+
+            --border-color: rgba(255, 255, 255, 0.1);
+            --border-glow: rgba(255, 107, 107, 0.5);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        :root[data-theme="dark"] .news-card.featured {
+            background: rgba(30, 41, 59, 0.65);
         }
 
         * {
@@ -160,14 +185,14 @@
         /* Header - Glassmorphism */
         .header {
             position: sticky;
-            top: 16px;
+            top: 0;
             z-index: 100;
-            margin: 0 16px;
+            margin: 0;
             background: var(--bg-card);
             backdrop-filter: var(--card-blur);
             -webkit-backdrop-filter: var(--card-blur);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
+            border-radius: 0;
             box-shadow: var(--shadow-md);
             transition: all var(--transition-medium);
         }
@@ -186,7 +211,7 @@
         .logo-section {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
             text-decoration: none;
         }
 
@@ -237,34 +262,108 @@
             gap: 16px;
         }
 
-        .stat-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
+        /* Theme Toggle Button */
+        .theme-toggle-wrapper {
+            position: relative;
+        }
+
+        .theme-toggle-button {
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(99, 102, 241, 0.1));
             border: 1px solid rgba(37, 99, 235, 0.2);
             border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
         }
 
-        .stat-badge-icon {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+        .theme-toggle-button:hover {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(99, 102, 241, 0.15));
+            border-color: rgba(37, 99, 235, 0.3);
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        .theme-toggle-button:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
         }
 
-        .stat-badge-text {
-            font-size: 13px;
-            color: var(--accent-blue);
-            font-weight: 700;
-            letter-spacing: 0.02em;
+        .theme-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        /* Theme Dropdown Menu */
+        .theme-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            min-width: 160px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all var(--transition-fast);
+            z-index: 1000;
+        }
+
+        .theme-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .theme-option:last-child {
+            border-bottom: none;
+        }
+
+        .theme-option:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .theme-option:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: -2px;
+        }
+
+        .theme-option-icon {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .theme-option-text {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .theme-option-check {
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 16px;
+            opacity: 0;
+        }
+
+        .theme-option.active .theme-option-check {
+            opacity: 1;
         }
 
         /* Main Content */
@@ -532,8 +631,8 @@
             }
 
             .header {
-                margin: 0 8px;
-                top: 8px;
+                margin: 0;
+                top: 0;
             }
 
             .header-inner {
@@ -588,13 +687,28 @@
                 </div>
                 <div class="logo-text">
                     <div class="logo-title">Financial Intelligence</div>
-                    <div class="logo-subtitle">每日财经新闻日报</div>
                 </div>
             </a>
-            <div class="header-stats">
-                <div class="stat-badge">
-                    <span class="stat-badge-icon"></span>
-                    <span class="stat-badge-text">每日自动更新</span>
+            <div class="theme-toggle-wrapper">
+                <button class="theme-toggle-button" id="themeToggle" aria-label="切换主题">
+                    <span class="theme-icon" id="themeIcon">🌙</span>
+                </button>
+                <div class="theme-dropdown" id="themeDropdown">
+                    <div class="theme-option" data-theme="light" tabindex="0">
+                        <span class="theme-option-icon">🌞</span>
+                        <span class="theme-option-text">明亮模式</span>
+                        <span class="theme-option-check">✓</span>
+                    </div>
+                    <div class="theme-option" data-theme="dark" tabindex="0">
+                        <span class="theme-option-icon">🌙</span>
+                        <span class="theme-option-text">黑暗模式</span>
+                        <span class="theme-option-check">✓</span>
+                    </div>
+                    <div class="theme-option" data-theme="system" tabindex="0">
+                        <span class="theme-option-icon">💻</span>
+                        <span class="theme-option-text">跟随系统</span>
+                        <span class="theme-option-check">✓</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -644,6 +758,136 @@
     </footer>
 
     <script>
+        // Theme Management
+        const ThemeManager = {
+            STORAGE_KEY: 'theme-preference',
+
+            init() {
+                // Always default to system theme
+                this.setTheme('system', false);
+                this.initEventListeners();
+                this.updateUI();
+            },
+
+            initEventListeners() {
+                const toggleBtn = document.getElementById('themeToggle');
+                const dropdown = document.getElementById('themeDropdown');
+                const options = document.querySelectorAll('.theme-option');
+
+                // Toggle dropdown
+                toggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('active');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', () => {
+                    dropdown.classList.remove('active');
+                });
+
+                // Prevent dropdown from closing when clicking inside
+                dropdown.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+
+                // Theme option selection
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        const theme = option.dataset.theme;
+                        this.setTheme(theme, true);
+                        dropdown.classList.remove('active');
+                    });
+
+                    // Keyboard support
+                    option.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            const theme = option.dataset.theme;
+                            this.setTheme(theme, true);
+                            dropdown.classList.remove('active');
+                        }
+                    });
+                });
+            },
+
+            setTheme(theme, save = true) {
+                const root = document.documentElement;
+
+                // Remove all theme classes
+                root.classList.remove('theme-light', 'theme-dark');
+
+                if (theme === 'light') {
+                    root.setAttribute('data-theme', 'light');
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('light-mode');
+                } else if (theme === 'dark') {
+                    root.setAttribute('data-theme', 'dark');
+                    document.body.classList.remove('light-mode');
+                    document.body.classList.add('dark-mode');
+                } else {
+                    // System theme
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+                    document.body.classList.remove('light-mode', 'dark-mode');
+                    document.body.classList.add(prefersDark ? 'dark-mode' : 'light-mode');
+                }
+
+                if (save) {
+                    sessionStorage.setItem(this.STORAGE_KEY, theme);
+                }
+
+                this.currentTheme = theme;
+                this.updateUI();
+            },
+
+            getCurrentTheme() {
+                return this.currentTheme || 'system';
+            },
+
+            updateUI() {
+                const theme = this.getCurrentTheme();
+                const icon = document.getElementById('themeIcon');
+                const options = document.querySelectorAll('.theme-option');
+
+                // Update button icon
+                const actualTheme = this.getActualTheme();
+                if (actualTheme === 'dark') {
+                    icon.textContent = '🌙';
+                } else {
+                    icon.textContent = '🌞';
+                }
+
+                // Update active state in dropdown
+                options.forEach(option => {
+                    if (option.dataset.theme === theme) {
+                        option.classList.add('active');
+                    } else {
+                        option.classList.remove('active');
+                    }
+                });
+            },
+
+            getActualTheme() {
+                const theme = this.getCurrentTheme();
+                if (theme === 'system') {
+                    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                }
+                return theme;
+            }
+        };
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (ThemeManager.getCurrentTheme() === 'system') {
+                ThemeManager.setTheme('system', false);
+            }
+        });
+
+        // Initialize theme manager
+        document.addEventListener('DOMContentLoaded', () => {
+            ThemeManager.init();
+        });
+
         // News data will be populated by index_updater.py
         const newsList = [
             // Example format:

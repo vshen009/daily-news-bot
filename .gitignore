@@ -74,3 +74,5 @@ yarn-error.log
 # Git工作流辅助脚本（本地使用，不提交）
 git-workflow-helpers.sh
 .claude/
+.vercel
+.env*.local

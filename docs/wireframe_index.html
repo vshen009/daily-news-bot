@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线框图 - index_modern.html</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .wireframe {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border: 3px solid #333;
+            padding: 40px;
+        }
+        .element {
+            border: 2px dashed #666;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .element-label {
+            position: absolute;
+            top: -12px;
+            left: 10px;
+            background: white;
+            padding: 0 8px;
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: #f0f0f0;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .logo-box {
+            width: 56px;
+            height: 56px;
+            background: #ddd;
+            border: 2px solid #999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            text-align: center;
+        }
+        .logo-text {
+            width: 200px;
+        }
+        .logo-title {
+            height: 24px;
+            background: #bbb;
+            margin-bottom: 4px;
+        }
+        .logo-subtitle {
+            height: 14px;
+            background: #ccc;
+            width: 150px;
+        }
+        .stat-badge {
+            padding: 10px 18px;
+            background: #e0e0ff;
+            border: 1px solid #999;
+            border-radius: 4px;
+            font-size: 11px;
+            text-align: center;
+        }
+        .page-header {
+            padding: 30px 0;
+        }
+        .page-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #e0e0ff;
+            border: 1px solid #999;
+            font-size: 11px;
+            margin-bottom: 16px;
+        }
+        .page-title {
+            height: 42px;
+            background: #bbb;
+            margin-bottom: 12px;
+            width: 400px;
+        }
+        .page-subtitle {
+            height: 17px;
+            background: #ccc;
+            width: 350px;
+        }
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .news-card {
+            border: 2px dashed #999;
+            padding: 28px;
+            min-height: 220px;
+            background: #fafafa;
+            position: relative;
+        }
+        .news-card.featured {
+            border: 3px solid #666;
+            background: #f0f0ff;
+        }
+        .card-badge {
+            position: absolute;
+            top: 28px;
+            left: 28px;
+            background: #666;
+            color: white;
+            padding: 4px 8px;
+            font-size: 9px;
+        }
+        .card-date {
+            height: 40px;
+            background: #888;
+            margin-bottom: 8px;
+            width: 100px;
+        }
+        .card-label {
+            height: 14px;
+            background: #ccc;
+            margin-bottom: 16px;
+            width: 160px;
+        }
+        .card-title {
+            height: 16px;
+            background: #aaa;
+            margin-bottom: 8px;
+        }
+        .card-title-2 {
+            height: 16px;
+            background: #aaa;
+            margin-bottom: 16px;
+            width: 80%;
+        }
+        .card-meta {
+            margin-top: auto;
+            height: 12px;
+            background: #ddd;
+            width: 100px;
+        }
+        .footer {
+            margin-top: 40px;
+            padding: 40px 0;
+            text-align: center;
+            background: #f5f5f5;
+        }
+        .footer-logo {
+            width: 48px;
+            height: 48px;
+            background: #ddd;
+            margin: 0 auto 20px;
+        }
+        .footer-text {
+            height: 14px;
+            background: #ccc;
+            margin: 0 auto 8px;
+            width: 300px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+        }
+        .footer-link {
+            height: 14px;
+            background: #999;
+            width: 60px;
+        }
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fffacd;
+            border: 2px solid #daa520;
+        }
+        .legend h3 {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .legend ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .legend li {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #666;
+            color: white;
+            border-radius: 3px;
+            font-size: 10px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📐 页面线框图 - index_modern.html</h1>
+    <p class="subtitle">Financial Intelligence Daily - 新闻归档页面结构</p>
+
+    <div class="wireframe">
+        <!-- HEADER -->
+        <div class="element header">
+            <span class="element-label">&lt;header class="header"&gt; - 浮动导航栏 (Glassmorphism)</span>
+            <div class="header-left">
+                <div class="logo-box">LOGO</div>
+                <div class="logo-text">
+                    <div class="logo-title"></div>
+                    <div class="logo-subtitle"></div>
+                </div>
+            </div>
+            <div class="stat-badge">统计徽章</div>
+        </div>
+
+        <!-- PAGE HEADER -->
+        <div class="element page-header">
+            <span class="element-label">&lt;div class="page-header"&gt; - 页面标题区域</span>
+            <div class="page-badge">📦 Archive 徽章</div>
+            <div class="page-title"></div>
+            <div class="page-subtitle"></div>
+        </div>
+
+        <!-- NEWS GRID -->
+        <div class="element">
+            <span class="element-label">&lt;div class="news-grid"&gt; - 新闻卡片网格 (3列布局)</span>
+            <div class="news-grid">
+                <!-- Featured Card -->
+                <div class="news-card featured">
+                    <span class="card-badge">⚡ 最新</span>
+                    <div class="card-date"></div>
+                    <div class="card-label"></div>
+                    <div class="card-title"></div>
+                    <div class="card-title-2"></div>
+                    <div class="card-meta"></div>
+                </div>
+
+                <!-- Regular Card 1 -->
+                <div class="news-card">
+                    <div class="card-date"></div>
+                    <div class="card-label"></div>
+                    <div class="card-title"></div>
+                    <div class="card-title-2"></div>
+                    <div class="card-meta"></div>
+                </div>
+
+                <!-- Regular Card 2 -->
+                <div class="news-card">
+                    <div class="card-date"></div>
+                    <div class="card-label"></div>
+                    <div class="card-title"></div>
+                    <div class="card-title-2"></div>
+                    <div class="card-meta"></div>
+                </div>
+
+                <!-- Regular Card 3 -->
+                <div class="news-card">
+                    <div class="card-date"></div>
+                    <div class="card-label"></div>
+                    <div class="card-title"></div>
+                    <div class="card-title-2"></div>
+                    <div class="card-meta"></div>
+                </div>
+
+                <!-- Regular Card 4 -->
+                <div class="news-card">
+                    <div class="card-date"></div>
+                    <div class="card-label"></div>
+                    <div class="card-title"></div>
+                    <div class="card-title-2"></div>
+                    <div class="card-meta"></div>
+                </div>
+
+                <!-- Regular Card 5 -->
+                <div class="news-card">
+                    <div class="card-date"></div>
+                    <div class="card-label"></div>
+                    <div class="card-title"></div>
+                    <div class="card-title-2"></div>
+                    <div class="card-meta"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="element footer">
+            <span class="element-label">&lt;footer class="footer"&gt; - 页脚</span>
+            <div class="footer-logo"></div>
+            <div class="footer-text"></div>
+            <div class="footer-text"></div>
+            <div class="footer-links">
+                <div class="footer-link"></div>
+                <div class="footer-link"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LEGEND -->
+    <div class="legend">
+        <h3>📋 元素说明</h3>
+        <ul>
+            <li><span class="tag">Header</span> 顶部浮动导航栏,包含 LOGO、标题和统计徽章</li>
+            <li><span class="tag">Page Header</span> 页面标题区域,展示 "历史新闻归档"</li>
+            <li><span class="tag">News Grid</span> 响应式网格布局,桌面端 3 列,移动端 1 列</li>
+            <li><span class="tag">News Card</span> 新闻卡片,包含日期、标签、标题和元信息</li>
+            <li><span class="tag">Featured</span> 第一个卡片有特殊样式(蓝色边框 + "最新" 徽章)</li>
+            <li><span class="tag">Footer</span> 页脚,包含 LOGO、文本和外部链接</li>
+            <li><span class="tag">NO Toolbar</span> ❌ 页面中没有传统的 toolbar 元素</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center; color: #666; font-size: 12px;">
+        💡 此页面由 JavaScript 动态生成卡片,数据来自 newsList 数组
+    </div>
+</body>
+</html>
