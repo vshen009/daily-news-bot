@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主题切换交互线框图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .option {
+            background: white;
+            border: 3px solid #333;
+            padding: 30px;
+        }
+        .option-title {
+            background: #333;
+            color: white;
+            padding: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .header-demo {
+            background: #f0f0f0;
+            border: 2px solid #999;
+            padding: 16px 24px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-box {
+            width: 48px;
+            height: 48px;
+            background: #666;
+            border: 2px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+        }
+        .logo-text {
+            height: 20px;
+            background: #888;
+            width: 180px;
+        }
+        .theme-button {
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border: 2px solid #999;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .theme-button::after {
+            content: '🌙';
+            font-size: 20px;
+        }
+        /* Dropdown Menu Style */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 160px;
+            z-index: 1000;
+        }
+        .dropdown-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        .dropdown-item:hover {
+            background: #f0f0f0;
+        }
+        .dropdown-item-icon {
+            font-size: 18px;
+        }
+        .dropdown-item-text {
+            flex: 1;
+        }
+        .dropdown-item-check {
+            color: #10b981;
+            font-weight: bold;
+        }
+        /* Popover Style */
+        .popover-card {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 12px;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            padding: 16px;
+            min-width: 200px;
+            z-index: 1000;
+        }
+        .popover-title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+        .popover-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .popover-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .popover-option:hover {
+            background: #f8f8f8;
+            border-color: #999;
+        }
+        .popover-option.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+        .feature-list {
+            margin-top: 20px;
+        }
+        .feature-list h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .feature-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            font-size: 12px;
+            margin: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+        .pros-cons {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .pros, .cons {
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .pros {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+        }
+        .cons {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+        }
+        .pros h4, .cons h4 {
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+        .pros h4 {
+            color: #10b981;
+        }
+        .cons h4 {
+            color: #ef4444;
+        }
+        .pros ul, .cons ul {
+            list-style: none;
+            padding: 0;
+        }
+        .pros li, .cons li {
+            font-size: 11px;
+            margin: 4px 0;
+        }
+        .pros li::before {
+            content: '+ ';
+            color: #10b981;
+        }
+        .cons li::before {
+            content: '- ';
+            color: #ef4444;
+        }
+        .recommendation {
+            grid-column: 1 / -1;
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .recommendation h4 {
+            color: #f59e0b;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .recommendation p {
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 主题切换交互方式对比</h1>
+    <p class="subtitle">两种下拉菜单样式的线框图对比</p>
+
+    <div class="comparison">
+        <!-- Option 1: Standard Dropdown -->
+        <div class="option">
+            <div class="option-title">方案 A: 标准下拉菜单</div>
+
+            <div class="header-demo">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <div class="logo-box">LOGO</div>
+                        <div class="logo-text"></div>
+                    </div>
+                    <div class="theme-button"></div>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu">
+                    <div class="dropdown-item">
+                        <span class="dropdown-item-icon">🌞</span>
+                        <span class="dropdown-item-text">明亮模式</span>
+                    </div>
+                    <div class="dropdown-item">
+                        <span class="dropdown-item-icon">🌙</span>
+                        <span class="dropdown-item-text">黑暗模式</span>
+                        <span class="dropdown-item-check">✓</span>
+                    </div>
+                    <div class="dropdown-item">
+                        <span class="dropdown-item-icon">💻</span>
+                        <span class="dropdown-item-text">跟随系统</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-list">
+                <h3>📋 特点</h3>
+                <ul>
+                    <li>点击按钮，下方直接展开菜单</li>
+                    <li>简洁的列表式布局</li>
+                    <li>当前选中项显示 ✓ 标记</li>
+                    <li>再次点击按钮或外部区域关闭</li>
+                    <li>类似传统下拉菜单的交互</li>
+                </ul>
+            </div>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ 优点</h4>
+                    <ul>
+                        <li>实现简单</li>
+                        <li>用户熟悉度高</li>
+                        <li>占用空间小</li>
+                        <li>适合移动端</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ 缺点</h4>
+                    <ul>
+                        <li>视觉层次较平淡</li>
+                        <li>设计感一般</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Option 2: Popover Card -->
+        <div class="option">
+            <div class="option-title">方案 B: 气泡卡片 (Popover)</div>
+
+            <div class="header-demo">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <div class="logo-box">LOGO</div>
+                        <div class="logo-text"></div>
+                    </div>
+                    <div class="theme-button"></div>
+                </div>
+
+                <!-- Popover Card -->
+                <div class="popover-card">
+                    <div class="popover-title">选择主题模式</div>
+                    <div class="popover-options">
+                        <div class="popover-option">
+                            <span style="font-size: 18px;">🌞</span>
+                            <span>明亮模式</span>
+                        </div>
+                        <div class="popover-option active">
+                            <span style="font-size: 18px;">🌙</span>
+                            <span>黑暗模式</span>
+                        </div>
+                        <div class="popover-option">
+                            <span style="font-size: 18px;">💻</span>
+                            <span>跟随系统</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-list">
+                <h3>📋 特点</h3>
+                <ul>
+                    <li>点击按钮，弹出卡片式菜单</li>
+                    <li>带有标题"选择主题模式"</li>
+                    <li>选项采用大卡片布局</li>
+                    <li>当前选中项高亮显示</li>
+                    <li>视觉层次更丰富</li>
+                </ul>
+            </div>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>✅ 优点</h4>
+                    <ul>
+                        <li>视觉吸引力强</li>
+                        <li>选中状态更明显</li>
+                        <li>符合现代设计趋势</li>
+                        <li>适合桌面端体验</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>❌ 缺点</h4>
+                    <ul>
+                        <li>占用空间较大</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="recommendation">
+                <h4>💡 推荐</h4>
+                <p>气泡卡片样式更符合现代 Glassmorphism 设计风格，与页面整体风格更协调。选中状态的高亮效果也更直观。</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="max-width: 1200px; margin: 30px auto; background: #e0f2fe; border: 2px solid #0284c7; padding: 20px; border-radius: 8px;">
+        <h3 style="color: #0284c7; margin-bottom: 10px;">📝 总结对比</h3>
+        <table style="width: 100%; font-size: 13px; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid #0284c7;">
+                <td style="padding: 8px; font-weight: bold;">对比项</td>
+                <td style="padding: 8px; font-weight: bold;">标准下拉菜单</td>
+                <td style="padding: 8px; font-weight: bold;">气泡卡片</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #bae6fd;">
+                <td style="padding: 8px;">设计风格</td>
+                <td style="padding: 8px;">传统简洁</td>
+                <td style="padding: 8px;">现代时尚 ✨</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #bae6fd;">
+                <td style="padding: 8px;">视觉层次</td>
+                <td style="padding: 8px;">平面列表</td>
+                <td style="padding: 8px;">卡片式分层 ✨</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #bae6fd;">
+                <td style="padding: 8px;">选中反馈</td>
+                <td style="padding: 8px;">✓ 标记</td>
+                <td style="padding: 8px;">整行高亮 ✨</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #bae6fd;">
+                <td style="padding: 8px;">空间占用</td>
+                <td style="padding: 8px;">紧凑 ✨</td>
+                <td style="padding: 8px;">较宽松</td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">与页面风格匹配度</td>
+                <td style="padding: 8px;">一般</td>
+                <td style="padding: 8px;">高度匹配 ✨</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="max-width: 1200px; margin: 20px auto; text-align: center; color: #666; font-size: 12px;">
+        💡 请选择你喜欢的方案，我会据此实现主题切换功能
+    </div>
+</body>
+</html>
