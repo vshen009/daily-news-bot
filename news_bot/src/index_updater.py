@@ -165,6 +165,11 @@ class IndexUpdater:
             with open(self.index_file, 'r', encoding='utf-8') as f:
                 content = f.read()
 
+            # 替换更新时间为北京时间
+            beijing_time = Config.get_beijing_time()
+            formatted_time = beijing_time.strftime("%Y-%m-%d %H:%M")
+            content = content.replace('{{ last_update_time }}', formatted_time)
+
             # 替换newsList数组
             pattern = r'const newsList = \[.*?\];'
             replacement = f'const newsList = [\n{news_list_js}\n        ];'
@@ -193,6 +198,11 @@ class IndexUpdater:
         # 读取模板
         with open(template_path, 'r', encoding='utf-8') as f:
             content = f.read()
+
+        # 替换更新时间为北京时间
+        beijing_time = Config.get_beijing_time()
+        formatted_time = beijing_time.strftime("%Y-%m-%d %H:%M")
+        content = content.replace('{{ last_update_time }}', formatted_time)
 
         # 确保目录存在
         self.index_file.parent.mkdir(parents=True, exist_ok=True)
