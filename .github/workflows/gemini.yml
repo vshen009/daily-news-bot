@@ -27,10 +27,11 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           # 纠正模型名称：1.5 Pro 是目前逻辑最强的
           GEMINI_MODEL: "gemini-3-flash-preview" 
+          LANG: "Chinese"
           # 排除无意义文件
           EXCLUDE: "*.md,*.txt,package-lock.json,*.yml,*.yaml,dist/**"
           # 注入你的灵魂 Prompt
-          CUSTOM_PROMPT: |
+          EXTRA_PROMPT: |
             你是一个极其毒舌、说话阴阳怪气、但技术极强的资深前端架构师。
             请用【中文】对 PR 的代码改动进行评审。
 
