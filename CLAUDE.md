@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Language**: Python 3.x
 - **Deployment**: Vercel (static site hosting)
 - **Repository**: https://github.com/vshen009/daily-news-bot
-- **Live Site**: https://financial-news.vercel.app
+- **Live Site**: https://news.ai.0814.host
 
 ---
 
@@ -74,6 +74,7 @@ gh pr merge --squash --delete-branch
 ```
 
 **Never**:
+
 - Direct commit to main
 - Force-push to main
 - Use same name for branch and tag
@@ -92,6 +93,7 @@ Scraper → Deduplicator → Database → Translator → AI Comment → HTML Gen
 ```
 
 **Key Optimization**: The system uses SQLite database to avoid reprocessing articles.
+
 - Articles are deduplicated by `title` (Chinese) and `title_original` (English)
 - Cached articles reuse existing translations and AI comments
 - Only NEW articles trigger API calls (70-85% cost reduction)
@@ -100,20 +102,21 @@ Scraper → Deduplicator → Database → Translator → AI Comment → HTML Gen
 
 **news_bot/src/** - Core modules:
 
-| Module | Purpose | Key Functions |
-|--------|---------|---------------|
-| `scraper.py` | Fetch news from configured sources | `fetch_all_sources()` |
-| `deduplicator.py` | Remove duplicates within batch | `deduplicate_articles()` |
-| `database.py` | SQLite CRUD operations | `article_exists()`, `save_article()`, `get_article_by_title()` |
-| `translator.py` | Translate English articles to Chinese | `translate_articles()` |
-| `ai_comment.py` | Generate professional insights | `generate_comment()`, `generate_comments()` |
-| `scorer.py` | Calculate news importance scores | `calculate_score()` |
-| `html_generator.py` | Generate daily HTML reports | `HTMLGenerator.generate()` |
-| `index_updater.py` | Update homepage with recent news | `IndexUpdater.update_index()` |
-| `models.py` | Data models (NewsArticle, Category, NewsSource) | - |
-| `config.py` | Global configuration | `Config` class |
+| Module              | Purpose                                         | Key Functions                                                  |
+| ------------------- | ----------------------------------------------- | -------------------------------------------------------------- |
+| `scraper.py`        | Fetch news from configured sources              | `fetch_all_sources()`                                          |
+| `deduplicator.py`   | Remove duplicates within batch                  | `deduplicate_articles()`                                       |
+| `database.py`       | SQLite CRUD operations                          | `article_exists()`, `save_article()`, `get_article_by_title()` |
+| `translator.py`     | Translate English articles to Chinese           | `translate_articles()`                                         |
+| `ai_comment.py`     | Generate professional insights                  | `generate_comment()`, `generate_comments()`                    |
+| `scorer.py`         | Calculate news importance scores                | `calculate_score()`                                            |
+| `html_generator.py` | Generate daily HTML reports                     | `HTMLGenerator.generate()`                                     |
+| `index_updater.py`  | Update homepage with recent news                | `IndexUpdater.update_index()`                                  |
+| `models.py`         | Data models (NewsArticle, Category, NewsSource) | -                                                              |
+| `config.py`         | Global configuration                            | `Config` class                                                 |
 
 **news_bot/main.py** - Main orchestrator with 9-step process:
+
 1. Config validation
 2. Database initialization
 3. Fetch all sources
@@ -147,35 +150,24 @@ daily-news-bot/
 ### Configuration Files
 
 **`news_bot/config/sources.yaml`** - News sources configuration:
+
 - Define sources with URL, RSS feed, category, priority
 - Toggle sources on/off with `enabled: true/false`
 
 **`.gitignore`** - Important rules:
+
 - `news_bot/data/news.db` is **EXPLICITLY INCLUDED** (committed to repo)
 - `*.db-shm`, `*.db-wal`, `backup_*.db` are ignored
 - `.env` is ignored (API secrets)
 - `Claude.md` and `memory.md` are ignored (internal docs)
 
 **`vercel.json`** - Routing rules:
+
 - `/` → `/public/index.html`
 - `/*.html` → `/public/*.html`
 - Static file caching headers
 
-### News Categories
 
-Three categories defined in `models.py`:
-1. **DOMESTIC** (国内金融) - Chinese sources
-2. **ASIA_PACIFIC** (亚太日本) - Asia sources, translated
-3. **US_EUROPE** (美国欧洲) - US/EU sources, translated
-
-### Scoring Algorithm
-
-When selecting TOP 15 news (`main.py:select_top_news()`):
-- **New article** (no DB ID): +50 points
-- **Has AI comment**: +20 points
-- **Freshness** (age-based): +5 to +30 points
-- **Translated**: +10 points
-- **Category balance**: Ensures all 3 categories are represented
 
 ---
 
@@ -184,6 +176,7 @@ When selecting TOP 15 news (`main.py:select_top_news()`):
 ### Database Deduplication
 
 **Unique constraint**: `UNIQUE(title, title_original)` on articles table
+
 - Chinese articles use `title` field
 - English articles use `title_original` field
 - Check existence with `db_manager.article_exists(title, title_original)`
@@ -191,6 +184,7 @@ When selecting TOP 15 news (`main.py:select_top_news()`):
 ### AI API Usage
 
 **Provider**: Zhipu AI proxy (https://open.bigmodel.cn/api/anthropic)
+
 - Base URL is proxied through Zhipu
 - Model: `claude-3-5-sonnet-20241022`
 - Environment variable: `ANTHROPIC_API_KEY` in `news_bot/.env`
@@ -200,11 +194,12 @@ When selecting TOP 15 news (`main.py:select_top_news()`):
 ### HTML Generation
 
 **Jinja2 template**: `news_bot/templates/daily_news.html`
+
 - Renders 3 news sections
-- Each section shows TOP 10 (but only 15 total displayed across all sections after scoring)
 - Featured article (first in section) gets special styling
 
 **Output paths**:
+
 - Daily report: `public/{date}.html` (e.g., `public/2026-01-27.html`)
 - Homepage: `public/index.html` (auto-updated with recent 30 days)
 
@@ -219,6 +214,7 @@ When selecting TOP 15 news (`main.py:select_top_news()`):
 ## Testing
 
 No formal test suite currently exists. Manual testing:
+
 1. Run `python news_bot/main.py`
 2. Check output in `public/` directory
 3. Verify database with `python news_bot/show_database_info.py`
@@ -228,12 +224,28 @@ No formal test suite currently exists. Manual testing:
 ## Deployment
 
 **Vercel**:
+
 - Static site hosting from `public/` directory
 - No build process required
 - GitHub Actions trigger: `.github/workflows/daily-news.yml` (auto-runs daily)
 - Environment variables must be configured in Vercel dashboard: `ANTHROPIC_API_KEY`
 
 **Note**: The project was recently separated from a monorepo (`claude-code-projects`). Vercel project must be connected to the new repository.
+
+
+
+---
+
+## Browser Automation
+
+Use `agent-browser` for web automation. Run `agent-browser --help` for all commands.
+
+Core workflow:
+
+1. `agent-browser open <url>` - Navigate to page
+2. `agent-browser snapshot -i` - Get interactive elements with refs (@e1, @e2)
+3. `agent-browser click @e1` / `fill @e2 "text"` - Interact using refs
+4. Re-snapshot after page changes
 
 ---
 
