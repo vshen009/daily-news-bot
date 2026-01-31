@@ -26,6 +26,15 @@ class Translator:
             # 中文新闻无需翻译
             return article
 
+        # 检查原文是否为空
+        if not article.content_original or len(article.content_original.strip()) == 0:
+            logger.warning(f"文章内容为空，跳过翻译: {article.title_original}")
+            article.content = "英文文章本身内容为空因此没有翻译"
+            article.title = article.title_original or article.title
+            article.translated = True
+            article.translation_method = "skipped"
+            return article
+
         logger.info(f"翻译文章: {article.title_original}")
 
         try:
@@ -67,7 +76,7 @@ class Translator:
             max_tokens = 100
         else:  # summary
             prompt = self._get_summary_translation_prompt(text)
-            max_tokens = 300
+            max_tokens = 500
 
         try:
             response = self.client.messages.create(
@@ -110,13 +119,36 @@ class Translator:
 
     def _get_summary_translation_prompt(self, content: str) -> str:
         """获取摘要翻译Prompt"""
-        return f"""你是一位专业的金融新闻翻译。请将以下英文新闻摘要翻译成地道的中文。
+        # 检查原文长度，给出不同的指令
+        content_length = len(content.strip()) if content else 0
+
+        if content_length < 100:
+            # 短文：要求扩展
+            return f"""你是一位专业的金融新闻翻译。请将以下英文新闻翻译成地道的中文。
 
 ## 要求：
 1. 保持金融专业性，准确翻译金融术语
-2. 翻译后控制在100-150字
-3. 符合中文新闻表达习惯
-4. 保留关键数据、机构名称、人名
+2. 原文较短（{content_length}字），请根据标题和内容补充相关背景信息，扩展到200-300字
+3. 可以补充：相关市场背景、历史数据、行业知识、影响分析、专家观点
+4. 符合中文新闻表达习惯
+5. 保留关键数据、机构名称、人名
+
+## 原文：
+{content}
+
+## 翻译（只输出翻译结果，不要解释）："""
+        else:
+            # 长文：要求精简或保持
+            return f"""你是一位专业的金融新闻翻译。请将以下英文新闻摘要翻译成地道的中文。
+
+## 要求：
+1. 保持金融专业性，准确翻译金融术语
+2. 翻译后控制在200-300字之间
+3. 如果原文不足200字，请补充背景信息扩展到200-300字
+4. 如果原文超过300字，请精简概括到200-300字
+5. 补充内容可以包括：市场背景、历史数据、行业知识、影响分析
+6. 符合中文新闻表达习惯
+7. 保留关键数据、机构名称、人名
 
 ## 原文：
 {content}

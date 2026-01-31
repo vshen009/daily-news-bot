@@ -52,8 +52,8 @@ class NewsScraper:
                     # 清理HTML标签
                     summary = self._clean_html(summary)
 
-                    # 提取发布时间（使用v2.1时间处理工具）
-                    crawl_time = Config.get_beijing_time()
+                    # 提取发布时间（使用UTC时间）
+                    crawl_time = datetime.utcnow()
 
                     # 优先使用published_parsed，否则使用published原始字符串
                     published = entry.get('published_parsed')
@@ -160,8 +160,8 @@ class NewsScraper:
         return truncated + "……"
 
     def _is_too_old(self, publish_time: datetime) -> bool:
-        """检查新闻是否过期（使用北京时间）"""
-        age = Config.get_beijing_time() - publish_time
+        """检查新闻是否过期（使用UTC时间）"""
+        age = datetime.utcnow() - publish_time
         return age > timedelta(hours=Config.MAX_AGE_HOURS)
 
 

@@ -2,12 +2,36 @@
 
 import sqlite3
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, List
 from loguru import logger
 
 from .models import NewsArticle, Category, Language
 from .config import Config
+
+
+def get_utc_now() -> datetime:
+    """
+    获取当前UTC时间（不带时区信息，用于数据库存储）
+
+    Returns:
+        datetime: UTC时间对象
+    """
+    return datetime.now(timezone.utc).replace(tzinfo=None)
+
+
+def utc_to_beijing(utc_dt: datetime) -> datetime:
+    """
+    将UTC时间转换为北京时间
+
+    Args:
+        utc_dt: UTC时间对象
+
+    Returns:
+        datetime: 北京时间对象
+    """
+    # 北京时间 = UTC + 8小时
+    return utc_dt + timedelta(hours=8)
 
 
 class DatabaseManager:
@@ -294,11 +318,11 @@ class DatabaseManager:
         with self:
             query = """
                 UPDATE news_articles
-                SET ai_comment = ?, updated_at = CURRENT_TIMESTAMP
+                SET ai_comment = ?, updated_at = ?
                 WHERE id = ?
             """
 
-            self.cursor.execute(query, (comment, article_id))
+            self.cursor.execute(query, (comment, get_utc_now().isoformat(), article_id))
             success = self.cursor.rowcount > 0
 
             if success:
@@ -346,8 +370,8 @@ class DatabaseManager:
             List[NewsArticle]: 新闻文章列表
         """
         with self:
-            # 计算时间范围（使用北京时间）
-            cutoff_time = Config.get_beijing_time() - timedelta(days=days)
+            # 计算时间范围（使用UTC时间）
+            cutoff_time = get_utc_now() - timedelta(days=days)
 
             query = """
                 SELECT * FROM news_articles
