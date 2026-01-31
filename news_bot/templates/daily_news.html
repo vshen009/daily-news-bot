@@ -514,38 +514,6 @@
             flex-grow: 1;
         }
 
-        /* AI Comment - Glassmorphism */
-        .ai-comment {
-            background: linear-gradient(135deg, rgba(255, 142, 83, 0.08) 0%, rgba(255, 107, 107, 0.08) 100%);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 142, 83, 0.2);
-            border-left: 3px solid var(--accent-indigo);
-            padding: 14px 16px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            position: relative;
-        }
-
-        .ai-comment::before {
-            content: 'AI INSIGHT';
-            position: absolute;
-            top: -9px;
-            left: 10px;
-            background: var(--bg-card);
-            padding: 0 6px;
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--accent-purple);
-            letter-spacing: 0.05em;
-        }
-
-        .ai-comment-text {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text-secondary);
-        }
-
         .news-footer {
             display: flex;
             justify-content: space-between;
@@ -797,12 +765,6 @@
 
                 <div class="news-expandable">
                     <p class="news-excerpt">{{ article.content }}</p>
-
-                    {% if article.ai_comment %}
-                    <div class="ai-comment" role="complementary" aria-label="AI 生成的专业分析">
-                        <p class="ai-comment-text">{{ article.ai_comment | simple_markdown | safe }}</p>
-                    </div>
-                    {% endif %}
 
                     <div class="news-footer">
                         <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">

@@ -13,7 +13,6 @@ from src.config import Config
 from src.database import DatabaseManager
 from src.scraper import fetch_all_sources
 from src.translator import translate_articles
-from src.ai_comment import generate_comments
 from src.html_generator import HTMLGenerator
 
 
@@ -332,8 +331,7 @@ def main():
         # 显示数据库统计
         stats = db_manager.get_stats()
         logger.info(f"数据库统计: 总记录 {stats['total_articles']} 条, "
-                   f"已翻译 {stats['translated_count']} 条, "
-                   f"有AI评论 {stats['with_ai_comments']} 条")
+                   f"已翻译 {stats['translated_count']} 条")
 
         # 3. 抓取新闻
         logger.info("\n步骤3: 抓取新闻")
@@ -368,15 +366,10 @@ def main():
         translated_new = translate_articles(new_articles)
         logger.info(f"✓ 翻译完成（处理了 {len(new_articles)} 条新新闻）")
 
-        # 6. 为所有新新闻生成AI评论（保存到数据库）
-        logger.info("\n步骤6: 生成AI评论（所有新新闻）")
+        # 6. 保存所有新新闻到数据库
+        logger.info("\n步骤6: 保存新新闻到数据库")
         saved_count = 0
         for article in translated_new:
-            if not article.ai_comment:
-                from src.ai_comment import generate_comment
-                comment = generate_comment(article)
-                article.ai_comment = comment
-
             # 保存到数据库（检查重复）
             try:
                 db_manager.save_article(article)

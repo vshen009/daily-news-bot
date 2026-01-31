@@ -24,7 +24,6 @@ from src.config import Config
 from src.database import DatabaseManager
 from src.scraper import fetch_all_sources
 from src.translator import translate_articles
-from src.ai_comment import generate_comment
 from src.html_generator import HTMLGenerator
 from src.index_updater import IndexUpdater
 
@@ -173,15 +172,10 @@ def main():
         translated_new = translate_articles(new_articles)
         logger.info(f"  ✓ 翻译完成（处理了 {len(new_articles)} 条新新闻）")
 
-        # ==================== 步骤6：生成AI评论 ====================
-        logger.info("\n【步骤6】生成AI评论...")
+        # ==================== 步骤6：保存到数据库 ====================
+        logger.info("\n【步骤6】保存新新闻到数据库...")
         saved_count = 0
         for article in translated_new:
-            if not article.ai_comment:
-                comment = generate_comment(article)
-                article.ai_comment = comment
-                logger.info(f"  ✓ {article.source}: {comment[:30]}...")
-
             # 保存到数据库
             try:
                 db_manager.save_article(article)
