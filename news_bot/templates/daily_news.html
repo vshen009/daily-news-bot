@@ -510,7 +510,7 @@
         }
 
         .news-excerpt {
-            font-size: 15px;
+            font-size: 17px;
             line-height: 1.7;
             color: var(--text-secondary);
             margin-bottom: 16px;
@@ -776,7 +776,7 @@
                 {% endif %}
 
                 <div class="news-expandable">
-                    <p class="news-excerpt">{{ article.content }}</p>
+                    <p class="news-excerpt">{{ article.content | simple_markdown | safe }}</p>
 
                     <div class="news-footer">
                         <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
