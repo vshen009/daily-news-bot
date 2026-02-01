@@ -26,23 +26,25 @@ class Translator:
             # 中文新闻无需翻译
             return article
 
-        # 检查原文是否为空
-        if not article.content_original or len(article.content_original.strip()) == 0:
-            logger.warning(f"文章内容为空，跳过翻译: {article.title_original}")
-            article.content = "英文文章本身内容为空因此没有翻译"
-            article.title = article.title_original or article.title
-            article.translated = True
-            article.translation_method = "skipped"
-            return article
-
         logger.info(f"翻译文章: {article.title_original}")
 
         try:
-            # 翻译标题
+            # 翻译标题（即使内容为空也要翻译标题）
             title_zh = self._translate_text(
                 article.title_original,
                 "title"
             )
+
+            # 检查正文是否为空
+            if not article.content_original or len(article.content_original.strip()) == 0:
+                logger.warning(f"文章正文为空，仅翻译标题: {article.title_original}")
+                article.title = title_zh
+                article.title_original = article.title_original  # 保留原文
+                article.content = "英文文章本身内容为空因此没有翻译"
+                article.content_original = article.content_original  # 保留原文
+                article.translated = True
+                article.translation_method = "claude"
+                return article
 
             # 翻译摘要
             content_zh = self._translate_text(
