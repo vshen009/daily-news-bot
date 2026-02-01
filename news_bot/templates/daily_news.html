@@ -690,14 +690,22 @@
         /* Responsive */
         @media (max-width: 768px) {
             .news-footer {
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
                 justify-content: flex-end;
-                gap: 8px;
+                gap: 6px;
+                overflow-x: auto;
             }
 
             .footer-left,
             .footer-right {
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
+                gap: 6px;
+            }
+
+            .footer-pill {
+                padding: 5px 10px;
+                font-size: 11px;
+                gap: 4px;
             }
         }
 
