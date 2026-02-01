@@ -82,6 +82,22 @@ def format_relative_time(utc_dt: datetime) -> str:
     return beijing_dt.strftime("%m-%d %H:%M")
 
 
+def format_beijing_iso(utc_dt: datetime) -> str:
+    """
+    将UTC时间转换为北京时间ISO格式字符串
+
+    Args:
+        utc_dt: UTC时间对象
+
+    Returns:
+        str: 北京时间的ISO格式字符串
+    """
+    if not utc_dt:
+        return ""
+    beijing_dt = utc_to_beijing(utc_dt)
+    return beijing_dt.isoformat()
+
+
 class HTMLGenerator:
     """HTML生成器"""
 
@@ -94,6 +110,7 @@ class HTMLGenerator:
         self.env.filters['zfill'] = lambda s, width: str(s).zfill(width)
         self.env.filters['simple_markdown'] = simple_markdown
         self.env.filters['beijing_time'] = format_beijing_time
+        self.env.filters['beijing_iso'] = format_beijing_iso
         self.env.filters['relative_time'] = format_relative_time
 
     def generate(self, articles: List[NewsArticle], output_path: str = None, template_name: str = 'daily_news.html'):
