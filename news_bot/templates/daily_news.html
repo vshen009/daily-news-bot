@@ -18,41 +18,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Vibrant Orange-Red Gradient System */
-            --bg-primary: linear-gradient(135deg, #ffd93d 0%, #ff8e53 25%, #ff6b6b 50%, #e63946 100%);
-            --bg-secondary: rgba(255, 255, 255, 0.7);
+            /* Professional Blue Gradient System - Fintech Harmony */
+            --bg-primary: linear-gradient(135deg, #0EA5E9 0%, #0369A1 50%, #0C4A6E 100%);
+            --bg-secondary: rgba(240, 249, 255, 0.8);
 
-            /* Glassmorphism Card */
-            --bg-card: rgba(255, 255, 255, 0.75);
-            --bg-card-hover: rgba(255, 255, 255, 0.85);
-            --card-border: rgba(255, 255, 255, 0.3);
+            /* Glassmorphism Card - Enhanced Blue Tint */
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-card-hover: rgba(255, 255, 255, 0.95);
+            --card-border: rgba(14, 165, 233, 0.2);
             --card-blur: blur(12px);
 
-            /* Vibrant Orange-Red Accent Colors */
-            --accent-blue: #ff6b6b;
-            --accent-blue-light: #ff8787;
-            --accent-blue-dark: #e63946;
+            /* Professional Blue Accent Palette */
+            --accent-blue: #0369A1;
+            --accent-blue-light: #0EA5E9;
+            --accent-blue-dark: #0C4A6E;
 
-            --accent-indigo: #ff8e53;
-            --accent-purple: #fa709a;
-            --accent-pink: #ffa726;
-            --accent-green: #10b981;
-            --accent-red: #e63946;
-            --accent-amber: #ffd93d;
+            --accent-indigo: #3B82F6;
+            --accent-purple: #6366F1;
+            --accent-pink: #8B5CF6;
+            --accent-green: #22C55E; /* Success green for positive indicators */
+            --accent-red: #EF4444;
+            --accent-amber: #F59E0B;
 
-            /* Text Colors - High Contrast */
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --text-tertiary: #64748b;
+            /* Text Colors - Optimized for Blue Background */
+            --text-primary: #0C4A6E;
+            --text-secondary: #0369A1;
+            --text-tertiary: #64748B;
 
-            /* Border & Effects */
-            --border-color: rgba(255, 255, 255, 0.3);
-            --border-glow: rgba(255, 107, 107, 0.4);
-            --shadow-sm: 0 2px 8px rgba(255, 107, 107, 0.1);
-            --shadow-md: 0 4px 16px rgba(255, 107, 107, 0.15);
-            --shadow-lg: 0 12px 32px rgba(255, 107, 107, 0.2);
-            --shadow-glow: 0 8px 24px rgba(255, 107, 107, 0.25);
-            --shadow-glow-strong: 0 12px 40px rgba(255, 107, 107, 0.3);
+            /* Border & Effects - Blue Harmony */
+            --border-color: rgba(14, 165, 233, 0.2);
+            --border-glow: rgba(3, 105, 161, 0.3);
+            --shadow-sm: 0 2px 8px rgba(3, 105, 161, 0.1);
+            --shadow-md: 0 4px 16px rgba(3, 105, 161, 0.15);
+            --shadow-lg: 0 12px 32px rgba(3, 105, 161, 0.2);
+            --shadow-glow: 0 8px 24px rgba(14, 165, 233, 0.25);
+            --shadow-glow-strong: 0 12px 40px rgba(14, 165, 233, 0.3);
 
             /* Typography */
             --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -66,45 +66,45 @@
             --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Dark Mode - System Preference Fallback - Enhanced Contrast */
+        /* Dark Mode - System Preference Fallback - Black to Dark Gold Gradient */
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme]) {
-                --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
-                --bg-secondary: rgba(15, 23, 42, 0.6);
+                --bg-primary: linear-gradient(135deg, #0c1929 0%, #000000 25%, #92400e 50%, #b8860b 100%);
+                --bg-secondary: rgba(15, 23, 42, 0.8);
 
-                --bg-card: rgba(30, 41, 59, 0.75);
-                --bg-card-hover: rgba(51, 65, 85, 0.85);
-                --card-border: rgba(255, 255, 255, 0.15);
+                --bg-card: rgba(30, 41, 59, 0.8);
+                --bg-card-hover: rgba(51, 65, 85, 0.9);
+                --card-border: rgba(184, 134, 11, 0.2);
                 --card-blur: blur(12px);
 
-                --text-primary: #ffffff;
+                --text-primary: #f1f5f9;
                 --text-secondary: #e2e8f0;
                 --text-tertiary: #cbd5e1;
 
-                --border-color: rgba(255, 255, 255, 0.15);
-                --border-glow: rgba(255, 107, 107, 0.6);
+                --border-color: rgba(184, 134, 11, 0.2);
+                --border-glow: rgba(251, 191, 36, 0.3);
                 --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
                 --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
                 --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
             }
         }
 
-        /* Manual Dark Mode - Enhanced Contrast */
+        /* Manual Dark Mode - Black to Dark Gold Gradient */
         :root[data-theme="dark"] {
-            --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
-            --bg-secondary: rgba(15, 23, 42, 0.6);
+            --bg-primary: linear-gradient(135deg, #0c1929 0%, #000000 25%, #92400e 50%, #b8860b 100%);
+            --bg-secondary: rgba(15, 23, 42, 0.8);
 
-            --bg-card: rgba(30, 41, 59, 0.75);
-            --bg-card-hover: rgba(51, 65, 85, 0.85);
-            --card-border: rgba(255, 255, 255, 0.15);
+            --bg-card: rgba(30, 41, 59, 0.8);
+            --bg-card-hover: rgba(51, 65, 85, 0.9);
+            --card-border: rgba(184, 134, 11, 0.2);
             --card-blur: blur(12px);
 
-            --text-primary: #ffffff;
+            --text-primary: #f1f5f9;
             --text-secondary: #e2e8f0;
             --text-tertiary: #cbd5e1;
 
-            --border-color: rgba(255, 255, 255, 0.15);
-            --border-glow: rgba(255, 107, 107, 0.6);
+            --border-color: rgba(184, 134, 11, 0.2);
+            --border-glow: rgba(251, 191, 36, 0.3);
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
             --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
@@ -144,7 +144,7 @@
         body::before {
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(255, 142, 83, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 70%);
             top: -200px;
             right: -200px;
             animation: float 20s ease-in-out infinite;
@@ -153,7 +153,7 @@
         body::after {
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(255, 107, 107, 0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(3, 105, 161, 0.1) 0%, transparent 70%);
             bottom: -150px;
             left: -150px;
             animation: float 15s ease-in-out infinite reverse;
@@ -283,8 +283,8 @@
         .theme-toggle-button {
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 142, 83, 0.1));
-            border: 1px solid rgba(255, 107, 107, 0.2);
+            background: linear-gradient(135deg, rgba(3, 105, 161, 0.1), rgba(14, 165, 233, 0.1));
+            border: 1px solid rgba(3, 105, 161, 0.2);
             border-radius: 10px;
             cursor: pointer;
             display: flex;
@@ -294,8 +294,8 @@
         }
 
         .theme-toggle-button:hover {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 142, 83, 0.15));
-            border-color: rgba(255, 107, 107, 0.3);
+            background: linear-gradient(135deg, rgba(3, 105, 161, 0.15), rgba(14, 165, 233, 0.15));
+            border-color: rgba(3, 105, 161, 0.3);
             transform: scale(1.05);
         }
 
@@ -555,12 +555,12 @@
             flex-grow: 1;
         }
 
-        /* News Footer - Pill Button Layout */
+        /* News Footer - Pill Button Layout - All Right Aligned */
         .news-footer {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             padding-top: 16px;
             border-top: 1px solid var(--border-color);
         }
@@ -604,7 +604,7 @@
             line-height: 1;
         }
 
-        /* Time Pill */
+        /* Time Pill - Blue Harmony */
         .pill-time {
             background: #f1f5f9;
             color: #64748b;
@@ -614,14 +614,14 @@
             background: #e2e8f0;
         }
 
-        /* Source Pill */
+        /* Source Pill - Unified Gray Background */
         .pill-source {
-            background: rgba(255, 107, 107, 0.15);
-            color: #e63946;
+            background: #f1f5f9;
+            color: #64748b;
         }
 
         .pill-source:hover {
-            background: rgba(255, 107, 107, 0.25);
+            background: #e2e8f0;
             text-decoration: none;
         }
 
@@ -631,7 +631,7 @@
             border-radius: 4px;
         }
 
-        /* Share Pill */
+        /* Share Pill - Blue Harmony */
         .pill-share {
             background: #f1f5f9;
             color: #64748b;
@@ -647,7 +647,7 @@
             border-radius: 4px;
         }
 
-        /* Read More Pill */
+        /* Read More Pill - Blue Harmony */
         .pill-read-more {
             background: #f1f5f9;
             color: #64748b;
@@ -690,19 +690,14 @@
         /* Responsive */
         @media (max-width: 768px) {
             .news-footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-
-            .footer-left {
-                width: 100%;
-                justify-content: flex-start;
-            }
-
-            .footer-right {
-                width: 100%;
+                flex-wrap: wrap;
                 justify-content: flex-end;
+                gap: 8px;
+            }
+
+            .footer-left,
+            .footer-right {
+                flex-wrap: wrap;
             }
         }
 
