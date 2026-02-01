@@ -32,9 +32,7 @@
             --accent-blue: #0369A1;
             --accent-blue-light: #0EA5E9;
             --accent-blue-dark: #0C4A6E;
-
-            /* Focus State Colors */
-            --accent-focus: #0369A1; /* Deep blue for light mode focus */
+            --accent-gold: #d4af37;
 
             --accent-indigo: #3B82F6;
             --accent-purple: #6366F1;
@@ -43,9 +41,9 @@
             --accent-red: #EF4444;
             --accent-amber: #F59E0B;
 
-            /* Text Colors - Pure Black for Better Readability */
-            --text-primary: #000000;
-            --text-secondary: #000000;
+            /* Text Colors - Deep Gray for Better Contrast */
+            --text-primary: #1e293b;
+            --text-secondary: #1e293b;
             --text-tertiary: #64748B;
 
             /* Border & Effects - Blue Harmony */
@@ -84,8 +82,6 @@
                 --text-secondary: #e2e8f0;
                 --text-tertiary: #cbd5e1;
 
-                --accent-focus: #92400e; /* Dark gold for dark mode focus */
-
                 --border-color: rgba(184, 134, 11, 0.2);
                 --border-glow: rgba(251, 191, 36, 0.3);
                 --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -108,13 +104,22 @@
             --text-secondary: #e2e8f0;
             --text-tertiary: #cbd5e1;
 
-            --accent-focus: #92400e; /* Dark gold for dark mode focus */
-
             --border-color: rgba(184, 134, 11, 0.2);
             --border-glow: rgba(251, 191, 36, 0.3);
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
             --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Dark Mode: Gold hover effect for news titles */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme]) .news-card:hover .news-title {
+                color: #d4af37;
+            }
+        }
+
+        :root[data-theme="dark"] .news-card:hover .news-title {
+            color: #d4af37;
         }
 
         * {
@@ -549,9 +554,8 @@
             font-size: 26px;
         }
 
-        .news-card:hover .news-title,
-        .news-card:focus .news-title {
-            color: var(--accent-focus);
+        .news-card:hover .news-title {
+            color: var(--accent-blue);
         }
 
         .news-excerpt {
