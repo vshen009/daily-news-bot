@@ -60,7 +60,8 @@ news_bot/data/backup_*.db
 vercel.json
 
 # 生成的 HTML 文件（部署输出目录）
-public/
+# 注意：favicon 文件需要提交
+public/*.html
 
 # Node.js (如果未来使用)
 node_modules/
