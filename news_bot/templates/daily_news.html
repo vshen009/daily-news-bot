@@ -66,48 +66,48 @@
             --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Dark Mode - System Preference Fallback */
+        /* Dark Mode - System Preference Fallback - Enhanced Contrast */
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme]) {
                 --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
                 --bg-secondary: rgba(15, 23, 42, 0.6);
 
-                --bg-card: rgba(30, 41, 59, 0.65);
-                --bg-card-hover: rgba(51, 65, 85, 0.75);
-                --card-border: rgba(255, 255, 255, 0.1);
+                --bg-card: rgba(30, 41, 59, 0.75);
+                --bg-card-hover: rgba(51, 65, 85, 0.85);
+                --card-border: rgba(255, 255, 255, 0.15);
                 --card-blur: blur(12px);
 
-                --text-primary: #f1f5f9;
-                --text-secondary: #cbd5e1;
-                --text-tertiary: #94a3b8;
+                --text-primary: #ffffff;
+                --text-secondary: #e2e8f0;
+                --text-tertiary: #cbd5e1;
 
-                --border-color: rgba(255, 255, 255, 0.1);
-                --border-glow: rgba(255, 107, 107, 0.5);
-                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+                --border-color: rgba(255, 255, 255, 0.15);
+                --border-glow: rgba(255, 107, 107, 0.6);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
             }
         }
 
-        /* Manual Dark Mode */
+        /* Manual Dark Mode - Enhanced Contrast */
         :root[data-theme="dark"] {
             --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
             --bg-secondary: rgba(15, 23, 42, 0.6);
 
-            --bg-card: rgba(30, 41, 59, 0.65);
-            --bg-card-hover: rgba(51, 65, 85, 0.75);
-            --card-border: rgba(255, 255, 255, 0.1);
+            --bg-card: rgba(30, 41, 59, 0.75);
+            --bg-card-hover: rgba(51, 65, 85, 0.85);
+            --card-border: rgba(255, 255, 255, 0.15);
             --card-blur: blur(12px);
 
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-tertiary: #94a3b8;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-tertiary: #cbd5e1;
 
-            --border-color: rgba(255, 255, 255, 0.1);
-            --border-glow: rgba(255, 107, 107, 0.5);
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --border-glow: rgba(255, 107, 107, 0.6);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
         }
 
         * {
@@ -174,12 +174,39 @@
             z-index: 1;
         }
 
-        /* Focus States for Accessibility */
+        /* Focus States for Accessibility - Enhanced */
         a:focus-visible,
-        button:focus-visible {
-            outline: 2px solid var(--accent-blue);
+        button:focus-visible,
+        .news-card:focus-visible {
+            outline: 3px solid var(--accent-blue);
             outline-offset: 2px;
             border-radius: 4px;
+        }
+
+        /* Enhanced focus for news cards */
+        .news-card:focus {
+            outline: 3px solid var(--accent-blue);
+            outline-offset: 4px;
+            border-color: var(--accent-blue);
+        }
+
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-blue);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 10000;
+            font-weight: 600;
+            border-radius: 0 0 4px 0;
+            transition: top var(--transition-fast);
+        }
+
+        .skip-link:focus {
+            top: 0;
         }
 
         /* Container */
@@ -269,6 +296,11 @@
         .theme-toggle-button:hover {
             background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 142, 83, 0.15));
             border-color: rgba(255, 107, 107, 0.3);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-button:active {
+            transform: scale(0.95);
         }
 
         .theme-toggle-button:focus-visible {
@@ -434,7 +466,7 @@
             margin-bottom: 40px;
         }
 
-        /* News Card - Glassmorphism */
+        /* News Card - Glassmorphism - Enhanced Interaction */
         .news-card {
             background: var(--bg-card);
             backdrop-filter: var(--card-blur);
@@ -456,6 +488,11 @@
             border-color: var(--border-glow);
             box-shadow: var(--shadow-lg);
             transform: translateY(-4px) scale(1.01);
+        }
+
+        .news-card:active {
+            transform: translateY(-2px) scale(1.005);
+            transition: transform var(--transition-fast);
         }
 
         /* Expandable Content */
@@ -518,34 +555,155 @@
             flex-grow: 1;
         }
 
+        /* News Footer - Pill Button Layout */
         .news-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
             padding-top: 16px;
             border-top: 1px solid var(--border-color);
         }
 
-        .news-source {
+        .footer-left,
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Pill Button Base Style */
+        .footer-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 13px;
-            color: var(--accent-blue);
-            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 500;
-            transition: color var(--transition-fast);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
         }
 
-        .news-source:hover {
-            color: var(--accent-indigo);
+        .footer-pill:hover {
+            transform: scale(1.05);
         }
 
-        .news-meta {
-            display: flex;
-            gap: 12px;
-            font-size: 11px;
-            color: var(--text-tertiary);
+        .footer-pill:active {
+            transform: scale(0.98);
+        }
+
+        .pill-icon {
+            flex-shrink: 0;
+        }
+
+        .pill-text {
+            line-height: 1;
+        }
+
+        /* Time Pill */
+        .pill-time {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .pill-time:hover {
+            background: #e2e8f0;
+        }
+
+        /* Source Pill */
+        .pill-source {
+            background: rgba(255, 107, 107, 0.15);
+            color: #e63946;
+        }
+
+        .pill-source:hover {
+            background: rgba(255, 107, 107, 0.25);
+            text-decoration: none;
+        }
+
+        .pill-source:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Share Pill */
+        .pill-share {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .pill-share:hover {
+            background: #e2e8f0;
+        }
+
+        .pill-share:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Read More Pill */
+        .pill-read-more {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .pill-read-more:hover {
+            background: #e2e8f0;
+        }
+
+        .pill-read-more:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .news-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .footer-left {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .footer-right {
+                width: 100%;
+                justify-content: flex-end;
+            }
         }
 
         /* Footer - Glassmorphism */
@@ -571,10 +729,20 @@
             color: var(--accent-blue);
             text-decoration: none;
             transition: color var(--transition-fast);
+            cursor: pointer;
+            font-weight: 500;
         }
 
         .footer-link:hover {
             color: var(--accent-indigo);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .footer-link:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         /* Loading Screen */
@@ -665,6 +833,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">跳转到主内容</a>
     <div class="loading-screen">
         <div class="loading-logo">FI</div>
     </div>
@@ -755,7 +924,7 @@
         </div>
     </div>
 
-    <main class="container main-content">
+    <main id="main-content" class="container main-content">
         <section class="section-header">
             <h1 class="section-title">全球财经日报</h1>
             <p class="section-subtitle">Global Financial Daily · {{ date }}</p>
@@ -779,12 +948,36 @@
                     <p class="news-excerpt">{{ article.content | simple_markdown | safe }}</p>
 
                     <div class="news-footer">
-                        <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="news-source" onclick="event.stopPropagation();">
-                            {{ article.source }}
-                            {% if article.source_original %} / {{ article.source_original }}{% endif %}
-                        </a>
-                        <div class="news-meta">
-                            <span>{{ article.source }}</span>
+                        <!-- 左侧：时间 + 来源 -->
+                        <div class="footer-left">
+                            <span class="footer-pill pill-time" data-published-date="{{ article.published_date }}">
+                                <svg class="pill-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="pill-text">计算中...</span>
+                            </span>
+                            <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="footer-pill pill-source" onclick="event.stopPropagation();">
+                                <svg class="pill-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                                </svg>
+                                <span class="pill-text">{{ article.source }}</span>
+                            </a>
+                        </div>
+
+                        <!-- 右侧：分享 + 阅读全文 -->
+                        <div class="footer-right">
+                            <button class="footer-pill pill-share" onclick="showShareToast(event)" aria-label="分享">
+                                <svg class="pill-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                                <span class="pill-text">分享</span>
+                            </button>
+                            <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="footer-pill pill-read-more" onclick="event.stopPropagation();">
+                                <svg class="pill-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                                <span class="pill-text">阅读全文</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -934,6 +1127,70 @@
         // Initialize theme manager
         document.addEventListener('DOMContentLoaded', () => {
             ThemeManager.init();
+        });
+
+        // 时间格式化函数 - 显示相对时间
+        function formatTimeAgo(dateString) {
+            if (!dateString) return '未知时间';
+
+            const now = new Date();
+            const past = new Date(dateString);
+            const diffMs = now - past;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return '刚刚';
+            if (diffMins < 60) return `${diffMins}分钟前`;
+            if (diffHours < 24) return `${diffHours}小时前`;
+            if (diffDays < 7) return `${diffDays}天前`;
+
+            // 超过7天显示格式化日期
+            const year = past.getFullYear();
+            const month = past.getMonth() + 1;
+            const day = past.getDate();
+            return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        }
+
+        // 初始化所有时间显示
+        function initializeTimeAgo() {
+            const timeElements = document.querySelectorAll('.pill-time[data-published-date]');
+            timeElements.forEach(element => {
+                const dateString = element.getAttribute('data-published-date');
+                const timeText = formatTimeAgo(dateString);
+                element.querySelector('.pill-text').textContent = timeText;
+            });
+        }
+
+        // Toast 提示函数
+        function showShareToast(event) {
+            // 阻止事件冒泡和默认行为
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+
+            // 创建或获取 toast 元素
+            let toast = document.querySelector('.toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = '分享功能正在开发中...';
+                document.body.appendChild(toast);
+            }
+
+            // 显示 toast
+            toast.classList.add('show');
+
+            // 1.5秒后自动隐藏
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 1500);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTimeAgo();
         });
 
         // 新闻卡片展开/收起交互

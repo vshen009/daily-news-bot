@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻卡片底部布局 - 线框图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+            color: #1e293b;
+        }
+
+        .subtitle {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .option-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .option-description {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .option-code {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 12px;
+            color: #334155;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        /* 线框图样式 */
+        .wireframe {
+            border: 2px dashed #cbd5e1;
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 16px;
+            position: relative;
+        }
+
+        .wireframe-label {
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: #64748b;
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* 模拟新闻卡片 */
+        .mock-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .mock-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .mock-title-original {
+            font-size: 12px;
+            color: #94a3b8;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .mock-divider {
+            border-top: 1px solid #e2e8f0;
+            margin: 16px 0;
+        }
+
+        /* 选项 A: 简洁布局 */
+        .footer-a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mock-source-a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .mock-source-a::before {
+            content: '🔗';
+            font-size: 12px;
+        }
+
+        /* 选项 B: 左右布局 */
+        .footer-b {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-left-b {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mock-source-b {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 500;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        .footer-right-b {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .meta-item-b {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* 选项 C: 三列布局 */
+        .footer-c {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .mock-source-c {
+            font-size: 13px;
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .footer-center-c {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .meta-item-c {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .footer-right-c {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mock-tag {
+            background: #f1f5f9;
+            color: #64748b;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* 选项 D: 卡片式布局 */
+        .footer-d {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mock-info-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 14px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .info-icon {
+            font-size: 14px;
+        }
+
+        .info-label {
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .info-value {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .mock-link-d {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 16px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        /* 选项 E: 极简布局 */
+        .footer-e {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .mock-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .pill-source {
+            background: rgba(255, 107, 107, 0.15);
+            color: #e63946;
+        }
+
+        .pill-meta {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .pill-link {
+            background: #1e293b;
+            color: white;
+            text-decoration: none;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .recommendation-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .recommendation-text {
+            color: #78350f;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📰 新闻卡片底部布局 - 线框图</h1>
+        <p class="subtitle">选择最适合你需求的设计方案</p>
+
+        <div class="options-grid">
+            <!-- 选项 A -->
+            <div class="option-card">
+                <div class="option-title">选项 A：简洁布局 ⭐ 推荐</div>
+                <div class="option-description">
+                    移除重复的元数据，只保留来源链接，简洁清爽
+                </div>
+                <div class="option-code">
+&lt;div class="news-footer"&gt;
+    &lt;a href="{{ article.url }}" class="news-source"&gt;
+        {{ article.source }}
+        {% if article.source_original %} / {{ article.source_original }}{% endif %}
+    &lt;/a&gt;
+&lt;/div&gt;
+                </div>
+                <div class="wireframe">
+                    <span class="wireframe-label">预览</span>
+                    <div class="mock-card">
+                        <div class="mock-title">美联储宣布维持利率不变</div>
+                        <div class="mock-title-original">Federal Reserve keeps interest rates unchanged</div>
+                        <div class="mock-divider"></div>
+                        <div class="footer-a">
+                            <a href="#" class="mock-source-a">Bloomberg / 彭博社</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 选项 B -->
+            <div class="option-card">
+                <div class="option-title">选项 B：左右分栏布局</div>
+                <div class="option-description">
+                    左侧显示来源，右侧显示元数据（日期、分类）
+                </div>
+                <div class="option-code">
+&lt;div class="news-footer"&gt;
+    &lt;div class="footer-left"&gt;
+        &lt;a href="{{ article.url }}" class="news-source"&gt;
+            {{ article.source }}
+        &lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="footer-right"&gt;
+        &lt;span class="news-date"&gt;{{ article.date }}&lt;/span&gt;
+        &lt;span class="news-category"&gt;{{ article.category }}&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </div>
+                <div class="wireframe">
+                    <span class="wireframe-label">预览</span>
+                    <div class="mock-card">
+                        <div class="mock-title">美联储宣布维持利率不变</div>
+                        <div class="mock-title-original">Federal Reserve keeps interest rates unchanged</div>
+                        <div class="mock-divider"></div>
+                        <div class="footer-b">
+                            <div class="footer-left-b">
+                                <a href="#" class="mock-source-b">Bloomberg</a>
+                            </div>
+                            <div class="footer-right-b">
+                                <span class="meta-item-b">📅 2026-02-01</span>
+                                <span class="meta-item-b">🏷️ 货币政策</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 选项 C -->
+            <div class="option-card">
+                <div class="option-title">选项 C：三列布局</div>
+                <div class="option-description">
+                    左侧来源、中间元数据、右侧标签，信息丰富
+                </div>
+                <div class="option-code">
+&lt;div class="news-footer"&gt;
+    &lt;a href="{{ article.url }}" class="news-source"&gt;{{ article.source }}&lt;/a&gt;
+    &lt;div class="footer-center"&gt;
+        &lt;span class="news-date"&gt;{{ article.date }}&lt;/span&gt;
+        &lt;span class="news-time"&gt;{{ article.read_time }}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="footer-right"&gt;
+        &lt;span class="news-tag"&gt;{{ article.category }}&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </div>
+                <div class="wireframe">
+                    <span class="wireframe-label">预览</span>
+                    <div class="mock-card">
+                        <div class="mock-title">美联储宣布维持利率不变</div>
+                        <div class="mock-title-original">Federal Reserve keeps interest rates unchanged</div>
+                        <div class="mock-divider"></div>
+                        <div class="footer-c">
+                            <a href="#" class="mock-source-c">Bloomberg</a>
+                            <div class="footer-center-c">
+                                <span class="meta-item-c">📅 2月1日</span>
+                                <span class="meta-item-c">⏱️ 3分钟</span>
+                            </div>
+                            <div class="footer-right-c">
+                                <span class="mock-tag">货币政策</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 选项 D -->
+            <div class="option-card">
+                <div class="option-title">选项 D：卡片式信息布局</div>
+                <div class="option-description">
+                    每个信息项独立卡片，右侧醒目的 CTA 按钮
+                </div>
+                <div class="option-code">
+&lt;div class="news-footer"&gt;
+    &lt;div class="info-cards"&gt;
+        &lt;div class="info-card"&gt;
+            &lt;span class="label"&gt;来源&lt;/span&gt;
+            &lt;span class="value"&gt;{{ article.source }}&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="info-card"&gt;
+            &lt;span class="label"&gt;日期&lt;/span&gt;
+            &lt;span class="value"&gt;{{ article.date }}&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;a href="{{ article.url }}" class="read-more"&gt;阅读全文 →&lt;/a&gt;
+&lt;/div&gt;
+                </div>
+                <div class="wireframe">
+                    <span class="wireframe-label">预览</span>
+                    <div class="mock-card">
+                        <div class="mock-title">美联储宣布维持利率不变</div>
+                        <div class="mock-title-original">Federal Reserve keeps interest rates unchanged</div>
+                        <div class="mock-divider"></div>
+                        <div class="footer-d">
+                            <div class="mock-info-card">
+                                <span class="info-icon">📰</span>
+                                <div>
+                                    <div class="info-label">来源</div>
+                                    <div class="info-value">Bloomberg</div>
+                                </div>
+                            </div>
+                            <div class="mock-info-card">
+                                <span class="info-icon">📅</span>
+                                <div>
+                                    <div class="info-label">发布</div>
+                                    <div class="info-value">2月1日</div>
+                                </div>
+                            </div>
+                            <a href="#" class="mock-link-d">阅读全文 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 选项 E -->
+            <div class="option-card">
+                <div class="option-title">选项 E：药丸式标签布局</div>
+                <div class="option-description">
+                    所有信息以药丸标签形式展示，现代风格
+                </div>
+                <div class="option-code">
+&lt;div class="news-footer"&gt;
+    &lt;div class="pill-group"&gt;
+        &lt;span class="pill pill-source"&gt;{{ article.source }}&lt;/span&gt;
+        &lt;span class="pill pill-date"&gt;{{ article.date }}&lt;/span&gt;
+        &lt;span class="pill pill-category"&gt;{{ article.category }}&lt;/span&gt;
+        &lt;a href="{{ article.url }}" class="pill pill-link"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </div>
+                <div class="wireframe">
+                    <span class="wireframe-label">预览</span>
+                    <div class="mock-card">
+                        <div class="mock-title">美联储宣布维持利率不变</div>
+                        <div class="mock-title-original">Federal Reserve keeps interest rates unchanged</div>
+                        <div class="mock-divider"></div>
+                        <div class="footer-e">
+                            <span class="mock-pill pill-source">🔗 Bloomberg</span>
+                            <span class="mock-pill pill-meta">📅 2月1日</span>
+                            <span class="mock-pill pill-meta">🏷️ 货币政策</span>
+                            <a href="#" class="mock-pill pill-link">阅读全文 →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推荐建议 -->
+        <div class="recommendation">
+            <div class="recommendation-title">
+                💡 推荐建议
+            </div>
+            <div class="recommendation-text">
+                <strong>选项 A（简洁布局）</strong>最适合财经新闻网站，原因：
+                <ul style="margin-top: 8px; padding-left: 20px;">
+                    <li>✅ 移除重复显示的 source</li>
+                    <li>✅ 保持简洁，不干扰阅读</li>
+                    <li>✅ 来源链接醒目，用户可直接跳转</li>
+                    <li>✅ 移动端友好，不会被压缩</li>
+                    <li>✅ 符合金融类专业风格</li>
+                </ul>
+                <p style="margin-top: 12px;">
+                    如果你需要更多元数据，建议选择<strong>选项 B</strong>或<strong>选项 C</strong>。
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #94a3b8; font-size: 14px;">
+            <p>💬 告诉我你选择哪个选项，我会立即应用到模板中</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -52,57 +52,57 @@
             --transition-medium: 250ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Dark Mode - System Preference Fallback */
+        /* Dark Mode - System Preference Fallback - Enhanced Contrast */
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme]) {
                 --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
                 --bg-secondary: rgba(15, 23, 42, 0.6);
 
-                --bg-card: rgba(30, 41, 59, 0.65);
-                --bg-card-hover: rgba(51, 65, 85, 0.75);
-                --card-border: rgba(255, 255, 255, 0.1);
+                --bg-card: rgba(30, 41, 59, 0.75);
+                --bg-card-hover: rgba(51, 65, 85, 0.85);
+                --card-border: rgba(255, 255, 255, 0.15);
                 --card-blur: blur(12px);
 
-                --text-primary: #f1f5f9;
-                --text-secondary: #cbd5e1;
-                --text-tertiary: #94a3b8;
+                --text-primary: #ffffff;
+                --text-secondary: #e2e8f0;
+                --text-tertiary: #cbd5e1;
 
-                --border-color: rgba(255, 255, 255, 0.1);
-                --border-glow: rgba(255, 107, 107, 0.5);
-                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+                --border-color: rgba(255, 255, 255, 0.15);
+                --border-glow: rgba(37, 99, 235, 0.6);
+                --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+                --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
             }
 
             /* 暗色模式下 featured 卡片保持毛玻璃效果 */
             .news-card.featured {
-                background: rgba(30, 41, 59, 0.65);
+                background: rgba(30, 41, 59, 0.75);
             }
         }
 
-        /* Manual Dark Mode */
+        /* Manual Dark Mode - Enhanced Contrast */
         :root[data-theme="dark"] {
             --bg-primary: linear-gradient(135deg, #8b4513 0%, #b7410e 25%, #891a1c 50%, #5c0f1c 100%);
             --bg-secondary: rgba(15, 23, 42, 0.6);
 
-            --bg-card: rgba(30, 41, 59, 0.65);
-            --bg-card-hover: rgba(51, 65, 85, 0.75);
-            --card-border: rgba(255, 255, 255, 0.1);
+            --bg-card: rgba(30, 41, 59, 0.75);
+            --bg-card-hover: rgba(51, 65, 85, 0.85);
+            --card-border: rgba(255, 255, 255, 0.15);
             --card-blur: blur(12px);
 
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-            --text-tertiary: #94a3b8;
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --text-tertiary: #cbd5e1;
 
-            --border-color: rgba(255, 255, 255, 0.1);
-            --border-glow: rgba(255, 107, 107, 0.5);
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --border-glow: rgba(37, 99, 235, 0.6);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
         }
 
         :root[data-theme="dark"] .news-card.featured {
-            background: rgba(30, 41, 59, 0.65);
+            background: rgba(30, 41, 59, 0.75);
         }
 
         * {
@@ -170,8 +170,43 @@
             z-index: 1;
         }
 
+        /* Enhanced Focus States for Accessibility */
+        a:focus-visible,
+        button:focus-visible,
+        .news-card:focus-visible {
+            outline: 3px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Enhanced focus for news cards */
+        .news-card:focus {
+            outline: 3px solid var(--accent-blue);
+            outline-offset: 4px;
+            border-color: var(--accent-blue);
+        }
+
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-blue);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 10000;
+            font-weight: 600;
+            border-radius: 0 0 4px 0;
+            transition: top var(--transition-fast);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         a:focus-visible {
-            outline: 2px solid var(--accent-blue);
+            outline: 3px solid var(--accent-blue);
             outline-offset: 2px;
             border-radius: 4px;
         }
@@ -283,6 +318,11 @@
         .theme-toggle-button:hover {
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(99, 102, 241, 0.15));
             border-color: rgba(37, 99, 235, 0.3);
+            transform: scale(1.05);
+        }
+
+        .theme-toggle-button:active {
+            transform: scale(0.95);
         }
 
         .theme-toggle-button:focus-visible {
@@ -417,7 +457,7 @@
             gap: 24px;
         }
 
-        /* News Card */
+        /* News Card - Enhanced Interaction */
         .news-card {
             background: var(--bg-card);
             backdrop-filter: var(--card-blur, blur(12px));
@@ -456,6 +496,11 @@
 
         .news-card:hover::before {
             transform: scaleX(1);
+        }
+
+        .news-card:active {
+            transform: translateY(-2px);
+            transition: transform var(--transition-fast);
         }
 
         .news-card.featured {
@@ -585,10 +630,19 @@
             text-decoration: none;
             font-weight: 600;
             transition: color var(--transition-fast);
+            cursor: pointer;
         }
 
         .footer-link:hover {
             color: var(--accent-indigo);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .footer-link:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
         }
 
         /* Empty State */
@@ -699,6 +753,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">跳转到主内容</a>
     <header class="header">
         <div class="container header-inner">
             <a href="/" class="logo-section">
@@ -744,7 +799,7 @@
         </div>
     </header>
 
-    <main class="container main-content">
+    <main id="main-content" class="container main-content">
         <div class="page-header">
             <div class="page-badge">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
