@@ -20,6 +20,7 @@
             --accent-blue: #0369A1;
             --accent-blue-light: #0EA5E9;
             --accent-blue-dark: #0C4A6E;
+            --accent-gold: #d4af37;
 
             /* Accent Colors */
             --accent-indigo: #3B82F6;
@@ -77,6 +78,12 @@
             /* 暗色模式下 featured 卡片保持毛玻璃效果 */
             .news-card.featured {
                 background: rgba(30, 41, 59, 0.8);
+                border-color: #d4af37;
+            }
+
+            /* 暗色模式下顶部彩条使用金色渐变 */
+            .news-card::before {
+                background: linear-gradient(90deg, #d4af37, #f1c40f);
             }
         }
 
@@ -103,6 +110,12 @@
 
         :root[data-theme="dark"] .news-card.featured {
             background: rgba(30, 41, 59, 0.8);
+            border-color: #d4af37;
+        }
+
+        /* 手动暗色模式下顶部彩条使用金色渐变 */
+        :root[data-theme="dark"] .news-card::before {
+            background: linear-gradient(90deg, #d4af37, #f1c40f);
         }
 
         * {
