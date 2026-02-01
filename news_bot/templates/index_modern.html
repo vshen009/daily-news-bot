@@ -90,6 +90,24 @@
             .card-badge {
                 background: linear-gradient(135deg, #d4af37, #b8860b);
             }
+
+            /* 暗色模式下 focus 样式使用金色 */
+            a:focus-visible,
+            button:focus-visible,
+            .news-card:focus-visible {
+                outline-color: #d4af37 !important;
+            }
+
+            .news-card:focus {
+                outline-color: #d4af37 !important;
+                border-color: #d4af37 !important;
+            }
+
+            .theme-toggle-button:focus-visible,
+            .theme-option:focus-visible,
+            .footer-link:focus-visible {
+                outline-color: #d4af37 !important;
+            }
         }
 
         /* Manual Dark Mode - Black to Dark Gold */

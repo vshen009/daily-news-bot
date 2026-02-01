@@ -88,6 +88,27 @@
                 --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
                 --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
             }
+
+            /* 暗色模式下 focus 样式使用金色 */
+            a:focus-visible,
+            button:focus-visible,
+            .news-card:focus-visible {
+                outline-color: #d4af37 !important;
+            }
+
+            .news-card:focus {
+                outline-color: #d4af37 !important;
+                border-color: #d4af37 !important;
+            }
+
+            .theme-toggle-button:focus-visible,
+            .theme-option:focus-visible,
+            .pill-source:focus-visible,
+            .pill-share:focus-visible,
+            .pill-read-more:focus-visible,
+            .footer-link:focus-visible {
+                outline-color: #d4af37 !important;
+            }
         }
 
         /* Manual Dark Mode - Black to Dark Gold Gradient */
@@ -109,6 +130,27 @@
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
             --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
             --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        /* 手动暗色模式下 focus 样式使用金色 */
+        :root[data-theme="dark"] a:focus-visible,
+        :root[data-theme="dark"] button:focus-visible,
+        :root[data-theme="dark"] .news-card:focus-visible {
+            outline-color: #d4af37 !important;
+        }
+
+        :root[data-theme="dark"] .news-card:focus {
+            outline-color: #d4af37 !important;
+            border-color: #d4af37 !important;
+        }
+
+        :root[data-theme="dark"] .theme-toggle-button:focus-visible,
+        :root[data-theme="dark"] .theme-option:focus-visible,
+        :root[data-theme="dark"] .pill-source:focus-visible,
+        :root[data-theme="dark"] .pill-share:focus-visible,
+        :root[data-theme="dark"] .pill-read-more:focus-visible,
+        :root[data-theme="dark"] .footer-link:focus-visible {
+            outline-color: #d4af37 !important;
         }
 
         /* Dark Mode: Gold hover effect for news titles */
