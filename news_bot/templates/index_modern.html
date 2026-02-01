@@ -227,25 +227,6 @@
             border-color: var(--accent-blue);
         }
 
-        /* Skip link for accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-blue);
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            z-index: 10000;
-            font-weight: 600;
-            border-radius: 0 0 4px 0;
-            transition: top var(--transition-fast);
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
         a:focus-visible {
             outline: 3px solid var(--accent-blue);
             outline-offset: 2px;
@@ -794,7 +775,6 @@
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-link">跳转到主内容</a>
     <header class="header">
         <div class="container header-inner">
             <a href="/" class="logo-section">

@@ -244,25 +244,6 @@
             border-color: var(--accent-blue);
         }
 
-        /* Skip link for accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-blue);
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            z-index: 10000;
-            font-weight: 600;
-            border-radius: 0 0 4px 0;
-            transition: top var(--transition-fast);
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
         /* Container */
         .container {
             max-width: var(--container-max-width);
@@ -890,7 +871,6 @@
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-link">跳转到主内容</a>
     <div class="loading-screen">
         <div class="loading-logo">FI</div>
     </div>
