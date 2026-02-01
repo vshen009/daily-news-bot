@@ -33,6 +33,9 @@
             --accent-blue-light: #0EA5E9;
             --accent-blue-dark: #0C4A6E;
 
+            /* Focus State Colors */
+            --accent-focus: #0369A1; /* Deep blue for light mode focus */
+
             --accent-indigo: #3B82F6;
             --accent-purple: #6366F1;
             --accent-pink: #8B5CF6;
@@ -40,9 +43,9 @@
             --accent-red: #EF4444;
             --accent-amber: #F59E0B;
 
-            /* Text Colors - Optimized for Blue Background */
-            --text-primary: #0C4A6E;
-            --text-secondary: #0369A1;
+            /* Text Colors - Pure Black for Better Readability */
+            --text-primary: #000000;
+            --text-secondary: #000000;
             --text-tertiary: #64748B;
 
             /* Border & Effects - Blue Harmony */
@@ -81,6 +84,8 @@
                 --text-secondary: #e2e8f0;
                 --text-tertiary: #cbd5e1;
 
+                --accent-focus: #92400e; /* Dark gold for dark mode focus */
+
                 --border-color: rgba(184, 134, 11, 0.2);
                 --border-glow: rgba(251, 191, 36, 0.3);
                 --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
@@ -102,6 +107,8 @@
             --text-primary: #f1f5f9;
             --text-secondary: #e2e8f0;
             --text-tertiary: #cbd5e1;
+
+            --accent-focus: #92400e; /* Dark gold for dark mode focus */
 
             --border-color: rgba(184, 134, 11, 0.2);
             --border-glow: rgba(251, 191, 36, 0.3);
@@ -542,8 +549,9 @@
             font-size: 26px;
         }
 
-        .news-card:hover .news-title {
-            color: var(--accent-blue);
+        .news-card:hover .news-title,
+        .news-card:focus .news-title {
+            color: var(--accent-focus);
         }
 
         .news-excerpt {
