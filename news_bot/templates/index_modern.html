@@ -85,6 +85,11 @@
             .news-card::before {
                 background: linear-gradient(90deg, #d4af37, #f1c40f);
             }
+
+            /* 暗色模式下 badge 使用菊金色渐变 */
+            .card-badge {
+                background: linear-gradient(135deg, #d4af37, #b8860b);
+            }
         }
 
         /* Manual Dark Mode - Black to Dark Gold */
@@ -116,6 +121,11 @@
         /* 手动暗色模式下顶部彩条使用金色渐变 */
         :root[data-theme="dark"] .news-card::before {
             background: linear-gradient(90deg, #d4af37, #f1c40f);
+        }
+
+        /* 手动暗色模式下 badge 使用菊金色渐变 */
+        :root[data-theme="dark"] .card-badge {
+            background: linear-gradient(135deg, #d4af37, #b8860b);
         }
 
         * {
