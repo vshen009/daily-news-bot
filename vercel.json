@@ -25,7 +25,7 @@
       ]
     },
     {
-      "source": "/favicon.ico",
+      "source": "/icons/favicon.ico",
       "headers": [
         {
           "key": "Cache-Control",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "source": "/favicon.svg",
+      "source": "/icons/favicon.svg",
       "headers": [
         {
           "key": "Cache-Control",
@@ -43,7 +43,7 @@
       ]
     },
     {
-      "source": "/apple-touch-icon.svg",
+      "source": "/icons/apple-touch-icon.svg",
       "headers": [
         {
           "key": "Cache-Control",
