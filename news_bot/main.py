@@ -48,8 +48,10 @@ def filter_and_sort_articles(articles: list, hours: int = 24, enable_time_filter
 
     # ========== 第一阶段：时间筛选（可选）==========
     if enable_time_filter:
-        now = Config.get_beijing_time()
-        time_threshold = now - timedelta(hours=hours)
+        # 使用 UTC 时间进行筛选（article.publish_time 是 UTC 时间）
+        from datetime import datetime as dt
+        now_utc = dt.utcnow()
+        time_threshold = now_utc - timedelta(hours=hours)
 
         # 筛选最近 N 小时内的新闻
         filtered_articles = [
