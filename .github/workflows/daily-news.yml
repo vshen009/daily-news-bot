@@ -17,7 +17,24 @@ jobs:
 
     steps:
       - name: 检出代码
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4      
+
+      - name: Time sanity check
+        run: |
+          echo "Event: $GITHUB_EVENT_NAME"
+          echo "Runner now (default date):"; date
+          echo "UTC now:"; date -u
+          echo "TZ env: $TZ"
+          python - <<'PY'
+          import os, time
+          from datetime import datetime, timezone
+          from zoneinfo import ZoneInfo
+          print("python now():", datetime.now())
+          print("python now(utc):", datetime.now(timezone.utc))
+          print("python now(Asia/Shanghai):", datetime.now(ZoneInfo("Asia/Shanghai")))
+          print("time.tzname:", time.tzname)
+          print("TZ env:", os.getenv("TZ"))
+          PY
 
       - name: 设置 Python 环境
         uses: actions/setup-python@v5
