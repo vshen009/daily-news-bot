@@ -97,7 +97,7 @@ sources:
     language: "en"
     category: "global"
     priority: 5
-    enabled: true
+    enabled: false
     translate: true
 
 # 配置说明：
