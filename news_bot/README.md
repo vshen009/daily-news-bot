@@ -175,7 +175,6 @@ news_bot/
 │   ├── config.py             # 配置管理
 │   ├── scraper.py            # 新闻抓取器
 │   ├── translator.py         # 翻译模块（Claude API）
-│   ├── ai_comment.py         # AI评论生成器
 │   └── html_generator.py     # HTML生成器
 ├── templates/
 │   └── daily_news.html       # 响应式HTML模板（适配所有设备）
@@ -226,12 +225,11 @@ sources:
 ## 💰 成本估算
 
 **每日成本**:
-- Claude API: ~$0.11/天 (约0.8元)
+- Claude API: ~$0.075/天 (约0.5元)
   - 翻译：15条 × 1000 token = 15,000 token
-  - AI评论：15条 × 500 token = 7,500 token
-  - 总计：22,500 token ≈ $0.11
+  - 总计：15,000 token ≈ $0.075
 
-**每月成本**: 约 $3.3 (24元人民币)
+**每月成本**: 约 $2.25 (16元人民币)
 
 **Vercel 托管**: 免费版足够使用（100GB 带宽/月）
 
@@ -279,7 +277,7 @@ Vercel 会部署 `public/` 目录下的所有 HTML 文件，访问格式：
 **MVP测试版**:
 - ✅ 支持2-3个新闻源（新华社、财新网、Bloomberg）
 - ✅ RSS抓取
-- ✅ Claude翻译和AI评论
+- ✅ Claude翻译
 - ✅ 生成HTML
 - ✅ Vercel 自动部署
 - ❌ 暂不支持HTML解析（备用方案）
@@ -307,7 +305,6 @@ Vercel 会部署 `public/` 目录下的所有 HTML 文件，访问格式：
 ### v0.1.0 (2026-01-25) - MVP测试版
 - ✅ 基础抓取功能
 - ✅ Claude翻译集成
-- ✅ AI评论生成
 - ✅ HTML生成
 - ✅ 配置文件系统
 

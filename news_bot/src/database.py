@@ -361,7 +361,7 @@ class DatabaseManager:
 
     def get_articles_by_days(self, days: int = 7) -> List[NewsArticle]:
         """
-        获取最近N天的所有新闻文章（已翻译、有AI评论）
+        获取最近N天的所有新闻文章（已翻译）
 
         注意：天数基于北京时间计算（无论在哪个时区运行）
 
@@ -383,7 +383,6 @@ class DatabaseManager:
                 SELECT * FROM news_articles
                 WHERE publish_time >= ?
                 AND translated = 1
-                AND ai_comment IS NOT NULL
                 ORDER BY publish_time DESC
             """
 

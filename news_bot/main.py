@@ -305,7 +305,7 @@ def main():
     # 解析命令行参数
     parser = argparse.ArgumentParser(description='财经新闻抓取系统')
     parser.add_argument('--html-only', action='store_true',
-                        help='只从数据库读取新闻生成HTML，跳过抓取、翻译、AI评论')
+                        help='只从数据库读取新闻生成HTML，跳过抓取和翻译')
     parser.add_argument('--days', type=int, default=7,
                         help='读取最近N天的新闻，默认7天（仅用于--html-only）')
     args = parser.parse_args()
