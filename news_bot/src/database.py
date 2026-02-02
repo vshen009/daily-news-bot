@@ -363,6 +363,8 @@ class DatabaseManager:
         """
         获取最近N天的所有新闻文章（已翻译、有AI评论）
 
+        注意：天数基于北京时间计算（无论在哪个时区运行）
+
         Args:
             days: 天数，默认7天
 
@@ -370,8 +372,12 @@ class DatabaseManager:
             List[NewsArticle]: 新闻文章列表
         """
         with self:
-            # 计算时间范围（使用UTC时间）
-            cutoff_time = get_utc_now() - timedelta(days=days)
+            # 基于北京时间计算"最近N天"，然后转回 UTC 用于数据库查询
+            # 这样无论在本地还是 GitHub Actions (UTC环境) 运行，结果都一致
+            from .config import Config
+            beijing_now = Config.get_beijing_time()
+            cutoff_beijing = beijing_now - timedelta(days=days)
+            cutoff_time = cutoff_beijing - timedelta(hours=8)  # 转回 UTC
 
             query = """
                 SELECT * FROM news_articles
@@ -629,7 +635,7 @@ class DatabaseManager:
 
     def delete_old_articles(self, days: int = 30) -> int:
         """
-        删除超过指定天数的旧文章（基于UTC时间）
+        删除超过指定天数的旧文章（基于北京时间）
 
         Args:
             days: 保留最近几天的文章，默认30天
@@ -639,7 +645,12 @@ class DatabaseManager:
         """
         from datetime import timedelta
 
-        cutoff_time = get_utc_now() - timedelta(days=days)
+        # 基于北京时间计算"最近N天"，然后转回 UTC 用于数据库查询
+        # 这样无论在本地还是 GitHub Actions (UTC环境) 运行，结果都一致
+        from .config import Config
+        beijing_now = Config.get_beijing_time()
+        cutoff_beijing = beijing_now - timedelta(days=days)
+        cutoff_time = cutoff_beijing - timedelta(hours=8)  # 转回 UTC
 
         with self:
             self.cursor.execute("""
