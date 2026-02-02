@@ -385,61 +385,16 @@ def main():
 
         logger.info(f"✓ 已保存 {saved_count} 条新新闻到数据库")
 
-        # 7. 按日期分组并生成HTML
-        logger.info("\n步骤7: 按日期分组")
-        from collections import defaultdict
+        # 7. 删除超过30天的旧文章
+        logger.info("\n步骤7: 清理旧文章")
+        deleted_count = db_manager.delete_old_articles(days=30)
 
-        all_articles = translated_new + cached_articles
-        articles_by_date = defaultdict(list)
-        for article in all_articles:
-            # 将UTC时间转换为北京时间后再提取日期（用于文件分组和命名）
-            from src.database import utc_to_beijing
-            publish_date = utc_to_beijing(article.publish_time).date()
-            articles_by_date[publish_date].append(article)
+        # 8. 重新生成最近30天的HTML
+        logger.info("\n步骤8: 重新生成最近30天的HTML")
+        regenerate_html_from_db(days=30)
 
-        logger.info(f"✓ {len(all_articles)} 条新闻分为 {len(articles_by_date)} 天")
-        for date, articles in sorted(articles_by_date.items()):
-            logger.info(f"  {date}: {len(articles)} 条")
-
-        # 8. 为每个日期生成HTML
-        logger.info("\n步骤8: 为每个日期生成HTML")
-        generator = HTMLGenerator()
-        generated_files = []
-
-        for date, articles in sorted(articles_by_date.items(), reverse=True):
-            # 筛选并排序当天新闻（不筛选时间）
-            top_news = filter_and_sort_articles(articles, enable_time_filter=False)
-
-            # 生成HTML
-            date_str = date.strftime(Config.DATE_FORMAT)
-            filename = Config.OUTPUT_FILENAME_FORMAT.format(date=date_str)
-            output_path = Config.OUTPUT_DIR / filename
-
-            template = generator.env.get_template('daily_news.html')
-            html = template.render(
-                date=date_str,
-                articles=top_news,
-                total_articles=len(top_news)
-            )
-
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(output_path, 'w', encoding='utf-8') as f:
-                f.write(html)
-
-            generated_files.append(output_path)
-            logger.info(f"  ✓ 生成: {output_path.name} ({len(top_news)} 条新闻)")
-
-        logger.info(f"✓ 共生成 {len(generated_files)} 个HTML文件")
-
-        # 9. 更新首页（自动更新index.html）
-        logger.info("\n步骤9: 更新首页")
-        from src.index_updater import IndexUpdater
-        updater = IndexUpdater(project_root=Config.BASE_DIR.parent)
-        success = updater.update_index(days=30)
-        if success:
-            logger.info("✓ 首页已自动更新（保留30天）")
-        else:
-            logger.warning("⚠ 首页更新失败，但不影响新闻生成")
+        # 注意：首页更新已在 regenerate_html_from_db() 中完成
+        logger.info("\n步骤9: 首页已在步骤8中更新")
 
         logger.info("\n" + "=" * 60)
         logger.info("✓ 所有任务完成！")
