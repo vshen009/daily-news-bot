@@ -77,3 +77,6 @@ git-workflow-helpers.sh
 .claude/
 .vercel
 .env*.local
+
+# AI 工作流程文件
+.ai/task-brief.md  # 任务简报每次都会更新，不提交
