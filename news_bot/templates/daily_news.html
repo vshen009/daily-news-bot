@@ -698,6 +698,27 @@
             border-radius: 4px;
         }
 
+        /* Forward Button - Success State */
+        .pill-forward-success {
+            background: var(--accent-green) !important;
+            color: white !important;
+            transform: scale(1.05) !important;
+            animation: pulse-success 0.6s ease-in-out;
+        }
+
+        @keyframes pulse-success {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
         /* Toast Notification */
         .toast {
             position: fixed;
@@ -1001,20 +1022,20 @@
                             </a>
                         </div>
 
-                        <!-- 右侧：分享 + 阅读全文 -->
+                        <!-- 右侧：图片 + 转发 -->
                         <div class="footer-right">
-                            <button class="footer-pill pill-share" onclick="showShareToast(event)" aria-label="分享">
+                            <button class="footer-pill pill-share" onclick="showShareToast(event)" aria-label="图片">
                                 <svg class="pill-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                                 </svg>
-                                <span class="pill-text">分享</span>
+                                <span class="pill-text">图片</span>
                             </button>
-                            <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="footer-pill pill-read-more" onclick="event.stopPropagation();">
+                            <button class="footer-pill pill-share" onclick="copyNewsContent(event, this)" aria-label="转发" type="button">
                                 <svg class="pill-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                 </svg>
-                                <span class="pill-text">阅读全文</span>
-                            </a>
+                                <span class="pill-text">转发</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1199,30 +1220,96 @@
             });
         }
 
-        // Toast 提示函数
+        /**
+         * 复制新闻内容到剪贴板
+         * @param {Event} event - 点击事件
+         * @param {HTMLElement} button - 点击的按钮元素
+         */
+        function copyNewsContent(event, button) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+
+            const card = button.closest('.news-card');
+            if (!card) {
+                showToast('复制失败，请重试');
+                return;
+            }
+
+            const chineseTitle = card.querySelector('.news-title')?.textContent.trim() || '无标题';
+            const englishTitleEl = card.querySelector('.news-title-original');
+            const englishTitle = englishTitleEl ? englishTitleEl.textContent.trim() : '';
+            const content = card.querySelector('.news-excerpt')?.textContent.trim() || '';
+            const source = card.querySelector('.pill-source .pill-text')?.textContent.trim() || '未知来源';
+            const link = card.querySelector('.pill-source')?.getAttribute('href') || '';
+
+            let copyText = chineseTitle;
+            if (englishTitle) {
+                copyText += `\n${englishTitle}`;
+            }
+            copyText += `\n\n${content}\n\n`;
+            copyText += `【来源】${source}\n`;
+            copyText += `【原文链接】${link}\n\n`;
+            copyText += '更多新闻查看 news.ai.0814.host';
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(copyText).then(() => {
+                    showToast('新闻内容已经复制');
+
+                    // 添加视觉反馈：按钮变色
+                    const buttonText = button.querySelector('.pill-text');
+                    const originalText = buttonText.textContent;
+                    const originalIcon = button.querySelector('.pill-icon');
+
+                    button.classList.add('pill-forward-success');
+                    buttonText.textContent = '已复制 ✓';
+
+                    // 1.5秒后恢复原状
+                    setTimeout(() => {
+                        button.classList.remove('pill-forward-success');
+                        buttonText.textContent = originalText;
+                    }, 1500);
+                }).catch(err => {
+                    console.error('复制失败:', err);
+                    showToast('复制失败，请重试');
+                });
+            } else {
+                showToast('复制失败，请重试');
+            }
+        }
+
+        /**
+         * 显示 Toast 提示
+         * @param {string} message - 提示文字
+         */
+        function showToast(message) {
+            let toast = document.querySelector('.toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'toast';
+                document.body.appendChild(toast);
+            }
+
+            toast.textContent = message;
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 1500);
+        }
+
+        /**
+         * 显示图片功能提示
+         * @param {Event} event - 点击事件
+         */
         function showShareToast(event) {
             // 阻止事件冒泡和默认行为
             if (event) {
                 event.stopPropagation();
                 event.preventDefault();
             }
-
-            // 创建或获取 toast 元素
-            let toast = document.querySelector('.toast');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.className = 'toast';
-                toast.textContent = '分享功能正在开发中...';
-                document.body.appendChild(toast);
-            }
-
-            // 显示 toast
-            toast.classList.add('show');
-
-            // 1.5秒后自动隐藏
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 1500);
+            showToast('图片功能正在开发中...');
         }
 
         // 页面加载完成后初始化
