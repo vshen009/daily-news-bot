@@ -57,7 +57,7 @@ news_bot/data/backup_*.db
 
 # Vercel
 .vercel/
-vercel.json
+# vercel.json 需要提交（用于配置部署）
 
 # 生成的 HTML 文件（部署输出目录）
 # 注意：favicon 文件需要提交
