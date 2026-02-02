@@ -627,6 +627,33 @@ class DatabaseManager:
             deleted_count = self.cursor.rowcount
             logger.info(f"✓ 已清空临时表，删除了 {deleted_count} 条记录")
 
+    def delete_old_articles(self, days: int = 30) -> int:
+        """
+        删除超过指定天数的旧文章（基于UTC时间）
+
+        Args:
+            days: 保留最近几天的文章，默认30天
+
+        Returns:
+            int: 删除的文章数量
+        """
+        from datetime import timedelta
+
+        cutoff_time = get_utc_now() - timedelta(days=days)
+
+        with self:
+            self.cursor.execute("""
+                DELETE FROM news_articles
+                WHERE publish_time < ?
+            """, (cutoff_time.isoformat(),))
+
+            deleted_count = self.cursor.rowcount
+            self.conn.commit()
+
+            logger.info(f"✓ 删除了 {deleted_count} 条超过 {days} 天的旧文章")
+
+        return deleted_count
+
     def get_raw_stats(self) -> dict:
         """
         获取临时表的统计信息
