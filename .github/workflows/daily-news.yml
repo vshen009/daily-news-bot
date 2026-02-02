@@ -52,12 +52,18 @@ jobs:
         uses: actions/cache@v4
         with:
           path: news_bot/data/news.db
-          # key 决定了本次运行产生的缓存叫什么名字
-          key: news-db-${{ runner.os }}-${{ github.run_id }}
-          # restore-keys 决定了如果 key 没命中，去捡哪一个旧缓存来用
+          # ✅ 修复：缓存 key 不要用 run_id（会导致经常捡到旧 DB）
+          # 改成按分支固定，形成"同一条缓存链"，每次运行都会更新同一个缓存
+          key: news-db-${{ runner.os }}-${{ github.ref_name }}
           restore-keys: |
             news-db-${{ runner.os }}-
             news-db-
+
+      - name: Debug DB file info
+        run: |
+          ls -lah news_bot/data || true
+          ls -lah news_bot/data/news.db || true
+          du -h news_bot/data/news.db || true
 
       - name: 设置环境变量
         run: |
