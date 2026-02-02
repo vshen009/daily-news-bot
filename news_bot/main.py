@@ -234,8 +234,9 @@ def regenerate_html_from_db(days: int = 7):
 
     articles_by_date = defaultdict(list)
     for article in all_articles:
-        # 直接使用新闻的发布时间日期
-        publish_date = article.publish_time.date()
+        # 将UTC时间转换为北京时间后再提取日期（用于文件分组和命名）
+        from src.database import utc_to_beijing
+        publish_date = utc_to_beijing(article.publish_time).date()
         articles_by_date[publish_date].append(article)
 
     logger.info(f"✓ 分为 {len(articles_by_date)} 天:")
@@ -391,7 +392,9 @@ def main():
         all_articles = translated_new + cached_articles
         articles_by_date = defaultdict(list)
         for article in all_articles:
-            publish_date = article.publish_time.date()
+            # 将UTC时间转换为北京时间后再提取日期（用于文件分组和命名）
+            from src.database import utc_to_beijing
+            publish_date = utc_to_beijing(article.publish_time).date()
             articles_by_date[publish_date].append(article)
 
         logger.info(f"✓ {len(all_articles)} 条新闻分为 {len(articles_by_date)} 天")
