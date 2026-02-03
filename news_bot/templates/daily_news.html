@@ -437,12 +437,16 @@
             opacity: 1;
         }
 
-        /* Ticker Tape - Glassmorphism */
+        /* Ticker Tape - Glassmorphism - Sticky at Top */
         .ticker-tape {
+            position: sticky;
+            top: 88px; /* Header height (72px approx) + spacing */
+            z-index: 99; /* Below header (z-index: 100) but above content */
             background: var(--bg-secondary);
             backdrop-filter: var(--card-blur);
             -webkit-backdrop-filter: var(--card-blur);
             border-bottom: 1px solid var(--card-border);
+            box-shadow: 0 2px 8px rgba(3, 105, 161, 0.1);
             overflow: hidden;
             padding: 12px 0;
         }
