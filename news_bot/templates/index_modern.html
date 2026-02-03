@@ -869,8 +869,9 @@
             STORAGE_KEY: 'theme-preference',
 
             init() {
-                // Always default to system theme
-                this.setTheme('system', false);
+                // Load saved theme from localStorage, or default to system
+                const savedTheme = localStorage.getItem(this.STORAGE_KEY) || 'system';
+                this.setTheme(savedTheme, false);
                 this.initEventListeners();
                 this.updateUI();
             },
@@ -939,7 +940,7 @@
                 }
 
                 if (save) {
-                    sessionStorage.setItem(this.STORAGE_KEY, theme);
+                    localStorage.setItem(this.STORAGE_KEY, theme);
                 }
 
                 this.currentTheme = theme;
