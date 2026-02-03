@@ -869,8 +869,9 @@
             STORAGE_KEY: 'theme-preference',
 
             init() {
-                // Always default to system theme
-                this.setTheme('system', false);
+                // Load saved theme from localStorage, or default to system
+                const savedTheme = localStorage.getItem(this.STORAGE_KEY) || 'system';
+                this.setTheme(savedTheme, false);
                 this.initEventListeners();
                 this.updateUI();
             },
@@ -939,7 +940,7 @@
                 }
 
                 if (save) {
-                    sessionStorage.setItem(this.STORAGE_KEY, theme);
+                    localStorage.setItem(this.STORAGE_KEY, theme);
                 }
 
                 this.currentTheme = theme;
@@ -962,9 +963,8 @@
                     system: '<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />'
                 };
 
-                // Update button icon based on actual theme
-                const actualTheme = this.getActualTheme();
-                icon.innerHTML = icons[actualTheme] || icons.system;
+                // Update button icon based on selected theme (not actual theme)
+                icon.innerHTML = icons[theme] || icons.system;
 
                 // Update active state in dropdown
                 options.forEach(option => {
