@@ -13,6 +13,11 @@ on:
           - 7
           - 14
           - 30
+      test_mode:
+        description: '测试模式（每个源只抓1条新闻）'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   regenerate:
@@ -68,8 +73,14 @@ jobs:
         cd news_bot
         # 如果是手动触发使用用户指定的天数，否则默认7天
         DAYS="${{ inputs.days || '7' }}"
+        TEST_MODE="${{ inputs.test_mode || 'false' }}"
         echo "🔄 开始重新生成HTML（最近 $DAYS 天）"
-        python main.py --html-only --days "$DAYS"
+        if [ "$TEST_MODE" = "true" ]; then
+          echo "🧪 测试模式启用：每个源只抓取1条新闻"
+          python main.py --test
+        else
+          python main.py --html-only --days "$DAYS"
+        fi
 
     - name: 安装 Vercel CLI
       if: success()
