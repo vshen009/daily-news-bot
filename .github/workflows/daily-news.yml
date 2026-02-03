@@ -86,7 +86,11 @@ jobs:
       - name: 运行新闻抓取
         run: |
           cd news_bot
-          python main.py
+          if [ "${{ inputs.test_mode }}" = "true" ]; then
+            python main.py --test
+          else
+            python main.py
+          fi
 
       # ✅ 修复：先安装 Vercel CLI（否则会出现 vercel: command not found）
       - name: 安装 Vercel CLI
