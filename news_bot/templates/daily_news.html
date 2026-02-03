@@ -277,6 +277,12 @@
             padding: 16px 24px;
         }
 
+        .logo-link {
+            display: inline-flex;
+            text-decoration: none;
+            color: inherit;
+        }
+
         .logo-section {
             display: flex;
             align-items: center;
@@ -284,18 +290,26 @@
             text-decoration: none;
         }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
-            border-radius: 12px;
+        .logo-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-indigo) 100%);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 18px;
             box-shadow: var(--shadow-glow);
+            transition: transform var(--transition-medium);
+        }
+
+        .logo-section:hover .logo-icon-wrapper {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            color: white;
         }
 
         .logo-text {
@@ -898,12 +912,18 @@
 
     <header class="header">
         <div class="container header-inner">
-            <div class="logo-section">
-                <div class="logo-icon">FI</div>
-                <div class="logo-text">
-                    <div class="logo-title">Financial Intelligence</div>
+            <a class="logo-link" href="/" aria-label="返回首页">
+                <div class="logo-section">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-title">Financial Intelligence</div>
+                    </div>
                 </div>
-            </div>
+            </a>
             <div class="theme-toggle-wrapper">
                 <button class="theme-toggle-button" id="themeToggle" aria-label="切换主题">
                     <svg class="theme-icon" id="themeIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -1059,8 +1079,9 @@
             STORAGE_KEY: 'theme-preference',
 
             init() {
-                // Always default to system theme
-                this.setTheme('system', false);
+                // Load saved theme from localStorage, or default to system
+                const savedTheme = localStorage.getItem(this.STORAGE_KEY) || 'system';
+                this.setTheme(savedTheme, false);
                 this.initEventListeners();
                 this.updateUI();
             },
@@ -1129,7 +1150,7 @@
                 }
 
                 if (save) {
-                    sessionStorage.setItem(this.STORAGE_KEY, theme);
+                    localStorage.setItem(this.STORAGE_KEY, theme);
                 }
 
                 this.currentTheme = theme;
