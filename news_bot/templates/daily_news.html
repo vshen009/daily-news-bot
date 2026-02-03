@@ -1238,20 +1238,12 @@
             }
 
             const chineseTitle = card.querySelector('.news-title')?.textContent.trim() || '无标题';
-            const englishTitleEl = card.querySelector('.news-title-original');
-            const englishTitle = englishTitleEl ? englishTitleEl.textContent.trim() : '';
             const content = card.querySelector('.news-excerpt')?.textContent.trim() || '';
             const source = card.querySelector('.pill-source .pill-text')?.textContent.trim() || '未知来源';
-            const link = card.querySelector('.pill-source')?.getAttribute('href') || '';
 
-            let copyText = chineseTitle;
-            if (englishTitle) {
-                copyText += `\n${englishTitle}`;
-            }
+            let copyText = `[${source}]-${chineseTitle}`;
             copyText += `\n\n${content}\n\n`;
-            copyText += `【来源】${source}\n`;
-            copyText += `【原文链接】${link}\n\n`;
-            copyText += '更多新闻查看 news.ai.0814.host';
+            copyText += 'Shared by c.c1nd.cn/0VmFo';
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(copyText).then(() => {

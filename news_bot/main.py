@@ -308,6 +308,8 @@ def main():
                         help='只从数据库读取新闻生成HTML，跳过抓取和翻译')
     parser.add_argument('--days', type=int, default=7,
                         help='读取最近N天的新闻，默认7天（仅用于--html-only）')
+    parser.add_argument('--test', action='store_true',
+                        help='测试模式：每个源只抓取1条新闻，但完整跑完端到端流程')
     args = parser.parse_args()
 
     logger.info("=" * 60)
@@ -344,6 +346,22 @@ def main():
         if not all_articles:
             logger.warning("没有抓取到任何新闻！")
             return
+
+        # 测试模式：每个源只保留最新1条
+        if args.test:
+            from collections import defaultdict
+            source_articles = defaultdict(list)
+            for article in all_articles:
+                source_articles[article.source].append(article)
+
+            test_articles = []
+            for source, articles in source_articles.items():
+                articles.sort(key=lambda x: x.publish_time, reverse=True)
+                test_articles.append(articles[0])
+                logger.info(f"  测试模式 {source}: 选取1条 (发布时间: {articles[0].publish_time})")
+
+            all_articles = test_articles
+            logger.info(f"✓ 测试模式生效: 从 {len(source_articles)} 个源选取 {len(all_articles)} 条新闻")
 
         # 4. 去重检查：分离新新闻和缓存新闻
         logger.info("\n步骤4: 去重检查")
