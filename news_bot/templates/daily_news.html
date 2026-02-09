@@ -1674,8 +1674,8 @@
             event.stopPropagation();
 
             const card = button.closest('.news-card');
-            const title = card.querySelector('.card-title').textContent.trim();
-            const content = card.querySelector('.card-description-full').textContent.trim();
+            const title = card.querySelector('.news-title').textContent.trim();
+            const content = card.querySelector('.news-excerpt').textContent.trim();
             const source = card.querySelector('.pill-source .pill-text').textContent.trim();
             const publishTime = card.querySelector('.pill-time').getAttribute('data-published-date');
 
