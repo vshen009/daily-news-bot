@@ -80,3 +80,6 @@ git-workflow-helpers.sh
 
 # AI 工作流程文件
 .ai/task-brief.md  # 任务简报每次都会更新，不提交
+
+# 图片分享功能测试文件夹（不上传到 GitHub）
+/share-test/
