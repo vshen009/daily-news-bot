@@ -71,8 +71,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: news_bot/data/news.db
-          # ✅ 使用固定的缓存 key,确保每次都更新同一个缓存
-          key: news-db-Linux-main
+          # ✅ 使用 Commit SHA 作为缓存 key，每次运行都有唯一的 key
+          # restore-keys 会恢复最近一次的缓存，确保数据持续累积
+          key: news-db-${{ runner.os }}-${{ github.sha }}
           restore-keys: |
             news-db-${{ runner.os }}-
             news-db-
