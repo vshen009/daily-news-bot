@@ -83,3 +83,4 @@ git-workflow-helpers.sh
 
 # 图片分享功能测试文件夹（不上传到 GitHub）
 /share-test/
+news_bot/.vercel.pid
