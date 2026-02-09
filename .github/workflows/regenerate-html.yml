@@ -7,12 +7,14 @@ on:
       days:
         description: '读取最近N天的新闻'
         required: false
-        default: '7'
+        default: '30'
         type: choice
         options:
-          - 7
-          - 14
           - 30
+          - 14
+          - 7
+          - 3
+          - 1
       test_mode:
         description: '测试模式（每个源只抓1条新闻）'
         required: false
@@ -43,8 +45,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: news_bot/data/news.db
-        # ✅ 修复：缓存 key 不要用 run_id（会导致经常捡到旧 DB）
-        # 改成按分支固定，形成"同一条缓存链"，每次运行都会更新同一个缓存
+        # ✅ 使用固定的缓存 key，确保每次都更新同一个缓存
         key: news-db-${{ runner.os }}-${{ github.ref_name }}
         restore-keys: |
           news-db-${{ runner.os }}-
