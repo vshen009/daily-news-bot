@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "/Users/vincent/.npm-global/bin/mcp-server-filesystem",
+      "args": [
+        "/Users/vincent/Documents/daily-news-bot",
+        "/Users/vincent"
+      ]
+    }
+  }
+}

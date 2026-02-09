@@ -256,3 +256,56 @@ Core workflow:
 3. **Database is version-controlled** - Unlike typical projects, `news_bot/data/news.db` is committed to Git
 4. **Git history matters** - All commits should follow emoji prefix convention (✨, 🔧, 📝, etc.)
 5. **Main branch protection** - Always work on feature branches, use PRs for main
+
+---
+
+## Local Development & Debugging
+
+### Local Testing Workflow
+
+**IMPORTANT**: Always test changes locally before deploying to production.
+
+**Standard debugging workflow**:
+
+1. **Generate test data locally**:
+   ```bash
+   cd news_bot
+   python main.py --test  # Each source only fetches 1 article for quick testing
+   ```
+
+2. **Start local web server**:
+   ```bash
+   cd public
+   python3 -m http.server 8080 --bind 0.0.0.0
+   ```
+
+3. **Access from local browser**:
+   ```
+   http://localhost:8080/2026-02-09.html
+   ```
+
+4. **Access from other devices on LAN**:
+   ```
+   http://192.168.123.107:8080/2026-02-09.html
+   ```
+
+**Key debugging rules**:
+- ✅ Always test on LAN IP (192.168.123.107:8080) before deploying
+- ✅ Test image sharing feature locally first
+- ✅ Check browser console (F12) for JavaScript errors
+- ✅ Verify CSS selectors match actual HTML structure
+- ✅ Never deploy to production without local testing
+
+### Vercel Deployment Policy
+
+**FORBIDDEN**:
+- ❌ Never use `vercel deploy --prod` locally
+- ❌ Never deploy directly to production environment
+- ❌ Never skip local testing
+
+**ALLOWED**:
+- ✅ Local testing only (http://localhost:8080 or LAN IP)
+- ✅ PR preview deployments (automatic via GitHub Actions)
+- ✅ Production deployment only after PR merge to main
+
+**Reason**: User wants to test locally on LAN (192.168.123.107) before any production deployment.
