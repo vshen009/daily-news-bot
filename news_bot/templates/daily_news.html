@@ -16,6 +16,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- 图片分享功能依赖库 (v2.3) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Professional Blue Gradient System - Fintech Harmony */
@@ -1048,7 +1053,7 @@
 
                         <!-- 右侧：图片 + 转发 -->
                         <div class="footer-right">
-                            <button class="footer-pill pill-share" onclick="showShareToast(event)" aria-label="图片">
+                            <button class="footer-pill pill-share" onclick="generateShareImage(event, this)" aria-label="图片">
                                 <svg class="pill-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                                 </svg>
@@ -1365,6 +1370,353 @@
                 card.setAttribute('aria-expanded', newState);
             }
         });
+
+        // ========== 图片分享功能 (v2.3) ==========
+
+        // html2canvas 配置
+        const html2canvasConfig = {
+            scale: 2,
+            useCORS: true,
+            backgroundColor: '#e5e0d8',
+            logging: false,
+            allowTaint: true,
+            windowWidth: 1200,
+            windowHeight: 1600
+        };
+
+        // 等待字体加载完成
+        async function waitForFonts() {
+            await document.fonts.load('900 51px "Noto Serif SC"');
+            await document.fonts.load('700 18px "Oswald"');
+            await document.fonts.load('500 28px "Noto Sans SC"');
+            await document.fonts.ready;
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+
+        // 生成二维码
+        function generateQRCode(url, containerId) {
+            const qrCode = new QRCodeStyling({
+                width: 100,
+                height: 100,
+                type: 'svg',
+                data: url,
+                dotsOptions: {
+                    color: '#000000',
+                    type: 'dots'
+                },
+                cornersSquareOptions: {
+                    type: 'extra-rounded',
+                    color: '#c17c4a'
+                },
+                cornersDotOptions: {
+                    type: 'dot',
+                    color: '#c17c4a'
+                }
+            });
+
+            qrCode.append(document.getElementById(containerId));
+        }
+
+        // 检测微信环境
+        function isWeChatBrowser() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('micromessenger') !== -1;
+        }
+
+        // 创建新闻卡片HTML
+        function createNewsCardHTML(title, content, source, publishTime) {
+            const timeAgo = formatTimeAgoForShare(publishTime);
+
+            return `
+                <div class="share-outer-wrapper">
+                    <div class="share-inner-card">
+                        <div class="news-header">
+                            <h1 class="news-title">${escapeHtmlForShare(title)}</h1>
+                            <div class="news-meta">来源: ${source.toUpperCase()} | ${timeAgo}</div>
+                            <div class="news-divider"></div>
+                        </div>
+                        <div class="news-lead">
+                            ${escapeHtmlForShare(content)}
+                        </div>
+                        <div class="news-footer">
+                            <span class="footer-text">Shared by 文森特</span>
+                            <div id="qrcode-container"></div>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@500;700&family=Oswald:wght@500;700&display=swap');
+                    .share-outer-wrapper {
+                        width: 1080px;
+                        height: auto;
+                        background: #e5e0d8;
+                        padding: 80px 60px;
+                        box-sizing: border-box;
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-start;
+                    }
+                    .share-inner-card {
+                        width: 960px;
+                        background: transparent;
+                        position: relative;
+                    }
+                    .news-title {
+                        font-family: 'Noto Serif SC', serif;
+                        font-weight: 900;
+                        font-size: 51px;
+                        line-height: 1.1;
+                        margin-bottom: 20px;
+                        padding-bottom: 8px;
+                        color: #2c241b;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                    }
+                    .news-meta {
+                        font-family: 'Oswald', sans-serif;
+                        font-weight: 700;
+                        font-size: 18px;
+                        color: #c17c4a;
+                        text-transform: uppercase;
+                        margin-bottom: 8px;
+                    }
+                    .news-divider {
+                        border-bottom: 4px solid #2c241b;
+                        margin: 24px 0;
+                    }
+                    .news-lead {
+                        background: #ece8e1;
+                        border-left: 4px solid #c17c4a;
+                        padding: 32px;
+                        margin: 32px 0;
+                        font-weight: 500;
+                        font-size: 28px;
+                        color: #2c241b;
+                        line-height: 1.6;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 6;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                    }
+                    .news-footer {
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        gap: 16px;
+                        border-top: 2px solid #dcd6ce;
+                        padding-top: 24px;
+                        margin-top: 32px;
+                    }
+                    .footer-text {
+                        font-weight: 500;
+                        font-size: 20px;
+                        color: #94A3B8;
+                    }
+                    #qrcode-container {
+                        width: 100px;
+                        height: 100px;
+                        flex-shrink: 0;
+                        flex-grow: 0;
+                        border-radius: 12px;
+                        overflow: hidden;
+                        padding: 8px;
+                        background: white;
+                    }
+                </style>
+            `;
+        }
+
+        // 显示全屏预览
+        function showPreview(imageData) {
+            let previewContainer = document.getElementById('image-preview-container');
+
+            if (!previewContainer) {
+                previewContainer = document.createElement('div');
+                previewContainer.id = 'image-preview-container';
+                previewContainer.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: #000;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    overflow: auto;
+                `;
+                document.body.appendChild(previewContainer);
+            }
+
+            previewContainer.innerHTML = '';
+
+            const imgWrapper = document.createElement('div');
+            imgWrapper.style.cssText = `
+                max-width: 100%;
+                max-height: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+
+            const img = document.createElement('img');
+            img.src = imageData;
+            img.style.cssText = `
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                display: block;
+            `;
+
+            imgWrapper.appendChild(img);
+            previewContainer.appendChild(imgWrapper);
+
+            const tip = document.createElement('div');
+            const tipText = isWeChatBrowser()
+                ? '长按图片发送给朋友'
+                : '长按图片保存到相册';
+            tip.textContent = tipText;
+            tip.style.cssText = `
+                color: white;
+                font-size: 16px;
+                margin-top: 20px;
+                text-align: center;
+            `;
+            previewContainer.appendChild(tip);
+
+            previewContainer.onclick = function() {
+                closePreview();
+            };
+
+            previewContainer.style.display = 'flex';
+        }
+
+        // 关闭预览
+        function closePreview() {
+            const previewContainer = document.getElementById('image-preview-container');
+            if (previewContainer) {
+                previewContainer.style.opacity = '0';
+                previewContainer.style.transition = 'opacity 300ms ease-in-out';
+
+                setTimeout(() => {
+                    previewContainer.style.display = 'none';
+                    previewContainer.style.opacity = '1';
+                    previewContainer.onclick = null;
+                }, 300);
+            }
+        }
+
+        // 格式化时间
+        function formatTimeAgoForShare(dateString) {
+            if (!dateString) return '未知时间';
+            const now = new Date();
+            const past = new Date(dateString);
+            const diffMs = now - past;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+
+            if (diffMins < 1) return '刚刚';
+            if (diffMins < 60) return `${diffMins}分钟前`;
+            if (diffHours < 24) return `${diffHours}小时前`;
+
+            const month = past.getMonth() + 1;
+            const day = past.getDate();
+            return `${month}月${day}日`;
+        }
+
+        // HTML转义
+        function escapeHtmlForShare(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Toast提示
+        function showToastForShare(message) {
+            let toast = document.querySelector('.share-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.className = 'share-toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 24px;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(100px);
+                    background: rgba(30, 41, 59, 0.95);
+                    color: #f8fafc;
+                    padding: 12px 24px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+                    opacity: 0;
+                    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+                    z-index: 10001;
+                `;
+                document.body.appendChild(toast);
+            }
+
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(100px)';
+            }, 3000);
+        }
+
+        // 主生成函数
+        async function generateShareImage(event, button) {
+            event.stopPropagation();
+
+            const card = button.closest('.news-card');
+            const title = card.querySelector('.card-title').textContent.trim();
+            const content = card.querySelector('.card-description-full').textContent.trim();
+            const source = card.querySelector('.pill-source .pill-text').textContent.trim();
+            const publishTime = card.querySelector('.pill-time').getAttribute('data-published-date');
+
+            let container = null;
+
+            try {
+                showToastForShare('正在生成图片，请稍候...');
+                await waitForFonts();
+
+                container = document.createElement('div');
+                container.style.cssText = `
+                    position: fixed;
+                    top: -9999px;
+                    left: -9999px;
+                    width: 1080px;
+                    z-index: -1;
+                `;
+                document.body.appendChild(container);
+
+                container.innerHTML = createNewsCardHTML(title, content, source, publishTime);
+
+                const qrUrl = window.location.href;
+                generateQRCode(qrUrl, 'qrcode-container');
+
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                const canvas = await html2canvas(container, html2canvasConfig);
+                const imageData = canvas.toDataURL('image/jpeg', 0.85);
+
+                showPreview(imageData);
+                showToastForShare('图片已生成');
+
+            } catch (error) {
+                console.error('生成图片失败:', error);
+                showToastForShare('图片生成失败，请尝试长按截图分享');
+            } finally {
+                if (container && container.parentNode) {
+                    document.body.removeChild(container);
+                }
+            }
+        }
     </script>
 </body>
 </html>
