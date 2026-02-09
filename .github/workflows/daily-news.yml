@@ -11,8 +11,22 @@ on:
   # 允许手动触发
   workflow_dispatch:
     inputs:
+      html_only:
+        description: '仅重新生成HTML(不抓取新数据)'
+        type: boolean
+        default: false
+      days:
+        description: '读取最近N天的新闻'
+        type: choice
+        default: '30'
+        options:
+          - 30
+          - 14
+          - 7
+          - 3
+          - 1
       test_mode:
-        description: '测试模式（强制部署到 Preview）'
+        description: '测试模式(强制部署到 Preview)'
         type: boolean
         default: false
 
@@ -57,9 +71,8 @@ jobs:
         uses: actions/cache@v4
         with:
           path: news_bot/data/news.db
-          # ✅ 修复：缓存 key 不要用 run_id（会导致经常捡到旧 DB）
-          # 改成按分支固定，形成"同一条缓存链"，每次运行都会更新同一个缓存
-          key: news-db-${{ runner.os }}-${{ github.ref_name }}
+          # ✅ 使用固定的缓存 key,确保每次都更新同一个缓存
+          key: news-db-Linux-main
           restore-keys: |
             news-db-${{ runner.os }}-
             news-db-
@@ -86,9 +99,14 @@ jobs:
       - name: 运行新闻抓取
         run: |
           cd news_bot
-          if [ "${{ inputs.test_mode }}" = "true" ]; then
+          if [ "${{ inputs.html_only }}" = "true" ]; then
+            echo "🔄 仅重新生成HTML，不抓取新数据"
+            python main.py --html-only --days "${{ inputs.days }}"
+          elif [ "${{ inputs.test_mode }}" = "true" ]; then
+            echo "🧪 测试模式"
             python main.py --test
           else
+            echo "📰 正常模式：抓取新闻并生成HTML"
             python main.py
           fi
 
